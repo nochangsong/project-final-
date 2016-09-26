@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Jenga">
+    <wb-module deploy-name="Puzzle">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <property name="context-root" value="Jenga"/>
-        <property name="java-output-path" value="/Jenga/bin"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/sources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main"/>
+        <property name="context-root" value="Puzzle"/>
+        <property name="java-output-path" value="/Puzzle/bin"/>
     </wb-module>
 </project-modules>
