@@ -17,6 +17,7 @@ public class LoginController {
 	public String form() {
 		return "docuwrite";
 	}
+	
 
 }
 
