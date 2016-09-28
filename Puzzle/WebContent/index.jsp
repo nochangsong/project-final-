@@ -5,6 +5,7 @@
 <html>
 <body>
 	<div class="container" align="center">
+	
 	<button type="button" class="btn btn-default"><a href="puzzle/docutest.do">document definition실행</a></button>
 	</div>
 </body>
