@@ -7,39 +7,39 @@
 <tiles-definitions>
 
 	<definition name="base_layout"
-		template="/WEB-INF/views/layout.jsp">
+		template="/views/layout.jsp">
 		
 		<put-attribute name="header"
-			value="/WEB-INF/views/header.jsp" />
+			value="/views/header.jsp" />
 			
 		<put-attribute name="left"
-			value="/WEB-INF/views/left.jsp"/>
+			value="/views/left.jsp"/>
 			
 		<put-attribute name="content" 
 			value=""/>
 			
 		<put-attribute name="footer"
-			value="/WEB-INF/views/footer.jsp" />
+			value="/views/footer.jsp" />
 	</definition>
 
 	<definition name="layout" extends="base_layout">
 		<put-attribute name="content"
-			value="/WEB-INF/views/usermain.jsp" />
+			value="/views/usermain.jsp" />
 	</definition>
 	
 	<definition name="layout" extends="base_layout">
 		<put-attribute name="content"
-			value="/WEB-INF/views/adminmain.jsp" />
+			value="/views/adminmain.jsp" />
 	</definition>
 	
 	<definition name="docuwrite" extends="base_layout">
 		<put-attribute name="content"
-			value="/WEB-INF/board/docuwrite.jsp" />
+			value="/board/docuwrite.jsp" />
 	</definition>
 	
 	<definition name="content" extends="base_layout">
 		<put-attribute name="content"
-			value="/WEB-INF/views/content.jsp" />
+			value="/views/content.jsp" />
 	</definition>
 
 		
