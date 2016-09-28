@@ -4,7 +4,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <html>
 <body>
-	<div class="container" align="center">
+	<div class="container" align="center"> 
 	
 	<button type="button" class="btn btn-default"><a href="puzzle/docutest.do">document definition실행</a></button>
 	</div>
