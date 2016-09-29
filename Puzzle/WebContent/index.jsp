@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="puzzle/docutest.do">document definition실행</a>
+<!-- <a href="/puzzle/docutest.do">document definition실행</a> -->
+<% response.sendRedirect("puzzle/docutest.do"); %>
 </body>
 </html>

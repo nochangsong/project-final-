@@ -43,5 +43,9 @@
 			value="/WEB-INF/views/content.jsp" />
 	</definition>
 
+	<definition name="messageList" extends="base_layout">
+		<put-attribute name="content"
+			value="/WEB-INF/message/messageList.jsp" />
+	</definition>
 		
 </tiles-definitions>

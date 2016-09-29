@@ -23,6 +23,10 @@
 	<bean id="layout" class="tiles.test.LoginController" />
 
 
+
+	<context:annotation-config/>
+	<context:component-scan base-package="controller.message"/>
+
 </beans>
 
 
