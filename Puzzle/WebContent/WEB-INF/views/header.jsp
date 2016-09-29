@@ -40,7 +40,7 @@
     
     <div class="col-sm-8"></div>
     
-    <div class="col-sm-1" id="message"><a href="message/messageList.do"><img src="/Puzzle/img/message.png" width="40px"><br>message</a></div>
+    <div class="col-sm-1" id="message"><a href="/Puzzle/puzzle/message/messageList.do"><img src="/Puzzle/img/message.png" width="40px"><br>message</a></div>
     <div class="col-sm-1" id="main"><a href="#"><img src="/Puzzle/img/user.png" width="40px"><br>user</a></div>
 	
   </div>
