@@ -17,9 +17,8 @@
   </style>
 </head>
 
-<div id="header">
 <tiles:insertAttribute name="header" />
-</div>
+
 
  
 <div class="row" id="content">
