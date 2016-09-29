@@ -2,9 +2,9 @@
 <!DOCTYPE>
 <html>
 <head>
-<title>Insert title here</title>
 </head>
 <body>
-messageList.jsp
+<h2>쪽지함</h2>
+
 </body>
 </html>

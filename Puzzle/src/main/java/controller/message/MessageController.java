@@ -11,4 +11,6 @@ public class MessageController {
 	public String messageList(){
 		return "messageList";
 	}
+	
+	
 }
