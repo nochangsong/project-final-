@@ -6,15 +6,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
   	a{
-  	text-align: left;
-  	font-size: medium;
-  	vertical-align: bottom;
+	  	text-align: left;
+	  	font-size: medium;
+	  	vertical-align: bottom;
   	
   	}
   	
+  	ul.nav li a:hover { 
+        background-color: #fff; 
+        font-weight: bold;   
+        color: #3163C9;
+     }
   	
-  	
-  </style>
+  	</style>
 	<div class="container">
 	  <ul class="nav nav-stacked">
 	    <li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;"> 기안문서작성</a></li>
