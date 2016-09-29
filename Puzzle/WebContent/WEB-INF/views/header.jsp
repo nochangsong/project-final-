@@ -36,7 +36,7 @@
   </style>
 <div class="well" id="well">
   <div class="row">
-    <div class="col-sm-2" id="logo"><img src="/Puzzle/img/logo.png" width="200px"></div>
+    <div class="col-sm-2" id="logo"><a href="/Puzzle/puzzle/docutest.do"><img src="/Puzzle/img/logo.png" width="200px"></a></div>
     
     <div class="col-sm-8"></div>
     
