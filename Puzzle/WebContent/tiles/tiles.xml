@@ -8,30 +8,37 @@
 
 	<definition name="base_layout"
 		template="/WEB-INF/template/layout.jsp">
-		<put-attribute name="title" value="Puzzle"/>
+		
 		<put-attribute name="header"
 			value="/WEB-INF/template/header.jsp" />
 			
 		<put-attribute name="left"
-			value="/WEB-INF/template/left.jsp"/>
+			value=""/>
+
 			
 		<put-attribute name="footer"
 			value="/WEB-INF/template/footer.jsp" />
 	</definition>
 	
-	<definition name="main" extends="base_layout">
-		<put-attribute name="content"
-			value="/WEB-INF/main/main.jsp" />
+<!-- 	user화면	 -->
+	<definition name="left" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
 	</definition>
 	
+<!-- 	admin 화면	 -->
+	<definition name="admin" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/admin.jsp" />
+	</definition>
+		
+<!-- 	docuform 	-->
 	<definition name="docuForm" extends="base_layout">
-		<put-attribute name="content"
-			value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
 	</definition>
 	
-	<definition name="content" extends="base_layout">
-		<put-attribute name="content"
-			value="/WEB-INF/template/content.jsp" />
+	<definition name="docuWrite" extends="docuForm">
+		<put-attribute name="content2" value="/WEB-INF/document/docuWrite.jsp"/>
+	
 	</definition>
 
 	<definition name="messageList" extends="base_layout">
