@@ -12,28 +12,31 @@
 		<put-attribute name="header"
 			value="/WEB-INF/template/header.jsp" />
 			
-		<put-attribute name="left"
-			value=""/>
-
+		<put-attribute name="content1"
+			value="/WEB-INF/template/test.jsp"/>
+			
+		<put-attribute name="content2"
+			value="/WEB-INF/template/test.jsp"/>
 			
 		<put-attribute name="footer"
 			value="/WEB-INF/template/footer.jsp" />
 	</definition>
 	
 <!-- 	user화면	 -->
-	<definition name="left" extends="base_layout">
+	<definition name="user" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
 	</definition>
 	
 <!-- 	admin 화면	 -->
 	<definition name="admin" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/admin.jsp" />
+		<put-attribute name="content1" value="/WEB-INF/template/test.jsp"/>
 	</definition>
 	
 <!-- 	docuform 	-->
 	<definition name="docuForm" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp"/>
 	</definition>
 	
 	<definition name="docuWrite" extends="docuForm">
