@@ -36,11 +36,11 @@
   </style>
 <div class="well" id="well">
   <div class="row">
-    <div class="col-sm-2" id="logo"><a href="/Puzzle/puzzle/docutest.do"><img src="/Puzzle/img/logo.png" width="200px"></a></div>
+    <div class="col-sm-2" id="logo"><a href="/Puzzle/main.puzzle"><img src="/Puzzle/img/logo.png" width="200px"></a></div>
     
     <div class="col-sm-8"></div>
     
-    <div class="col-sm-1" id="message"><a href="/Puzzle/puzzle/message/messageList.do"><img src="/Puzzle/img/message.png" width="40px"><br>message</a></div>
+    <div class="col-sm-1" id="message"><a href="/Puzzle/message/messageList.puzzle"><img src="/Puzzle/img/message.png" width="40px"><br>message</a></div>
     <div class="col-sm-1" id="main"><a href="#"><img src="/Puzzle/img/user.png" width="40px"><br>user</a></div>
 	
   </div>

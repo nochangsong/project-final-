@@ -15,6 +15,7 @@
   }
 
   </style>
+  <title><tiles:insertAttribute name="title"/></title>
 </head>
 
 <tiles:insertAttribute name="header" />
