@@ -29,7 +29,7 @@
 	<definition name="admin" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/admin.jsp" />
 	</definition>
-		
+	
 <!-- 	docuform 	-->
 	<definition name="docuForm" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
