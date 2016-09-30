@@ -20,6 +20,6 @@ public class MainController {
 	
 	@RequestMapping("/user.puzzle")
 	public String userlogin(){
-		return "left";
+		return "user";
 	}
 }

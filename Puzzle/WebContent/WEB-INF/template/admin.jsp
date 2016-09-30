@@ -18,12 +18,8 @@
         color: #3163C9;
      }
      
-    ul.nav li a:active {
-	 background-color: #fff;
-	}
-
-	ul.nav li{
-	background-color: #fff;
+	.container .nav li a{
+		background-color: #fff;
 	}
   	
   </style>
