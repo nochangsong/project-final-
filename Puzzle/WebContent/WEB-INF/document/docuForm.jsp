@@ -59,7 +59,7 @@
 				<div class="panel-heading" role="tab" id="headingThree">
 					<h4 class="panel-title">
 						<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						자유기안
+						<a href="freeDraft.puzzle">자유기안</a>
 						</a>
 					</h4>
 				</div>
@@ -68,7 +68,7 @@
 				<div class="panel-heading" role="tab" id="headingThree">
 					<h4 class="panel-title">
 						<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						나의양식
+						<a href="myWriteForm.puzzle">나의양식</a>
 						</a>
 					</h4>
 				</div>

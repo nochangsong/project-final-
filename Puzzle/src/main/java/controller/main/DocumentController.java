@@ -16,4 +16,21 @@ public class DocumentController {
 	public String docuwrite(){
 		return "docuWrite";
 	}
+	
+	@RequestMapping("/document/myWriteForm.puzzle")
+	public String viewDraft(){
+		return "myWriteForm";
+	}
+	
+	@RequestMapping("/document/freeDraft.puzzle")
+	public String freeDraft(){
+		return "freeDraft";
+	}
+	
+	@RequestMapping("/document/checkDoc.puzzle")
+	public String checkDoc(){
+		return "checkDoc";
+	}
+	
+	
 }

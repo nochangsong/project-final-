@@ -58,5 +58,24 @@
 		<put-attribute name="content"
 			value="/WEB-INF/message/messageList.jsp" />
 	</definition>
+	
+	<definition name="myWriteForm" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content2" value="/WEB-INF/document/myWriteForm.jsp" />
+	</definition>
+
+
+	<definition name="freeDraft" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content2" value="/WEB-INF/document/freeDraft.jsp" />
+	</definition>
+
+	<definition name="checkDoc" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content2" value="/WEB-INF/document/checkDoc.jsp" />
+	</definition>
 		
 </tiles-definitions>

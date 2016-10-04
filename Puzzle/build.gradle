@@ -57,4 +57,32 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
 	compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.2.2'
 	// https://mvnrepository.com/artifact/org.springframework/spring-orm
+	
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
+	compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.6.2'
+	// https://mvnrepository.com/artifact/com.google.api-client/google-api-client
+	compile group: 'com.google.api-client', name: 'google-api-client', version: '1.22.0'
+
+ 	compile 'com.google.api-client:google-api-client:1.22.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+    compile 'com.google.apis:google-api-services-sheets:v4-rev25-1.22.0'
+    
+    // https://mvnrepository.com/artifact/com.google.http-client/google-http-client
+	compile group: 'com.google.http-client', name: 'google-http-client', version: '1.22.0'
+    
+    // https://mvnrepository.com/artifact/com.google.gdata/core
+	compile group: 'com.google.gdata', name: 'core', version: '1.47.1'
+    
+    // https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2
+	compile group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.22.0'
+    
+    // https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson
+	compile group: 'com.google.http-client', name: 'google-http-client-jackson', version: '1.22.0'
+	
+	// https://mvnrepository.com/artifact/org.json/json
+	compile group: 'org.json', name: 'json', version: '20160810'
+	
+	// https://mvnrepository.com/artifact/com.google.apis/google-api-services-drive
+	compile group: 'com.google.apis', name: 'google-api-services-drive', version: 'v2-rev239-1.22.0'
+	
 }
