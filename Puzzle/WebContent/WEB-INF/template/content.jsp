@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="col-sm-8 text-left">
-      <h1>content</h1>
+      
 
 
 </div>

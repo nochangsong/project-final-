@@ -20,6 +20,9 @@
  
      }
 
+	.container .nav li a{
+		background-color: #fff;
+	}
   	
   </style>
 	<div class="container">
