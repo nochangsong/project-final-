@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	var tag = "<form id='add'><input type='text' size='20'/><input type='button' value='추가'/><input type='button' onclick='cancel()' value='취소'/></form>";
+	var tag = "<form id='add'><input type='text' id='a' size='20'/><input type='button' onclick='add()' value='추가'/><input type='button' onclick='cancel()' value='취소'/></form>";
 
 // 	카테고리 추가하는 입력폼 삽입
 	function insert(){
@@ -23,9 +23,11 @@
 	
 // 	입력폼에 넣은 값으로 li태그 추가
 	function add(){
-		var add = document.getElementById("add");
-		var addli = "<li>&nbsp;"+add+"</li>";
-		$("#hide").append(addli);
+		var addli = $("#a").val();
+		$("#category").append('<li>&nbsp;'+addli+'</li>');
+		$("#add").on('click',function(){
+			$(this).remove();
+		});
 	}
 	
 </script>
@@ -37,7 +39,7 @@
 		<div class="col-sm-4">
 				<div class="panel-group">
 					<div class="panel panel-default">
-						<div class="panel-heading">조직도<button id="insert" onclick="insert()">+</button><button id="delete" onclick="delete">삭제</button></div>
+						<div class="panel-heading">조직도<button id="insert" onclick="insert()">+</button><button id="delete" onclick="delete()">삭제</button></div>
 							<ul class="nav nav-stacked">
 								<li id="menu"><a href="#">puzzle</a>
 									<ul class="hide" id="category">
