@@ -13,10 +13,10 @@
 			value="/WEB-INF/template/header.jsp" />
 			
 		<put-attribute name="content1"
-			value="/WEB-INF/template/test.jsp"/>
+			value="/WEB-INF/template/content.jsp"/>
 			
 		<put-attribute name="content2"
-			value="/WEB-INF/template/test.jsp"/>
+			value="/WEB-INF/template/content.jsp"/>
 			
 		<put-attribute name="footer"
 			value="/WEB-INF/template/footer.jsp" />
@@ -30,7 +30,7 @@
 <!-- 	admin 화면	 -->
 	<definition name="admin" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/admin.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/template/test.jsp"/>
+		<put-attribute name="content1" value="/WEB-INF/template/content.jsp"/>
 	</definition>
 	
 <!-- 	docuform 	-->
@@ -45,8 +45,15 @@
 	</definition>
 
 	<definition name="messageList" extends="base_layout">
-		<put-attribute name="content"
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content1"
 			value="/WEB-INF/message/messageList.jsp" />
 	</definition>
-		
+	
+	<definition name="main" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content1"
+			value="/WEB-INF/main/main.jsp" />
+	</definition>
+			
 </tiles-definitions>

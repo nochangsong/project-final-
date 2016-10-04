@@ -43,7 +43,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 <!-- 		dataSource를 가져와서 커넥션? 연결 -->
 		<property name="dataSource" ref="dataSource"/>
-		<property name="mapperLocations" value="classpath:mapper/messageMapper.xml"/>
+		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
 <!-- 		value에 와일드카드 사용가능 *.xml (모든 xml파일 지정가능)  -->
 	</bean>
 	

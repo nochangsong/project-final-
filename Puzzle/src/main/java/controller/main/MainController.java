@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 public class MainController {
 
-	@RequestMapping("/main.puzzle")
+	@RequestMapping("main.puzzle")
 	public String main(){
 		return "main";
 	}
@@ -20,6 +20,6 @@ public class MainController {
 	
 	@RequestMapping("/user.puzzle")
 	public String userlogin(){
-		return "left";
+		return "user";
 	}
 }
