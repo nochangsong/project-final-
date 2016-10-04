@@ -31,6 +31,7 @@
 	<definition name="admin" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/admin.jsp" />
 		<put-attribute name="content1" value="/WEB-INF/template/content.jsp"/>
+	</definition>
 <!-- 	admin 기본화면 구성	 -->
 	<definition name="admin" template="/WEB-INF/template/admin/layout.jsp">
 		<put-attribute name="header"
