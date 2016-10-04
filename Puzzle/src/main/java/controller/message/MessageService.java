@@ -19,32 +19,42 @@ public class MessageService {
 	}
 
 
-	public List<MessageCommand> alarmList(){
+//	public List<MessageCommand> alarmList(){
+//		List<MessageCommand> list = null;
+//		try {
+//			list = dao.selectNewAlarm();
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//		}
+//
+//		return list;
+//	}
+//	
+//	public void updateAlarm(MessageCommand msg){
+//		try {
+//			dao.updateAlarm(msg);
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//		}
+//	}
+//	
+//	public int getNewMessageNumber(){
+//		int num = 0;
+//		try {
+//			num = dao.selectNewMessageNumber();
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//		}
+//		return num;
+//	}
+	
+	public List<MessageCommand> getAllMessages(String email) {
 		List<MessageCommand> list = null;
 		try {
-			list = dao.selectNewAlarm();
-		} catch (Exception e) {
+			list = dao.getAllMessages(email);
+		} catch(Exception e){
 			System.out.println(e.toString());
 		}
-
 		return list;
-	}
-	
-	public void updateAlarm(MessageCommand msg){
-		try {
-			dao.updateAlarm(msg);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	}
-	
-	public int getNewMessageNumber(){
-		int num = 0;
-		try {
-			num = dao.selectNewMessageNumber();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return num;
 	}
 }

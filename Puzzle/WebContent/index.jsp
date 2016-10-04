@@ -50,7 +50,6 @@
 </div>
 
 </div>
-<%-- <% response.sendRedirect("main.puzzle"); %> --%>
-
+<%-- <% response.sendRedirect("main/main.puzzle"); %> --%>
 </body>
 </html>

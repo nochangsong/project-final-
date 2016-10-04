@@ -45,11 +45,11 @@
   </style>
 <div class="well" id="well">
   <div class="row" style="width: 100%">
-    <div class="col-sm-2" id="logo"><img src="/Puzzle/img/logo.png" width="200px"></div>
+    <div class="col-sm-2" id="logo"><a href="/Puzzle/main/main.puzzle"><img src="/Puzzle/img/logo.png" width="200px"></a></div>
     
     <div class="col-sm-8"></div>
     
-    <div class="col-sm-1" id="message"><a href="#"><img src="/Puzzle/img/message.png" width="40px"><br>message</a></div>
+    <div class="col-sm-1" id="message"><a href="/Puzzle/message/messageList.puzzle"><img src="/Puzzle/img/message.png" width="40px"><span class="badge"></span><br>message</a></div>
     <div class="col-sm-1" id="main"><a href="#"><img src="/Puzzle/img/user.png" width="40px"><br>user</a></div>
 	
   </div>
