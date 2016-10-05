@@ -3,18 +3,18 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message">
-<!-- 	<update id="read" parameterType="model.MessageCommand"> -->
-<!-- 		update message set checked='read' where no=#{no} -->
-<!-- 	</update> -->
-<!-- 	<update id="alarm" parameterType="model.MessageCommand"> -->
-<!-- 		update message set alarm=1 where no=#{no} -->
-<!-- 	</update> -->
-<!-- 	<select id="selectNewMessageNumber" resultType="int"> -->
-<!-- 		select count(*) from message where checked='new' -->
-<!-- 	</select> -->
-<!-- 	<select id="selectNewAlarm" resultType="model.MessageCommand"> -->
-<!-- 		select * from message where alarm=0 -->
-<!-- 	</select> -->
+	<update id="updateRead" parameterType="model.MessageCommand">
+		update message set checked='read' where no=#{no}
+	</update>
+	<update id="updateAlarm" parameterType="model.MessageCommand">
+		update message set alarm=1 where no=#{no}
+	</update>
+	<select id="selectNewMessageNumber" parameterType="String" resultType="int">
+		select count(*) from message where checked='new' and receiver=#{receiver}
+	</select>
+	<select id="selectNewAlarm" parameterType="String" resultType="model.MessageCommand">
+		select * from message where alarm=0 and receiver=#{receiver}
+	</select>
 	
 	<select id="allMessages" parameterType="String" resultType="model.MessageCommand">
 		select * from message where receiver=#{receiver} order by reg_date desc

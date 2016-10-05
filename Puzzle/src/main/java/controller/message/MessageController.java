@@ -33,19 +33,25 @@ public class MessageController {
 		return mav;
 	}
 	
-//	@RequestMapping(value= "/message/messageList.do", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
-//	@ResponseBody
-//	public String alarmList(HttpServletResponse resp) throws Exception{
-//		resp.setContentType("text/html;charset=utf-8");
-//		List<MessageCommand> list = service.alarmList();
-//		int msgNum = service.getNewMessageNumber();
-//		JSONObject json = new JSONObject();
-//		json.put("data", list);
-//		json.put("msgNum", msgNum);
-//		for(int idx=0; idx<list.size();idx++){
-//			service.updateAlarm(list.get(idx));
-//		}
-////		System.out.println(json.toString());
-//		return json.toString();
-//	}
+	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String alarmList(HttpServletResponse resp) throws Exception{
+		resp.setContentType("text/html;charset=utf-8");
+		List<MessageCommand> list = service.getAlarmList("joo@naver.com");
+		int msgNum = service.getNewMessageNumber("joo@naver.com");
+		JSONObject json = new JSONObject();
+		json.put("data", list);
+		json.put("msgNum", msgNum);
+		for(int idx=0; idx<list.size();idx++){
+			service.updateAlarm(list.get(idx));
+		}
+//		System.out.println(json.toString());
+		return json.toString();
+	}
+	
+	@RequestMapping("message.puzzle")
+	public ModelAndView showMessage() throws Exception {
+		ModelAndView mav = new ModelAndView("message");
+		return mav;
+	}
 }

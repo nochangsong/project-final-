@@ -81,7 +81,11 @@
 		<put-attribute name="content2" value="/WEB-INF/document/checkDoc.jsp" />
 	</definition>
 		
-
+	<definition name="message" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/message/message.jsp"/>
+	</definition>
 	<definition name="main" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
 		<put-attribute name="content"

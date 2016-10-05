@@ -19,34 +19,35 @@ public class MessageService {
 	}
 
 
-//	public List<MessageCommand> alarmList(){
-//		List<MessageCommand> list = null;
-//		try {
-//			list = dao.selectNewAlarm();
-//		} catch (Exception e) {
-//			System.out.println(e.toString());
-//		}
-//
-//		return list;
-//	}
-//	
-//	public void updateAlarm(MessageCommand msg){
-//		try {
-//			dao.updateAlarm(msg);
-//		} catch (Exception e) {
-//			System.out.println(e.toString());
-//		}
-//	}
-//	
-//	public int getNewMessageNumber(){
-//		int num = 0;
-//		try {
-//			num = dao.selectNewMessageNumber();
-//		} catch (Exception e) {
-//			System.out.println(e.toString());
-//		}
-//		return num;
-//	}
+	public List<MessageCommand> getAlarmList(String email){
+		List<MessageCommand> list = null;
+		try {
+			list = dao.selectNewAlarm(email);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return list;
+	}
+	
+	//알람 울림으로
+	public void updateAlarm(MessageCommand msg){
+		try {
+			dao.updateAlarm(msg);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	
+	public int getNewMessageNumber(String email){
+		int num = 0;
+		try {
+			num = dao.selectNewMessageNumber(email);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return num;
+	}
 	
 	public List<MessageCommand> getAllMessages(String email) {
 		List<MessageCommand> list = null;
