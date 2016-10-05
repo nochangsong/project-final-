@@ -39,6 +39,14 @@ public class MessageService {
 		}
 	}
 	
+	public void updateRead(MessageCommand message) {
+		try {
+			dao.updateRead(message);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+	
 	public int getNewMessageNumber(String email){
 		int num = 0;
 		try {

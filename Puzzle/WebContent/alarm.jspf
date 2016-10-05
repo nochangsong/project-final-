@@ -36,5 +36,5 @@
 		    	Console.log(e.responseText);
 		    }
 		});
-	}, 300);
+	}, 100);
 </script>

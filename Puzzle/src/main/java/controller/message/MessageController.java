@@ -71,10 +71,12 @@ public class MessageController {
 		resp.setContentType("text/html;charset=utf-8");
 		int no = Integer.parseInt(request.getParameter("no"));
 		MessageCommand message = service.getMessage(no);
+		if(message.getChecked().equals("new")){
+			service.updateRead(message);
+		}
 		JSONObject json = new JSONObject();
 		json.put("sender", message.getSender());
 		json.put("content", message.getContent());
-		System.out.println(message.getContent());
 		return json.toString();
 	}
 }

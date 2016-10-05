@@ -27,7 +27,12 @@
 	$(function(){
 		$('.open-popup-link').magnificPopup({
 			type:'inline',
-			midClick: true
+			midClick: true,
+			callbacks: {
+				close: function(){
+					location.href="messageList.puzzle"
+				}
+			}
 		});
 	});
 	
@@ -50,6 +55,15 @@
 		    }
 		});
 	}
+	
+	function deleteMessage(){
+		var checkList = $(":checked");
+		if(checkList.length<1){
+			alert("삭제할 쪽지를 선택해주세요.");
+			return false;
+		}
+		alert(checkList.length);
+	}
 </script>
 <style>
 	.white-popup {
@@ -69,6 +83,7 @@
 <h2>쪽지함</h2>
 <br>
 <div class="container">
+<form:form>
 <table class="table">
 	<tr>
 		<th>선택</th>
@@ -84,14 +99,13 @@
 	<c:if test="${msg!=null}">
 		<c:forEach var="msg" items="${msg}">
 		<tr>
+			<td><input type="checkbox" name="msg_no" value="${msg.no}"/></td>
 			<c:if test="${msg.checked=='new'}">
-				<td><input type="checkbox"/></td>
 				<td><b>${msg.sender}</b></td>
 				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')"><b>${msg.content}</b></a></td>
 				<td><b>${msg.reg_date}</b></td>
 			</c:if>
 			<c:if test="${msg.checked=='read'}">
-				<td><input type="checkbox"/></td>
 				<td>${msg.sender}</td>
 				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')">${msg.content}</a></td>
 				<td>${msg.reg_date}</td>
@@ -100,16 +114,17 @@
 		</c:forEach>
 	</c:if>
 </table>
+</form:form>
 </div>
 <div>
 	<button type="button" class="btn btn-default" onclick="location.href='messageForm.puzzle'">쪽지보내기</button>
-	<button type="button" class="btn btn-default">삭제</button><br>
+	<button type="button" class="btn btn-default" onclick="return deleteMessage()">삭제</button><br>
 	<div id="messageBox" class="white-popup mfp-hide">
 		<div class="form-group">
 			<label>보낸 사람: </label>
 			<span id="sender"></span>
 		</div>
-		<div class="form-group" id="content">
+		<div class="form-group">
 			<label>내용: </label><br>
 			<span id="content"></span>
 		</div>
