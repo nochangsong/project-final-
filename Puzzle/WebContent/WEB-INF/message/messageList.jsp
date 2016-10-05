@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false" %>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -21,23 +22,52 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <!-- Magnific Popup core JS file -->
-<script src="/Puzzle/themes/jquery.magnific-popup.min.js"></script>
+<script src="/Puzzle/themes/jquery.magnific-popup.js"></script>
 <script>
-$(document).ready(function() {
-	$('.simple-ajax-popup').magnificPopup({
-		type: 'ajax'
+	$(function(){
+		$('.open-popup-link').magnificPopup({
+			type:'inline',
+			midClick: true
+		});
 	});
 	
-	$('.test-popup-link').magnificPopup({
-		type: 'image'
-		// other options
-	});
-	
-});
+	function showMessage(no){
+// 		alert(no);
+		var url = "/Puzzle/message/showMessage.puzzle";
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				no: no
+			}
+			,url: url	// url 주소	
+			,dataType:"json"
+			,success:function(args){	
+				$("#sender").html(args.sender);
+				$("#content").html(args.content);
+			}
+		    ,error:function(e) {	
+		    	Console.log(e.responseText);
+		    }
+		});
+	}
 </script>
+<style>
+	.white-popup {
+		position: relative;
+		background: #FFF;
+		padding: 20px;
+		width: auto;
+		max-width: 500px;
+		margin: 20px auto;
+	}
+	#content{
+		height: 50px;
+	}
+</style>
 </head>
 <body>
 <h2>쪽지함</h2>
+<br>
 <div class="container">
 <table class="table">
 	<tr>
@@ -57,13 +87,13 @@ $(document).ready(function() {
 			<c:if test="${msg.checked=='new'}">
 				<td><input type="checkbox"/></td>
 				<td><b>${msg.sender}</b></td>
-				<td><a href="#"><b>${msg.content}</b></a></td>
+				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')"><b>${msg.content}</b></a></td>
 				<td><b>${msg.reg_date}</b></td>
 			</c:if>
 			<c:if test="${msg.checked=='read'}">
 				<td><input type="checkbox"/></td>
 				<td>${msg.sender}</td>
-				<td><a href="#">${msg.content}</a></td>
+				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')">${msg.content}</a></td>
 				<td>${msg.reg_date}</td>
 			</c:if>
 		</tr>
@@ -72,12 +102,18 @@ $(document).ready(function() {
 </table>
 </div>
 <div>
-	<button type="button" class="btn btn-default">쪽지보내기</button>
+	<button type="button" class="btn btn-default" onclick="location.href='messageForm.puzzle'">쪽지보내기</button>
 	<button type="button" class="btn btn-default">삭제</button><br>
-	
-	
-	<a class="simple-ajax-popup" href="/Puzzle/message.jsp">Ajax</a><br>
-	<a class="test-popup-link" href="/Puzzle/1.jpg">image</a><br>
+	<div id="messageBox" class="white-popup mfp-hide">
+		<div class="form-group">
+			<label>보낸 사람: </label>
+			<span id="sender"></span>
+		</div>
+		<div class="form-group" id="content">
+			<label>내용: </label><br>
+			<span id="content"></span>
+		</div>
+	</div>
 </div>
 </body>
 </html>

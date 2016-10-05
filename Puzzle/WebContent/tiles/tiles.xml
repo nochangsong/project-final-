@@ -59,7 +59,7 @@
 	</definition>
 
 	<definition name="messageList" extends="base_layout">
-		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
 		<put-attribute name="content"
 			value="/WEB-INF/message/messageList.jsp" />
 	</definition>
@@ -89,11 +89,26 @@
 		<put-attribute name="content"
 			value="/WEB-INF/message/message.jsp"/>
 	</definition>
+	
 	<definition name="main" extends="base_layout">
-		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
 		<put-attribute name="content"
 			value="/WEB-INF/main/main.jsp" />
 	</definition>
+	
+	<definition name="messageForm" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/message/messageForm.jsp" />
+	</definition>
+	
+	<definition name="sendSuccess" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/message/sendSuccess.jsp" />
+	</definition>
+	
+	
 			
 
 </tiles-definitions>

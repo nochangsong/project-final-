@@ -12,8 +12,9 @@ public class MessageDAO extends SqlSessionDaoSupport{
 	public List<MessageCommand> selectNewAlarm(String receiver){
 		return getSqlSession().selectList("message.selectNewAlarm", receiver);
 	}
-	public void updateAlarm(MessageCommand msg){
-		getSqlSession().update("message.updateAlarm", msg);
+	
+	public void updateAlarm(MessageCommand message){
+		getSqlSession().update("message.updateAlarm", message);
 	}
 	
 	public int selectNewMessageNumber(String receiver){
@@ -25,5 +26,13 @@ public class MessageDAO extends SqlSessionDaoSupport{
 	
 	public List<MessageCommand> getAllMessages(String receiver){
 		return getSqlSession().selectList("message.allMessages", receiver);
+	}
+	
+	public int sendMessage(MessageCommand message) {
+		return getSqlSession().insert("message.sendmessage", message);
+	}
+	
+	public MessageCommand getMessage(int no){
+		return getSqlSession().selectOne("message.selectMessage", no);
 	}
 }

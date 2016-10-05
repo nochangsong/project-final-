@@ -13,7 +13,7 @@
   	width: 100%;
   
   }
-  #content{
+  #con{
   	margin-top: 0px;
 /*   	padding-top: 10px; */
   	height: 80%;
@@ -40,7 +40,7 @@
 <tiles:insertAttribute name="header" />
 
  
-<div class="row" id="content">
+<div class="row" id="con">
 	<div class="col-sm-2" id="left"><tiles:insertAttribute name="left"/></div>
 	<div class="col-sm-2"><tiles:insertAttribute name="content"/></div>
 </div>

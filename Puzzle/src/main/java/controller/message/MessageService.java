@@ -31,9 +31,9 @@ public class MessageService {
 	}
 	
 	//알람 울림으로
-	public void updateAlarm(MessageCommand msg){
+	public void updateAlarm(MessageCommand message){
 		try {
-			dao.updateAlarm(msg);
+			dao.updateAlarm(message);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -57,5 +57,25 @@ public class MessageService {
 			System.out.println(e.toString());
 		}
 		return list;
+	}
+	
+	public int send(MessageCommand message){
+		int result = 0;
+		try {
+			result = dao.sendMessage(message);
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	public MessageCommand getMessage(int no) {
+		MessageCommand message = null;
+		try {
+			message = dao.getMessage(no);
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return message;
 	}
 }
