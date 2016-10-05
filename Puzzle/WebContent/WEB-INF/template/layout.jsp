@@ -41,7 +41,7 @@
  
 <div class="row" id="content">
 	<div class="col-sm-2" id="left"><tiles:insertAttribute name="left"/></div>
-	<div class="col-sm-2"><tiles:insertAttribute name="content1"/></div>
+	<div class="col-sm-2"><tiles:insertAttribute name="content"/></div>
 </div>
 
 

@@ -12,9 +12,6 @@
 		<put-attribute name="header"
 			value="/WEB-INF/template/header.jsp" />
 			
-		<put-attribute name="content1"
-			value="/WEB-INF/template/content.jsp"/>
-			
 		<put-attribute name="footer"
 			value="/WEB-INF/template/footer.jsp" />
 	</definition>
@@ -22,34 +19,35 @@
 <!-- 	user화면	 -->
 	<definition name="user" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
+		<put-attribute name="content" value="/WEB-INF/template/content.jsp"/>
 	</definition>
 	
 <!-- 	admin 화면	 -->
 	<definition name="admin" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/template/content.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/template/content.jsp"/>
 	</definition>
 	
 <!-- 	admin 기본화면 구성	 -->
-	<definition name="admin" template="/WEB-INF/template/layout.jsp">
-		<put-attribute name="header"
-			value="/WEB-INF/template/header.jsp" />
+<!-- 	<definition name="admin" template="/WEB-INF/template/layout.jsp"> -->
+<!-- 		<put-attribute name="header" -->
+<!-- 			value="/WEB-INF/template/header.jsp" /> -->
 			
-		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp"/>
+<!-- 		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp"/> -->
 
-		<put-attribute name="footer"
-			value="/WEB-INF/template/footer.jsp" />
-	</definition>
+<!-- 		<put-attribute name="footer" -->
+<!-- 			value="/WEB-INF/template/footer.jsp" /> -->
+<!-- 	</definition> -->
 	
 <!-- 조직원 관리 게시판 -->
 	<definition name="depterment" extends="admin">
-		<put-attribute name="content1" value="/WEB-INF/template/admin/depterment.jsp"/>	
+		<put-attribute name="content" value="/WEB-INF/template/admin/depterment.jsp"/>	
 	</definition>
 	
 <!-- 	docuform 	-->
 	<definition name="docuForm" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/document/docuForm.jsp"/>
 	</definition>
 	
 	<definition name="docuWrite" extends="docuForm">
@@ -59,34 +57,34 @@
 
 	<definition name="messageList" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1"
+		<put-attribute name="content"
 			value="/WEB-INF/message/messageList.jsp" />
 	</definition>
 	
 
 	<definition name="myWriteForm" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content" value="/WEB-INF/document/docuForm.jsp" />
 		<put-attribute name="content2" value="/WEB-INF/document/myWriteForm.jsp" />
 	</definition>
 
 
 	<definition name="freeDraft" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content" value="/WEB-INF/document/docuForm.jsp" />
 		<put-attribute name="content2" value="/WEB-INF/document/freeDraft.jsp" />
 	</definition>
 
 	<definition name="checkDoc" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
+		<put-attribute name="content" value="/WEB-INF/document/docuForm.jsp" />
 		<put-attribute name="content2" value="/WEB-INF/document/checkDoc.jsp" />
 	</definition>
 		
 
 	<definition name="main" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
-		<put-attribute name="content1"
+		<put-attribute name="content"
 			value="/WEB-INF/main/main.jsp" />
 	</definition>
 			
