@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 	부서종류 가져옴  -->
+<mapper namespace="dept">	
+	<select id="allDeptType" resultType="model.DepterMentCommand">
+		select distinct Dept_Type from DEPARTMENT order by DEPT_TYPE asc
+	</select>
+	
+	<select id="deptnum" resultType="int">
+		select dept_num from DEPARTMENT order by dept_num desc
+	</select>
+	
+	
+	<insert id="depttypeadd" parameterType="model.DepterMentCommand">
+		insert into department(Dept_Type) values (#{Dept_Type})
+	</insert>
+</mapper>

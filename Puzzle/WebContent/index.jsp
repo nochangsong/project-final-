@@ -21,7 +21,7 @@
 	}	
 	
 	#background{
-		opacity: 0.6;
+/*   		opacity: 0.8;   */
 	}
 		
 	#login{
@@ -37,7 +37,7 @@
 
 <div class="col-sm-12" id="content" style="text-align: center">
 	<video id="background" preload="auto" autoplay="autoplay"> 
-		<source src="3145.mp4" type="video/mp4">
+		<source src="Laptop3145.mp4" type="video/mp4">
 	</video>
 	<div class="col-md-4" id="login">
 		<div>

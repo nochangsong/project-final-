@@ -29,9 +29,10 @@
 	
 <!-- 	admin 화면	 -->
 	<definition name="admin" extends="base_layout">
-		<put-attribute name="left" value="/WEB-INF/template/admin.jsp" />
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
 		<put-attribute name="content1" value="/WEB-INF/template/content.jsp"/>
 	</definition>
+	
 <!-- 	admin 기본화면 구성	 -->
 	<definition name="admin" template="/WEB-INF/template/admin/layout.jsp">
 		<put-attribute name="header"
@@ -44,8 +45,8 @@
 	</definition>
 	
 <!-- 조직원 관리 게시판 -->
-	<definition name="member" extends="admin">
-		<put-attribute name="content1" value="/WEB-INF/template/admin/member.jsp"/>	
+	<definition name="depterment" extends="admin">
+		<put-attribute name="content1" value="/WEB-INF/template/admin/depterment.jsp"/>	
 	</definition>
 	
 <!-- 	docuform 	-->

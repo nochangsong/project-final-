@@ -50,5 +50,10 @@
 	<bean id="dao" class="mybatis.MessageDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	
+	<bean id="deptdao" class="mybatis.DeptermentDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
 </beans>
 
