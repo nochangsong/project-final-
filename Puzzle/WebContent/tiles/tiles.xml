@@ -65,7 +65,7 @@
 			value="/WEB-INF/message/messageList.jsp" />
 	</definition>
 	
-<<<<<<< HEAD
+
 	<definition name="myWriteForm" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
 		<put-attribute name="content1" value="/WEB-INF/document/docuForm.jsp" />
@@ -85,12 +85,12 @@
 		<put-attribute name="content2" value="/WEB-INF/document/checkDoc.jsp" />
 	</definition>
 		
-=======
+
 	<definition name="main" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/left.jsp" />
 		<put-attribute name="content1"
 			value="/WEB-INF/main/main.jsp" />
 	</definition>
 			
->>>>>>> refs/remotes/origin/master
+
 </tiles-definitions>
