@@ -49,7 +49,7 @@
 		<li class="col-sm-2" id="menu"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;관리자</a>
 			<ul class="hide">
 				<li><a href="#"><span class="glyphicon glyphicon-user"> 조직관리</span></a></li>
-				<li><a href="#">조직도/조직원관리</a></li>
+				<li><a href="/Puzzle/ProsnnelView/P_Card_in.puzzle">조직도/조직원관리</a></li>
 				<li><a href="#">전체문서함</a></li>
 				<li><a href="#">문서양식</a></li>
 				<li><a href="#">게시판관리</a></li>

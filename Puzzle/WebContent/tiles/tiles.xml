@@ -108,7 +108,12 @@
 			value="/WEB-INF/message/sendSuccess.jsp" />
 	</definition>
 	
+	<!-- 창송 -->
 	
+	<definition name="P_Card_in" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
+		<put-attribute name="content" value="/WEB-INF/ProsnnelView/P_Card_in.jsp" />
+	</definition>
 			
 
 </tiles-definitions>
