@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="position">
+	<insert id="insertPosition" parameterType="model.PositionCommand">
+		insert into position(position_num,positionType) values(position_num_seq.nextval,#{positionType})
+	</insert>
+	<update id="updatePosition" parameterType="model.PositionCommand">
+		update position set positionType=#{positionType} where position_num=#{position_num}
+	</update>
+	<delete id="deletePosition" parameterType="int">
+		delete from position where position_num=#{position_num}
+	</delete>
+	<select id="selectAllPositions" resultType="model.PositionCommand">
+		select * from position order by position_num
+	</select>
+</mapper>

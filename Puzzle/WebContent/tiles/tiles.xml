@@ -9,6 +9,8 @@
 	<definition name="base_layout"
 		template="/WEB-INF/template/layout.jsp">
 		
+		<put-attribute name="title" value="Puzzle" />
+			
 		<put-attribute name="header"
 			value="/WEB-INF/template/header.jsp" />
 			
@@ -109,7 +111,11 @@
 	</definition>
 	
 	<!-- 창송 -->
-	
+	<!-- admin position -->
+	<definition name="positionList" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/admin/positionList.jsp"/>
+	</definition>
 	<definition name="P_Card_in" extends="base_layout">
 		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" />
 		<put-attribute name="content" value="/WEB-INF/ProsnnelView/P_Card_in.jsp" />
