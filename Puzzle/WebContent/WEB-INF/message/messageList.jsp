@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ page isELIgnored="false" %>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -91,12 +92,12 @@
 		<th>내용</th>
 		<th>날짜</th>
 	</tr>
-	<c:if test="${msg==null}">
+	<c:if test="${fn:length(msg)==0}">
 		<tr>
 			<td colspan="2">쪽지가 없습니다.</td>
 		</tr>
 	</c:if>
-	<c:if test="${msg!=null}">
+	<c:if test="${fn:length(msg)!=0}">
 		<c:forEach var="msg" items="${msg}">
 		<tr>
 			<td><input type="checkbox" name="msg_no" value="${msg.no}"/></td>

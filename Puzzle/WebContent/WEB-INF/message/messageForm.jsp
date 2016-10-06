@@ -37,6 +37,7 @@
 <%-- 		받는사람 : <form:input path="receiver" /><form:errors path="receiver" element="div"/><br> --%>
 <%-- 		내용 : <form:textarea path="content"/><form:errors path="content" element="div"/><br> --%>
 		<input type="submit" value="보내기" class="btn btn-default"/>
+		<input type="button" value="취소" class="btn btn-default" onclick="location.href='messageList.puzzle'"/>
 	</form:form>
 </body>
 </html>
