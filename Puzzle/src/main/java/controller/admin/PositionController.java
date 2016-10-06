@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,20 +27,21 @@ public class PositionController {
 		return new PositionCommand();
 	}
 	
-	@RequestMapping("/position/positionList.puzzle")
+	@RequestMapping(value="/position/positionList.puzzle", method=RequestMethod.GET)
 	public ModelAndView positionList() throws Exception {
 		ModelAndView mav = new ModelAndView("positionList");
 		List<PositionCommand> list = service.getPositionList();
-		mav.addObject("list",list);
+		mav.addObject("positionList",list);
 		return mav;
 	}
 	
-	@RequestMapping("/position/insert.puzzle")
+	@RequestMapping(value="/position/positionList.puzzle", method=RequestMethod.POST)
 	public String insert(@ModelAttribute("positionCommand")PositionCommand position) throws Exception {
 		service.insertPosition(position);
 		return "redirect:positionList.puzzle";
 	}
 	
+	@RequestMapping("/position/update.puzzle")
 	public String update(@RequestParam("num")int position_num, @RequestParam("type")String positionType){
 		PositionCommand position = new PositionCommand();
 		position.setPosition_num(position_num);
@@ -48,6 +50,7 @@ public class PositionController {
 		return "redirect:positionList.puzzle";
 	}
 	
+	@RequestMapping("/position/delete.puzzle")
 	public String delete(@RequestParam("num")int position_num){
 		service.deletePosition(position_num);
 		return "redirect:positionList.puzzle";
