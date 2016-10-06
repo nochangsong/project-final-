@@ -1,6 +1,6 @@
 package model;
 
-public class DepterMentCommand {
+public class DepartMentCommand {
 	
 	private int dept_Num;
 	private String dept_Type;

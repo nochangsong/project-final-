@@ -45,9 +45,16 @@
 <!-- 	</definition> -->
 	
 <!-- 조직원 관리 게시판 -->
-	<definition name="depterment" extends="admin">
-		<put-attribute name="content" value="/WEB-INF/template/admin/depterment.jsp"/>	
+<!-- 	<definition name="depterment" extends="admin"> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/template/admin/depterment.jsp"/>	 -->
+<!-- 	</definition> -->
+
+<!-- 	2016-10-06 추가 -->
+	<definition name="department" extends="base_layout">
+		<put-attribute name="left" value="/WEB-INF/template/admin/adminleft.jsp" /> 
+		<put-attribute name="content" value="/WEB-INF/department/department.jsp"/>
 	</definition>
+	
 	
 <!-- 	docuform 	-->
 	<definition name="docuForm" extends="base_layout">
