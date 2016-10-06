@@ -36,7 +36,7 @@ public class MainController {
 	@RequestMapping("/admin.puzzle")
 	public String adminlogin(){
 		
-		return "depterment";
+		return "admin";
 	}
 	
 	@RequestMapping("/user.puzzle")

@@ -4,16 +4,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 	부서종류 가져옴  -->
 <mapper namespace="dept">	
-	<select id="allDeptType" resultType="model.DepterMentCommand">
-		select distinct Dept_Type from DEPARTMENT order by DEPT_TYPE asc
+	<select id="listdept" resultType="model.DepterMentCommand">
+		select distinct Dept_Type from DEPARTMENT order by Dept_Type asc
+<!-- 		select distinct Dept_Type from depttable order by Dept_Type asc -->
 	</select>
-	
-	<select id="deptnum" resultType="int">
-		select dept_num from DEPARTMENT order by dept_num desc
-	</select>
-	
-	
-	<insert id="depttypeadd" parameterType="model.DepterMentCommand">
-		insert into department(Dept_Type) values (#{Dept_Type})
+
+	<insert id="dept_typeAdd" parameterType="model.DepterMentCommand">
+<!-- 		insert into department values (#{Dept_Num},#{Dept_Type}) -->
+		insert into depttable values(num.NEXTVAL,#{Dept_Type})
 	</insert>
 </mapper>

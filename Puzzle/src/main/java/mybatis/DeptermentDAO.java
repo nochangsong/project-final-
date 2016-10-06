@@ -8,15 +8,15 @@ import model.DepterMentCommand;
 
 public class DeptermentDAO extends SqlSessionDaoSupport{
 	
-	public List<DepterMentCommand> getAllDeptType(){
-		return getSqlSession().selectList("dept.allDeptType");
+//	listªÃ±‚
+	public List<DepterMentCommand> getListData(String string){
+		List<DepterMentCommand> dept_type = getSqlSession().selectList(string);
+		return dept_type;
 	}
 
-	public int selectdeptNum(){
-		return getSqlSession().selectOne("dept.deptnum");
+//	type√ﬂ∞°
+	public int insertDeptType(DepterMentCommand com){
+		return getSqlSession().insert("dept.dept_typeAdd", com);
 	}
 	
-//	public String insertDeptType(){
-//		return getSqlSession().insert("dept.depttypeadd");
-//	}
 }

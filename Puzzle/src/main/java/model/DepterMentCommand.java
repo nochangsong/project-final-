@@ -2,24 +2,21 @@ package model;
 
 public class DepterMentCommand {
 	
-	private int Dept_Num;
-	private String Dept_Type;
-	
+	private int dept_Num;
+	private String dept_Type;
 	public int getDept_Num() {
-		return Dept_Num;
+		return dept_Num;
 	}
-	
 	public void setDept_Num(int dept_Num) {
-		Dept_Num = dept_Num;
+		this.dept_Num = dept_Num;
 	}
-	
 	public String getDept_Type() {
-		return Dept_Type;		
+		return dept_Type;
 	}
-	
 	public void setDept_Type(String dept_Type) {
-		Dept_Type = dept_Type;
+		this.dept_Type = dept_Type;
 	}
+
 	
 	
 }
