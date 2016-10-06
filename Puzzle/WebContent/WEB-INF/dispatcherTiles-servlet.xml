@@ -20,7 +20,10 @@
 	
 
 	<context:annotation-config/>
-	<context:component-scan base-package="controller.message, controller.main, controller.Prosennel"/>
+	<context:component-scan base-package="controller.message"/>
+	<context:component-scan base-package="controller.main"/>
+	<context:component-scan base-package="controller.admin"/>
+	<context:component-scan base-package="controller.Prosnnel"/>
 
 	<!-- Servlet 경로를 포함한 전체 경로를 이용해서 매칭 여부를 판단하도록 설정 -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
@@ -44,11 +47,11 @@
 <!-- 		value에 와일드카드 사용가능 *.xml (모든 xml파일 지정가능)  -->
 	</bean>
 	
-	<bean id="dao" class="mybatis.MessageDAO">
+	<bean id="messageDao" class="mybatis.MessageDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	
-	<bean id="deptdao" class="mybatis.DeptermentDAO">
+	<bean id="deptDao" class="mybatis.DeptermentDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	
@@ -56,5 +59,8 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 
+	<bean id="positionDao" class="mybatis.PositionDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
 </beans>
 
