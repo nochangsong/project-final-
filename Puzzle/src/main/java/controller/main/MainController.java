@@ -11,13 +11,12 @@ import model.DepartMentCommand;
 @RequestMapping("/main")
 public class MainController {
 
-	@Autowired
-	private DepartMentCommand com;
-	
-//	public void setCom(DepterMentCommand com) {
+//	@Autowired
+//	private DepartMentCommand com;
+//	public void setCom(DepartMentCommand com) {
 //		this.com = com;
 //	}
-	
+//	
 
 	@ModelAttribute("com")
 	public DepartMentCommand formBacking(){
