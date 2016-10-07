@@ -34,6 +34,7 @@ public class DepartmentController {
 	public ModelAndView form(@ModelAttribute("com") DepartMentCommand com) throws Exception{
 		ModelAndView mav = new ModelAndView("department");
 		List<DepartMentCommand> list = service.listdept();
+		
 		mav.addObject("dept_type", list);
 		
 		return mav;

@@ -20,6 +20,10 @@
 	.bodyOne>a{
 		font-size: small;
 	}
+	
+	.bodyOne>button{
+		text-align: right;
+	}
 </style>
 <script>
 // 	var tag='<form:form commandName='com' id='add'><form:input path='Dept_Type' size='20'/><form:button id='add' value='추가'/><form:button id='cancel' value='취소'/></form:form>';
@@ -108,6 +112,9 @@
 			var dept_Type = $(this).text();
 			$(this).replaceWith("<input type=text id='edit_dept' onclick='edit()' value='"+dept_Type+"'/><input type=button onclick='editOk()' value='수정'/><input type=button onclick='edit_cancle()' value='취소'/>");
 		});
+		
+// 		$("#memberStatusTab")
+		
 	});
 
 	
@@ -145,6 +152,14 @@
 							<div class="bodyOne">
 							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit">조직원 편집</button><button id="memadd">조직원 추가</button>
 							</div>
+						</div>
+						<div class="panel-body">
+							<ul id="memberStatusTab" class="nav nav-pills padding-left-15 padding-20">
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+
+							</ul>
 						</div>
 				</div>
 			</div>	
