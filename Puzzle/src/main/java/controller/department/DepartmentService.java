@@ -7,5 +7,4 @@ import model.DepartMentCommand;
 public interface DepartmentService {
 	
 	public List<DepartMentCommand> listdept();
-	
 }
