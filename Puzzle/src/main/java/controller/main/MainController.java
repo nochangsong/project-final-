@@ -5,23 +5,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import model.DepterMentCommand;
+import model.DepartMentCommand;
 
 @Controller
 @RequestMapping("/main")
 public class MainController {
 
-//	@Autowired
-//	private DepterMentCommand com;
+	@Autowired
+	private DepartMentCommand com;
 	
 //	public void setCom(DepterMentCommand com) {
 //		this.com = com;
 //	}
 	
-	@ModelAttribute("com")
-	public DepterMentCommand formBacking(){
-	     return new DepterMentCommand();
-	}
+//	@ModelAttribute("com")
+//	public DepterMentCommand formBacking(){
+//	     return new DepterMentCommand();
+//	}
 	   
 	public MainController() {
 			// TODO Auto-generated constructor stub
