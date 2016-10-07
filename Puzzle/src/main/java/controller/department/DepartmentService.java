@@ -8,4 +8,4 @@ public interface DepartmentService {
 	
 	public List<DepartMentCommand> listdept();
 	
-}asdfasdf
+}
