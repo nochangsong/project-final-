@@ -32,7 +32,7 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView("messageList");
 		
 		int totalMsgCount = service.getTotalMessageCount("joo@naver.com");
-		int pageCount = totalMsgCount/perPage+1;
+		int pageCount = totalMsgCount/perPage+(totalMsgCount%perPage==0?0:1);
 		int start = totalMsgCount-perPage*(pageNum-1); 
 		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
 		int previous = (pageNum-5)/5*5+1;
