@@ -26,6 +26,7 @@
 <script src="/Puzzle/themes/jquery.magnific-popup.js"></script>
 <script>
 	$(function(){
+		$(".paging .pagination li#"+${pageNum}).addClass("active");
 		$('.open-popup-link').magnificPopup({
 			type:'inline',
 			midClick: true,
@@ -50,6 +51,11 @@
 			,success:function(args){	
 				$("#sender").html(args.sender);
 				$("#content").html(args.content);
+// 				$("#messagebox").append(
+// 						"<div class='form-group'><label>보낸 사람: </label>"+args.sender+"</div>" +
+// 						"<div class='form-group'><label>내용: </label><br>"+args.content+"</div>" +
+// 						"<div><input type='button' value='답장하기' class='btn btn-default' " +
+// 						"onclick='reply('')'</div>");
 			}
 		    ,error:function(e) {	
 		    	Console.log(e.responseText);
@@ -64,6 +70,12 @@
 			return false;
 		}
 		alert(checkList.length);
+	}
+	
+	function reply(){
+		var sender = $("span#sender").html();
+// 		alert(sender);
+		location.href="messageForm.puzzle?sender="+sender;
 	}
 </script>
 <style>
@@ -85,6 +97,8 @@
 <br>
 <div class="container">
 <form:form>
+<button type="button" class="btn btn-default" onclick="location.href='messageForm.puzzle'">쪽지보내기</button>
+<input type="submit" class="btn btn-default" onclick="return deleteMessage()" value="삭제"/>
 <table class="table">
 	<tr>
 		<th>선택</th>
@@ -100,7 +114,8 @@
 	<c:if test="${fn:length(msg)!=0}">
 		<c:forEach var="msg" items="${msg}">
 		<tr>
-			<td><input type="checkbox" name="msg_no" value="${msg.no}"/></td>
+<%-- 			<form:checkbox path="checkList" value="${msg.no}"/> --%>
+			<td><input type="checkbox" name="checkList" value="${msg.no}"></td>
 			<c:if test="${msg.checked=='new'}">
 				<td><b>${msg.sender}</b></td>
 				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')"><b>${msg.content}</b></a></td>
@@ -117,9 +132,26 @@
 </table>
 </form:form>
 </div>
+<div class="paging">
+	<c:if test="${pageNum>5}">
+		<ul class="pager">
+			<li><a href="messageList.puzzle?pageNum=${previous}">Previous</a></li>
+		</ul>
+	</c:if>
+	<ul class="pagination">
+		<c:forEach var="i" begin="1" end="${pageCount}">
+			<li id="${i}"><a href="messageList.puzzle?pageNum=${i}">${i}</a></li>
+		</c:forEach>
+<!-- 		<li class="active"><a href="#">2</a></li> -->
+	</ul>
+	
+	<c:if test="${pageCount>5 && pageNum<=(pageCount-pageCount%5)}">
+	<ul class="pager">
+		<li><a href="messageList.puzzle?pageNum=${next}">Next</a></li>
+	</ul>
+	</c:if>
+</div>
 <div>
-	<button type="button" class="btn btn-default" onclick="location.href='messageForm.puzzle'">쪽지보내기</button>
-	<button type="button" class="btn btn-default" onclick="return deleteMessage()">삭제</button><br>
 	<div id="messageBox" class="white-popup mfp-hide">
 		<div class="form-group">
 			<label>보낸 사람: </label>
@@ -129,6 +161,7 @@
 			<label>내용: </label><br>
 			<span id="content"></span>
 		</div>
+		<div><input type="button" class="btn btn-default" value="답장하기" onclick="reply()"/></div>
 	</div>
 </div>
 </body>

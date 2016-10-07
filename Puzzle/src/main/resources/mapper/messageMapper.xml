@@ -13,16 +13,29 @@
 	<update id="updateAlarm" parameterType="model.MessageCommand">
 		update message set alarm=1 where no=#{no}
 	</update>
+	<delete id="deleteMessage" parameterType="int">
+		delete from message where no=#{no}
+	</delete>
 	<select id="selectNewMessageNumber" parameterType="String" resultType="int">
 		select count(*) from message where checked='new' and receiver=#{receiver}
 	</select>
 	<select id="selectNewAlarm" parameterType="String" resultType="model.MessageCommand">
 		select * from message where alarm=0 and receiver=#{receiver}
 	</select>
-	<select id="allMessages" parameterType="String" resultType="model.MessageCommand">
-		select * from message where receiver=#{receiver} order by reg_date desc
+	<select id="allMessages" parameterType="java.util.HashMap" resultType="model.MessageCommand">
+		select no,content,reg_date,sender,receiver,checked,alarm 
+		from (select no,content,reg_date,sender,receiver,checked,alarm,rownum r from message where receiver=#{receiver} 
+		order by reg_date desc) where r &lt;= #{start} and r &gt;= #{end}
 	</select>
+	
+<!-- 	<select id="allMessages" parameterMap="String" resultType="model.MessageCommand"> -->
+<!-- 		select * from message where receiver=#{receiver} -->
+<!-- 	</select> -->
+
 	<select id="selectMessage" parameterType="int" resultType="model.MessageCommand">
 		select * from message where no=#{no}
+	</select>
+	<select id="selectTotalMessageCount" parameterType="String" resultType="int">
+		select count(*) from message where receiver=#{receiver}
 	</select>
 </mapper>

@@ -1,5 +1,6 @@
 package controller.message;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,14 @@ public class MessageService {
 		return num;
 	}
 	
-	public List<MessageCommand> getAllMessages(String email) {
+	public List<MessageCommand> getAllMessages(String email, int start, int end) {
 		List<MessageCommand> list = null;
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("receiver", email);
+		map.put("start", start);
+		map.put("end", end);
 		try {
-			list = dao.getAllMessages(email);
+			list = dao.getAllMessages(map);
 		} catch(Exception e){
 			System.out.println(e.toString());
 		}
@@ -85,5 +90,25 @@ public class MessageService {
 			System.out.println(e.toString());
 		}
 		return message;
+	}
+	
+	public int getTotalMessageCount(String email){
+		int count = 0;
+		try {
+			count = dao.getTotalMessageCount(email);
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return count;
+	}
+	
+	public void deleteMessages(int[] no){
+		try {
+			for(int i=0; i<no.length; i++){
+				dao.deleteMessages(no[i]);
+			}
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
 	}
 }

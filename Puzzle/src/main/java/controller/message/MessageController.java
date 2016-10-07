@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,14 +25,36 @@ public class MessageController {
 	public void setService(MessageService service) {
 		this.service = service;
 	}
+	private int perPage = 10;
 	
-	@RequestMapping("messageList.puzzle")
-	public ModelAndView submit() throws Exception {
+	@RequestMapping(value="messageList.puzzle", method=RequestMethod.GET)
+	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum) throws Exception {
 		ModelAndView mav = new ModelAndView("messageList");
-		List<MessageCommand> list = service.getAllMessages("joo@naver.com");
+		
+		int totalMsgCount = service.getTotalMessageCount("joo@naver.com");
+		int pageCount = totalMsgCount/perPage+1;
+		int start = totalMsgCount-perPage*(pageNum-1); 
+		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
+		int previous = (pageNum-5)/5*5+1;
+		int next = (pageNum/5+1)*5+1;
+		
+//		int start = perPage*(pageNum-1)+1;
+//		int end = start+(perPage-1);
+		
+		List<MessageCommand> list = service.getAllMessages("joo@naver.com", start, end);
+		
+		mav.addObject("pageCount", pageCount);
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("previous", previous);
+		mav.addObject("next", next);
 		mav.addObject("msg", list);
-		mav.addObject("messageCommand", new MessageCommand());
 		return mav;
+	}
+	
+	@RequestMapping(value="messageList.puzzle", method=RequestMethod.POST)
+	public String submit(@RequestParam("checkList")int[] no) throws Exception {
+		service.deleteMessages(no); 
+		return "redirect:messageList.puzzle";
 	}
 	
 	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
@@ -52,8 +74,11 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.GET)
-	public String messageForm(@ModelAttribute("messageCommand")MessageCommand messageCommand) throws Exception {
-		return "messageForm";
+	public ModelAndView messageForm(MessageCommand messageCommand, String sender) throws Exception {
+		ModelAndView mav = new ModelAndView("messageForm");
+		mav.addObject("messageCommand", messageCommand);
+		mav.addObject("sender", sender);
+		return mav;
 	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")

@@ -1,6 +1,8 @@
 package mybatis;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -24,8 +26,8 @@ public class MessageDAO extends SqlSessionDaoSupport{
 		getSqlSession().update("message.updateRead", msg);
 	}
 	
-	public List<MessageCommand> getAllMessages(String receiver){
-		return getSqlSession().selectList("message.allMessages", receiver);
+	public List<MessageCommand> getAllMessages(HashMap<String,Object> map){
+		return getSqlSession().selectList("message.allMessages", map);
 	}
 	
 	public int sendMessage(MessageCommand message) {
@@ -34,5 +36,13 @@ public class MessageDAO extends SqlSessionDaoSupport{
 	
 	public MessageCommand getMessage(int no){
 		return getSqlSession().selectOne("message.selectMessage", no);
+	}
+	
+	public int getTotalMessageCount(String receiver){
+		return getSqlSession().selectOne("message.selectTotalMessageCount", receiver);
+	}
+	
+	public int deleteMessages(int no){
+		return getSqlSession().delete("message.deleteMessage", no);
 	}
 }

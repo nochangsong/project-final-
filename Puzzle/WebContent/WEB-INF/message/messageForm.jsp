@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -28,7 +29,14 @@
 		
 		<div class="form-group">
     		<label for="receiver">받는 사람:</label>
-    		<form:input path="receiver" class="form-control"/><form:errors path="receiver" element="div"/>
+    		
+    		<c:if test="${sender==null}">
+	    		<form:input path="receiver" class="form-control"/><form:errors path="receiver" element="div"/>
+    		</c:if>	
+    		<c:if test="${sender!=null}">
+	    		<form:input path="receiver" value="${sender}" class="form-control"/><form:errors path="receiver" element="div"/>
+    		</c:if>	
+
   		</div>
   		<div class="form-group">
     		<label for="content">내용:</label>

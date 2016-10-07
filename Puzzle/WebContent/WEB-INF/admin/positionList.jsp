@@ -59,25 +59,26 @@
 <br>
 <div class="panel-group">
 	<div class="panel panel-default">
-			<div class="panel-heading">
-				<input type="button" class="btn btn-default" onclick="return del();" value="삭제"/>
-	    		<input type="button" class="btn btn-default" onclick="return edit();" value="수정"/>
-	    		<br><br><br>
-			    <form:form commandName="positionCommand">
-					<form:input class="form-control" placeholder="직급/직책" path="positionType"/>
-    				<input type="submit" title="추가하기" class="btn btn-default" value="+"/>
-    			</form:form>
-    		</div>
-    
-	    <c:if test="${fn:length(positionList)==0}">
-	    	<div class="panel-body">직급/직책을 추가해주세요.</div>
-	    </c:if>
-	    <c:if test="${fn:length(positionList)!=0}">
-	    	<c:forEach var="position" items="${positionList}">
-	    		<div class="panel-body"><input id="${position.position_num}" class="form-control sel" 
-	    			value="${position.positionType}" readonly/></div>
-	    	</c:forEach>
-	    </c:if>
+		<div class="panel-heading">
+			<input type="button" class="btn btn-default" onclick="return del();" value="삭제"/>
+	    	<input type="button" class="btn btn-default" onclick="return edit();" value="수정"/>
+	    	<br><br><br>
+			<form:form commandName="positionCommand">
+				<form:input class="form-control" placeholder="직급/직책" path="positionType"/>
+    			<input type="submit" title="추가하기" class="btn btn-default" value="+"/>
+    		</form:form>
+    	</div>
+    	<div class="list">
+    		<c:if test="${fn:length(positionList)==0}">
+	    		<div class="panel-body">직급/직책을 추가해주세요.</div>
+	    	</c:if>
+	    	<c:if test="${fn:length(positionList)!=0}">
+	    		<c:forEach var="position" items="${positionList}">
+	    			<div class="panel-body"><input id="${position.position_num}" class="form-control sel" 
+	    				value="${position.positionType}" readonly/></div>
+	    		</c:forEach>
+	    	</c:if>
+    	</div>
     </div>
 </div>
 </body>
