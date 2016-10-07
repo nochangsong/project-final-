@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import model.DepterMentCommand;
+import model.DepartMentCommand;
 
 @Controller
 @RequestMapping("/main")
@@ -19,8 +19,8 @@ public class MainController {
 //	}
 	
 	@ModelAttribute("com")
-	public DepterMentCommand formBacking(){
-	     return new DepterMentCommand();
+	public DepartMentCommand formBacking(){
+	     return new DepartMentCommand();
 	}
 	   
 	public MainController() {
