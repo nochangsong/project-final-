@@ -27,12 +27,13 @@
 <script>
 	$(function(){
 		$(".paging .pagination li#"+${pageNum}).addClass("active");
+		
 		$('.open-popup-link').magnificPopup({
 			type:'inline',
 			midClick: true,
 			callbacks: {
 				close: function(){
-					location.href="messageList.puzzle"
+					location.href="messageList.puzzle?pageNum="+${pageNum};
 				}
 			}
 		});
