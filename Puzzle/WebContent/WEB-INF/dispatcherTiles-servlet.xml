@@ -21,8 +21,10 @@
 
 	<context:annotation-config/>
 	<context:component-scan base-package="controller.message"/>
-	<context:component-scan base-package=" controller.main"/>
+	<context:component-scan base-package="controller.main"/>
+	<context:component-scan base-package="controller.admin"/>
 	<context:component-scan base-package="controller.Personnel"/>
+	<context:component-scan base-package="controller.department"/>
 
 	<!-- Servlet 경로를 포함한 전체 경로를 이용해서 매칭 여부를 판단하도록 설정 -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
