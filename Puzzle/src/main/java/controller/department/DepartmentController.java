@@ -1,5 +1,6 @@
 package controller.department;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class DepartmentController {
 		
 	}
 
+	/*기존코드(잘못된코드)
 	@RequestMapping("/update.puzzle")
 	public String update(@RequestParam("num")int dept_Num, @RequestParam("type")String dept_Type){
 		DepartMentCommand depterment = new DepartMentCommand();
@@ -61,6 +63,26 @@ public class DepartmentController {
 		depterment.setDept_Type(dept_Type);
 		service.updateDeptType(depterment);;
 		return "redirect:departmentList.puzzle";
+	}*/
+	
+	@RequestMapping("/update.puzzle")
+	@ResponseBody
+	public String update(HttpServletResponse resp, @ModelAttribute("com") DepartMentCommand com) throws IOException{
+		resp.setContentType("text/html);charset=utf-8");
+		ModelAndView mav = new ModelAndView("department");
+		JSONObject json = new JSONObject();
+		String dept_Num = service.deptnum();
+		mav.addObject("dept_Num", dept_Num);
+		
+		if(dept_Num != null){
+			int a = service.updateDeptType(com);			
+			json.put("dept_type", a);		
+			resp.setContentType("text/html);charset=utf-8");
+			PrintWriter out = resp.getWriter();
+			out.print(json.toString());
+		}
+			return json.toString();
+		
 	}
 	
 	@RequestMapping("/delete.puzzle")

@@ -18,10 +18,11 @@ public class MainController {
 //		this.com = com;
 //	}
 	
-//	@ModelAttribute("com")
-//	public DepterMentCommand formBacking(){
-//	     return new DepterMentCommand();
-//	}
+
+	@ModelAttribute("com")
+	public DepartMentCommand formBacking(){
+	     return new DepartMentCommand();
+	}
 	   
 	public MainController() {
 			// TODO Auto-generated constructor stub

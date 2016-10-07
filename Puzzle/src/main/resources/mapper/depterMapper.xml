@@ -15,7 +15,13 @@
 		insert into depttable values(num.NEXTVAL,#{Dept_Type})
 	</insert>
 	
-	<delete id="deleteDept" parameterType="int">
+	<select id="deptnum" resultType="model.DepartMentCommand">
+		select dept_num from DEPARTMENT where dept_Type=#{dept_Type}
+<!-- 		select distinct Dept_Type from depttable order by Dept_Type asc -->
+	</select>
+	
+	
+	<delete id="deleteDept" parameterType="model.DepartMentCommand">
 		delete from DEPARTMENT where dept_Num=#{dept_Num}
 	</delete>
 	
