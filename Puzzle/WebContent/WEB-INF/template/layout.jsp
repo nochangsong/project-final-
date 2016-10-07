@@ -16,10 +16,11 @@
   #con{
   	margin-top: 0px;
 /*   	padding-top: 10px; */
-  	height: 80%;
+/*   	height: auto; */
   }
 
   #left{
+  		width: 15%;
 		border-right: solid 1px;
 		border-right-color: lightgray;
 		padding-left: 10px;
@@ -27,6 +28,10 @@
 		padding-left: 0px;
 		height: 100%
 		
+	}
+	#tileContent{
+		width: 85%;
+		height: 100%;
 	}
 	
 	#docu{
@@ -43,7 +48,7 @@
  
 <div class="row" id="con">
 	<div class="col-sm-2" id="left"><tiles:insertAttribute name="left"/></div>
-	<div class="col-sm-2"><tiles:insertAttribute name="content"/></div>
+	<div class="col-sm-2" id="tileContent"><tiles:insertAttribute name="content"/></div>
 </div>
 
 
