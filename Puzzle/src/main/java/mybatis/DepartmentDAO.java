@@ -10,25 +10,24 @@ import model.PositionCommand;
 public class DepartmentDAO extends SqlSessionDaoSupport{
 	
 //	listªÃ±‚
-	public List<DepartMentCommand> getListData(String string){
-		List<DepartMentCommand> dept_type = getSqlSession().selectList(string);
-		return dept_type;
+	public List<DepartMentCommand> listdept(){
+		return getSqlSession().selectList("dept.selectAlldeptType");
 	}
 	
 	
 
 //	type√ﬂ∞°
-	public int insertDeptType(DepartMentCommand com){
-		return getSqlSession().insert("dept.dept_typeAdd", com);
+	public void insertDeptType(DepartMentCommand command){
+		getSqlSession().insert("dept.insert_deptType", command);
 	}
 	
-	public String selectdeptNum(String string){
-		String dept_Num = getSqlSession().selectOne(string);
-		return dept_Num;		
-	}
-	
-	public int updateDeptType(DepartMentCommand com){
-		return getSqlSession().update("dept.updateDept", com);
+//	public String selectdeptNum(String string){
+//		String dept_Num = getSqlSession().selectOne(string);
+//		return dept_Num;		
+//	}
+//	
+	public void updateDeptType(DepartMentCommand command){
+		getSqlSession().update("dept.updateDept", command);
 	}
 	
 	public void deleteDeptType(int dept_Num){
