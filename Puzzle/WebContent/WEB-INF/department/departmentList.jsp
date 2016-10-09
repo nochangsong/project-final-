@@ -44,13 +44,7 @@
 	function sel(dept_Num){
 		selected_deptType = dept_Num;
 	}
-	
-// 	카테고리 추가하는 입력폼 삽입
-//	function insert(){
-//		$(".deptlist").append(tag);			
-//	}
-	
-// 		$(".deptlist").append(tag);	
+
 	
 	function add(){
 		var deptType = $("#newdeptType").val();
