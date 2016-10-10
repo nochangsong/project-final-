@@ -1,6 +1,7 @@
 (function() {
 	/**
 	 * 
+	 * 
 	 * Initialise a Google Driver file picker
 	 */
 	var FilePicker = window.FilePicker = function(options) {

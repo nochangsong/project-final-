@@ -6,7 +6,6 @@
 </head>
 <body>
 	<button type="button" id="pick">불러오기</button>
-
 	<script src="filepicker.js"></script>
 	<script>
 		function initPicker() {
