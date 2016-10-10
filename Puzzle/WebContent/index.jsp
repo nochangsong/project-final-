@@ -230,6 +230,7 @@
 			</section>
 
 			<!-- image-content -->
+			<section>
 			<div class="clearfix"></div>
 
 			<!-- video -->
@@ -246,371 +247,201 @@
 			<!-- video -->
 			
 			<!--slider pan -->
+			<div class="slider-pan">
+				<header role="title-page" class="text-center">
+					<h4>Customer Voice</h4>
+				</header>
 
-                <div class="slider-pan">
+			<!-- carousel -->
+			<div id="owl-demo" class="owl-carousel text-center" role="slider">
+				<section class="item">
+					<article>
+					Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit <br/>
+					amet non magna felis euismod leo orta felis semper.	
+					</article>
 
-                	<header role="title-page" class="text-center">
+					<header>
+						<h5>Antony Casalena</h5>
+						<h6>Vice president, IQTeam</h6>
+					</header>
+				</section>
 
-                    	<h4>Customer Voice</h4>
+				<section class="item">
+					<article>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis tortor nec diam dapibus<br>efficitur in quis sem. Morbi tristique purus at vestibulum malesuada. 	
+					</article>
 
-                    </header>
+ 					<header>
+						<h5>Brain Rice</h5>
+						<h6>VP, Lexix Pvt Ltd</h6>
+					</header>
+				</section>
 
-                    <!-- carousel -->
+				<section class="item">
+					<article>
+					Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit <br/>
+					amet non magna felis euismod leo orta felis semper.	
+					</article>
+					
+					<header>
+						<h5>Antony Casalena</h5>
+						<h6>Vice president, IQTeam</h6>
+					</header>
+				</section>
 
-                    <div id="owl-demo" class="owl-carousel text-center" role="slider">
+				<section class="item">
+					<article>
+					Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit <br/>
+					amet non magna felis euismod leo orta felis semper.	
+					</article>
 
-                    
+					<header>
+						<h5>Antony Casalena</h5>
+						<h6>Vice president, IQTeam</h6>
+					</header>
+				</section>
 
-                    	<section class="item">
+			</div>
+			<!-- carousel -->
+		
+			</div>
+			<!--slider pan -->
+			</section>
 
-                            <article>
-
-                                Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit <br/>
-
-                                amet non magna felis euismod leo orta felis semper.	
-
-                            </article>
-
-                            <header>
-
-                                <h5>Antony Casalena</h5>
-
-                                <h6>Vice president, IQTeam</h6>
-
-                            </header>
-
-                       	</section>
-
-                        <section class="item">
-
-                            <article>
-
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis tortor nec diam dapibus<br>efficitur in quis sem. Morbi tristique purus at vestibulum malesuada. 	
-
-                            </article>
-
-                            <header>
-
-                                <h5>Brain Rice</h5>
-
-                                <h6>VP, Lexix Pvt Ltd</h6>
-
-                            </header>
-
-                       	</section>
-
-                        <section class="item">
-
-                            <article>
-
-                                Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit <br/>
-
-                                amet non magna felis euismod leo orta felis semper.	
-
-                            </article>
-
-                            <header>
-
-                                <h5>Antony Casalena</h5>
-
-                                <h6>Vice president, IQTeam</h6>
-
-                            </header>
-
-                       	</section>
-
-                        <section class="item">
-
-                            <article>
-
-                                Morbi leo orta felis euismod semper.Maecenas sed diam eget risus varius blandit sit <br/>
-
-                                amet non magna felis euismod leo orta felis semper.	
-
-                            </article>
-
-                            <header>
-
-                                <h5>Antony Casalena</h5>
-
-                                <h6>Vice president, IQTeam</h6>
-
-                            </header>
-
-                       	</section>
-
-                        
-
-                        
-
-                    </div>
-
-                    <!-- carousel -->
-
-                </div>
-
-                <!--slider pan -->
-
-                
-
-            </section>
-
-            <!-- section-two -->
-
-
-            
 
             <!-- section-four -->
-
             <section class="section-four" id="section-four">
-
             	<div class="container">
-
-                    <header role="title-page" class="text-center">
-
-                        <h4>Meet The Team</h4>
-
-                        <h2>Our team is passionate about bringing the <br/>best for our customers.</h2>
-
-                    </header>
+            		<header role="title-page" class="text-center">
+            			<h4>Meet The Team</h4>
+            			<h2>Our team is passionate about bringing the <br/>best for our customers.</h2>
+            		</header>
 
                     <!-- Team -->
-
                     <div class="team-pan row">
+                    	<section class="col-xs-12 col-sm-6 col-md-3">
+                    		<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+                    		<header>
+                    			<h5>Antony Casalena</h5>
+                    			<h6>Vice president</h6>
+                    			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                    		 </header>
+                    	</section>
 
-                    	
+                    	<section class="col-xs-12 col-sm-6 col-md-3">
+                    		<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+                    		<header>
+                    			<h5>Anaia Doe</h5>
+                    			<h6>Creative Head</h6>
+                    			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                    		</header>
+                    	</section>
 
                         <section class="col-xs-12 col-sm-6 col-md-3">
-
-                        	<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
-
-                        	<header>
-
-                            	<h5>Antony Casalena</h5>
-
-								<h6>Vice president</h6>
-
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-
+                    		<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
+                    		<header>
+                    			<h5>Johnathan Doe</h5>
+                    			<h6>Development Lead</h6>
+                    			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    			<a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
                             </header>
-
                         </section>
 
                         <section class="col-xs-12 col-sm-6 col-md-3">
-
                         	<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
-
                         	<header>
-
-                            	<h5>Anaia Doe</h5>
-
-								<h6>Creative Head</h6>
-
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-
-                            </header>
-
-                        </section>
-
-                        <section class="col-xs-12 col-sm-6 col-md-3">
-
-                        	<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
-
-                        	<header>
-
-                            	<h5>Johnathan Doe</h5>
-
-								<h6>Development Lead</h6>
-
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-
-                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-
-                            </header>
-
-                        </section>
-
-                        <section class="col-xs-12 col-sm-6 col-md-3">
-
-                        	<figure><img src="http://placehold.it/249x263" alt="" class=" img-responsive"/></figure>
-
-                        	<header>
-
                             	<h5>Julian Gulia</h5>
-
 								<h6>Marketing Head</h6>
-
                                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
                                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-
                                 <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-
                                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-
                                 <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-
                                 <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-
                             </header>
-
                         </section>
-
-                        
-
                     </div>
-
                     <!-- Team -->
 
-                </div>
-
+            	</div>
             </section>
-
             <!-- section-fore -->
 
-            
-
             <!-- section-five -->
-
             <section class="section-five" id="section-five">
-
             	<div class="container">
-
                 	 <header role="title-page" class="text-center">
-
                         <h4>Newsletter Subscribe</h4>
-
                         <h2>Subscribe to get monthly products updates<br/>and exclusive offers</h2>
-
                     </header>
 
                     <!-- subscribe -->
-
                     <div class="subscribe-form">
-
                         <div class="ntify_form">
-
                             <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform">
-
                                 <input name="email" type="email" id="subemail" placeholder="Email Address">
-
-								
-
                                 <button type="submit" name="" value="Submit">
-
                                 Subscribe <i class="fa fa-envelope" aria-hidden="true"></i></button>
-
                             </form>
 
                             <!-- subscribe message -->
-
                             <div id="mesaj"></div>
-
                             <!-- subscribe message --> 
-
                         </div>
-
                     </div>
-
                     <!-- subscribe -->
 
-                </div>
-
+            	</div>
             </section>
-
             <!-- section-five -->
 
-            
-
            <!-- footer -->
-
            <footer role="footer" class="footer text-center">
-
            		<div class="container">
 
                 	<!-- socil-icons -->
-
                 	<section role="socil-icons" class="socil-icons">
-
                         <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
                         <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-
                         <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-
                         <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-
                         <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-
                         <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-
                     </section>
 
                     <!-- socil-icons -->
 
                     <!-- nav -->
-
                     <nav role="footer-nav">
-
                         <a href="#">Terms of Use </a> 
-
                         <a href="#">Privacy Policy</a>
-
                     </nav>
 
                     <!-- nav -->
-
                     <p class="copy">&copy; 2016 Sartr. All rights reserved. Made with <i class="fa fa-heart pulse"></i> by <a href="http://www.designstub.com/">Designstub</a></p>
-
                 </div>
-
            </footer>
-
            <!-- footer -->
-
             
-
         </main>
-
-    <!-- main -->
-
-    
-
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
     <script src="Startr - Free Startup Landing page Template/js/jquery.min.js" type="text/javascript"></script>
-
-    
 
 	<script src="Startr - Free Startup Landing page Template/js/parallax.min.js" type="text/javascript"></script>
 
@@ -641,8 +472,6 @@
     <script src="Startr - Free Startup Landing page Template/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<script src="Startr - Free Startup Landing page Template/js/html5shiv.min.js" type="text/javascript"></script>
-
-
 
   </body>
 
