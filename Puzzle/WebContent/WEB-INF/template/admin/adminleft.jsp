@@ -49,8 +49,8 @@
 		<li class="col-sm-2" id="menu"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;包府磊</a>
 			<ul class="hide">
 				<li><a href="#"><span class="glyphicon glyphicon-user"> 炼流包府</span></a></li>
-				<li><a href="/Puzzle/admin/position/positionList.puzzle">流鞭包府</a></li>
-<!-- 				<li><a href="/Puzzle/ProsnnelView/P_Card_in.puzzle">炼流档/炼流盔包府</a></li> -->
+				<li><a href="/Puzzle/admin/position/positionList.puzzle">流鞭包府</a></li> 
+				<li><a href="/Puzzle/PersonnelView/P_Card_in.puzzle">炼流档/炼流盔包府</a></li>
 				<li><a href="/Puzzle/department/departmentList.puzzle">炼流档/炼流盔包府</a></li>
 				<li><a href="#">傈眉巩辑窃</a></li>
 				<li><a href="#">巩辑剧侥</a></li>
