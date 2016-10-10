@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>Google Drive File Picker Example</title>
+<title>Google Drive File Picker Example </title>
 </head>
 <body>
 	<button type="button" id="pick">불러오기</button>
