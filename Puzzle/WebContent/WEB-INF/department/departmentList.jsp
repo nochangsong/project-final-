@@ -169,7 +169,7 @@
 			</div>
 		</div>
 		<div class="col-sm-8">
-<%-- 			<div class="panel-grop">
+ 			<div class="panel-grop">
 				<div class="panel panel-default">
 					<div class="panel-heading">조직원<span> [전체 : 2 재직 : 2 휴직 : 0 퇴직 : 0] </span> <button id="select">검색</button>
 					
@@ -218,7 +218,7 @@
 							</div>
 						</div>	
 				</div>
-			</div> --%>
+			</div>
 		</div>
 	</div>
 </div>
