@@ -15,10 +15,10 @@ import mybatis.EmailDAO;
 
 
 @Component
-public class EmailService {
+public class EmailService { 
 	
 	@Autowired
-	private EmailDAO dao;
+	private EmailDAO dao; 
 	
 	public void setDAO(EmailDAO dao){
 		this.dao = dao;

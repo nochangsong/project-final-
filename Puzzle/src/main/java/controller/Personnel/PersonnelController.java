@@ -14,6 +14,7 @@ import model.PersonnelCommand;
 @RequestMapping("/PersonnelView")
 public class PersonnelController {
 	
+	
 	@Autowired
 	private PersonnelService service;
 

@@ -1,6 +1,7 @@
 package model;
 
 public class EmailCommand {
+	
 
 	private String Email;
 	private String Name;

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 public class PersonnelCommand {
 
+	
 	private String Email;
 	private String Name;
 	private int Age;

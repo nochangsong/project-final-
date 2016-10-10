@@ -23,7 +23,7 @@ public class EmailController {
 	@ModelAttribute("command")
 	public EmailCommand getCommand(){
 		return new EmailCommand();
-	}
+	}     
 	
 	@RequestMapping(value="/P_Card_in.puzzle", method=RequestMethod.GET)
 	public String WriteCard() throws Exception{

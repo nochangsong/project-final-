@@ -7,5 +7,5 @@
 	<insert id="insertCard" parameterType="model.PersonnelCommand">
 		insert into PersonnelCard 
 		values (#{Email},#{Name},#{Age},to_date(#{HireDate}),to_date(#{RetireDate}),#{PhoneNum},#{RetireType},#{Dept_Num},#{Position_Num},#{Work_Num},#{authority})
-	</insert>
+	</insert> 
 	</mapper>

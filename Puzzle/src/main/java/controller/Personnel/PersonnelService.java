@@ -7,7 +7,8 @@ import model.PersonnelCommand;
 import mybatis.PersonnelDAO;
 
 @Component
-public class PersonnelService {
+public class PersonnelService { 
+	
 
 	@Autowired
 	private PersonnelDAO dao;
