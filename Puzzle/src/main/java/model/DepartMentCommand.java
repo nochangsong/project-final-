@@ -4,7 +4,6 @@ public class DepartMentCommand {
 	
 	private int dept_Num;
 	private String dept_Type;
-	
 	public int getDept_Num() {
 		return dept_Num;
 	}

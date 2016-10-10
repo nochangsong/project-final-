@@ -4,15 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 	부서종류 가져옴  -->
 <mapper namespace="dept">	
-	<select id="selectAlldeptType" resultType="model.DepartMentCommand">
-		select distinct * from DEPARTMENT order by dept_Type asc
+	<select id="listdept" resultType="model.DepartMentCommand">
+		select distinct Dept_Type from DEPARTMENT order by Dept_Type asc
 <!-- 		select distinct Dept_Type from depttable order by Dept_Type asc -->
 	</select>
 
 <!-- localdb 다른 테이블로 test중 -->
-	<insert id="insert_deptType" parameterType="model.DepartMentCommand">
+	<insert id="dept_typeAdd" parameterType="model.DepartMentCommand">
 <!-- 		insert into department values (#{Dept_Num},#{Dept_Type}) -->
-		insert into DEPARTMENT values(dept_num.NEXTVAL,#{dept_Type})
+		insert into depttable values(num.NEXTVAL,#{Dept_Type})
 	</insert>
 	
 	<select id="deptnum" resultType="model.DepartMentCommand">
@@ -21,7 +21,7 @@
 	</select>
 	
 	
-	<delete id="deleteDept" parameterType="int">
+	<delete id="deleteDept" parameterType="model.DepartMentCommand">
 		delete from DEPARTMENT where dept_Num=#{dept_Num}
 	</delete>
 	
