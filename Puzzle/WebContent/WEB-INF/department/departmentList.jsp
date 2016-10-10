@@ -220,7 +220,7 @@
 									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
 										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
 									</c:forEach>
-								
+								  
 							</ul>
 						</div>
 						<div class="panel-body">
