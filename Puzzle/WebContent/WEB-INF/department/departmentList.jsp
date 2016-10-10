@@ -135,6 +135,37 @@
 		
 	});
 
+// 	function getpersonList(type, Name, Email, Position_Num, ){
+// 		var url = "/Puzzle/admin/department/departmentList.puzzle";
+// 		$.ajax({
+// 			type:"post"		// 포스트방식
+// 			,data: {
+// 				type: type,
+// 				dept_Num: dept_Num,
+// 				dept_Type: dept_Type
+// 			}
+// 			,url: url	// url 주소	
+// 			,dataType:"json"
+// 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+// 			,success:function(args){	
+// 				$(".deptlist").html("");
+// 				if(args.list.length==0){
+// 					$(".deptlist").append("<div class='panel-body'>직급/직책을 추가해주세요.</div>");
+// 				} else {
+// 					for(var idx=0; idx<args.list.length; idx++){
+// 						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
+// 						var dept_Num = args.list[idx].dept_Num;
+// 						$(".deptlist").append(
+// 								"<div class='panel-body'><input id='"+dept_Num+"' class='form-control' " +
+// 								"value='"+dept_Type+"' onclick='sel("+dept_Num+")' readonly/></div>");
+// 					}
+// 				}
+// 			}
+// 		    ,error:function(e) {	
+// 		    	Console.log(e.responseText);
+// 		    }
+// 		});
+// 	}
 
 	
 
@@ -152,7 +183,7 @@
 			<div class="panel-group">
 				<div class="panel panel-default">
 				<div class="panel-heading">
-					<input type="button" class="btn btn-default" value="조직도">
+					조직도
 					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add()">
 					<input type="button" class="btn btn-default" onclick="return editCheck();" value="수정">
 					<input type="button" class="btn btn-default" onclick="return del();" value="삭제">
@@ -181,12 +212,19 @@
 						</div>
 						<div class="panel-body">
 							<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
-								<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">asd</a></li>
-								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-								</c:forEach>
+								<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
+									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+									</c:forEach>
+								<li><a href="#" data-toggle="tab" data-id="2" class="">재직</a></li>
+									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+									</c:forEach>
+								
 							</ul>	
 						</div>
+						<div class="panel-body">
+						<div class="col-sm-6">
 						<div class="tab-content">
 							<div class="panel-body detailMemberBtn" data-id="29243" style="cursor:pointer; margin-top:0px;">
 								<div class="panel-img ">					
@@ -216,7 +254,41 @@
 									<input type="text" pa ></input>
 								</div>
 							</div>
-						</div>	
+						</div>
+						</div>
+						<div class="col-sm-6">
+						<div class="tab-content">
+							<div class="panel-body detailMemberBtn" data-id="29243" style="cursor:pointer; margin-top:0px;">
+								<div class="panel-img ">					
+									<div class="default-img " data-code="12609" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
+										<span>ㅁ</span>
+									</div>				
+								</div>
+								<div class="panel-content">
+									<div class="member_isAdmin ">			
+										<span data-id="29243" class="label label-orange">문서관리자</span>
+							        </div>
+								<div class="infinite_name panel-workflow">
+									ㅁ
+								</div>
+								<div class="infinite_name panel-workflow">
+									CEO
+								</div>
+								<div class="infinite_name panel-workflow">
+									인사팀,홍보팀
+								</div>
+								</div>
+								<div class="panel-email infinite_name">
+									<i class="ti ti-email"></i>
+									<a href="https://mail.google.com/mail/u/0/?view=cm&amp;fs=1&amp;to=joobk1225@naver.com" target="_blank">
+										joobk1225@naver.com
+									</a>
+									<input type="text" pa ></input>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
 				</div>
 			</div>
 		</div>
