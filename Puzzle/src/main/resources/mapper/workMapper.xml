@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="work">
+   
+   <select id="dataSearch" parameterType="String" resultType="model.WorkCommand">
+      select d.Dept_Type, p.PositionType, c.Name, w.Work_type 
+      from DepartMent d, Position p, PersonnelCard c, Work w 
+      where c.email=w.email and c.position_num=p.position_num and c.dept_num=d.dept_num
+      and c.Name = #{Name}
+   </select>
+
+</mapper>

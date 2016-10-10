@@ -25,6 +25,7 @@
 	<context:component-scan base-package="controller.admin"/>
 	<context:component-scan base-package="controller.Prosnnel"/>
 	<context:component-scan base-package="controller.department"/>
+	<context:component-scan base-package="controller.work" />
 
 	<!-- Servlet 경로를 포함한 전체 경로를 이용해서 매칭 여부를 판단하도록 설정 -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
@@ -42,10 +43,8 @@
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-<!-- 		dataSource를 가져와서 커넥션? 연결 -->
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
-<!-- 		value에 와일드카드 사용가능 *.xml (모든 xml파일 지정가능)  -->
 	</bean>
 	
 	<bean id="messageDao" class="mybatis.MessageDAO">
@@ -56,7 +55,7 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	
-	<bean class="controller.department.DepartmentServiceImpl" id="deptService"/>
+<!-- 	<bean class="controller.department.DepartmentServiceImpl" id="deptService"/> -->
 	
 	<bean id="prosDao" class="mybatis.ProsnnelDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -65,5 +64,9 @@
 	<bean id="positionDao" class="mybatis.PositionDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+	
+	<bean id="workDao" class="mybatis.WorkDAO">
+      <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+   </bean>
 </beans>
 

@@ -55,7 +55,7 @@
 				<li><a href="#">전체문서함</a></li>
 				<li><a href="#">문서양식</a></li>
 				<li><a href="#">게시판관리</a></li>
-				<li><a href="#">근태관리</a></li>   
+				<li><a href="/Puzzle/work/workList.puzzle">근태관리</a></li>   
 			</ul>
 		</li>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
