@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="P_Card">
+	<insert id="insertCard" parameterType="model.PersonnelCommand">
+		insert into PersonnelCard
+		(Email,Name,Age,HireDate,RetireDate,PhoneNum,RetireType,Dept_Num,Position_Num,Work_Num,authority,RANDOMCODE,certify)
+		values
+		(#{Email},#{Name},#{Age},to_date(#{HireDate}),to_date(#{RetireDate}),#{PhoneNum},#{RetireType},#{Dept_Num},#{Position_Num},#{Work_Num},#{authority},#{RANDOMCODE},#{certify})
+	</insert>
+	<select id="select" resultType="String" parameterType="String">
+		select RANDOMCODE from personnelcard where Email=#{Email}
+	</select>
+	<update id="Check" parameterType="String">
+		update personnelcard set CERTIFY='Y' where Email=#{Email}
+	</update>
+</mapper>  
