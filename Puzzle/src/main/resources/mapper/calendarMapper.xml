@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calendar">
+ 	<insert id="insertSchedule" parameterType="model.CalendarCommand"> 
+ 		insert into calendar(no,type,content,startDate,endDate,email)  
+ 		values(calendar_no_seq.nextval,#{type},#{content},to_date(#{startDate},'yyyy-mm-dd'),to_date(#{endDate},'yyyy-mm-dd'),#{email}) 
+ 	</insert> 
+	<update id="modifySchedule" parameterType="model.CalendarCommand">
+		update calendar set type=#{type}, content=#{content}, startDate=to_date(#{startDate},'yyyy-mm-dd'), endDate=to_date(#{endDate},'yyyy-mm-dd') where no=#{no}
+	</update>
+	<delete id="deleteSchedule" parameterType="int">
+		delete from calendar where no=#{no}
+	</delete>
+	<select id="selectSchedules" parameterType="String" resultType="model.CalendarCommand">
+		select no,type,content,to_char(startDate, 'yyyy-mm-dd') startDate,to_char(endDate, 'yyyy-mm-dd') endDate from calendar where email=#{email}
+	</select>
+</mapper>

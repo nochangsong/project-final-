@@ -2,6 +2,8 @@
 <html>
 <head>
 <script>
+// 	alert('${message}');
+    webSocket.send('${message}');
 	alert("쪽지가 전송되었습니다.");
 	location.href="messageList.puzzle";
 </script>

@@ -36,6 +36,7 @@
 			return false;
 		}
 		getList("insert", "", positionType);
+		$("#newPositionType").val("");
 	}
 	
 	function del(){
@@ -96,13 +97,9 @@
 		    }
 		});
 	}
-	
-	$(function(){
-		getList();
-	});
 
 </script>
-<body>
+<body onload="getList()">
 <h3>직급/직책관리</h3>
 <h5>조직의 직급/직책을 관리 할 수 있습니다.</h5>
 <br>

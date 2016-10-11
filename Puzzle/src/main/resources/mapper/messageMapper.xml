@@ -23,9 +23,9 @@
 		select * from message where alarm=0 and receiver=#{receiver}
 	</select>
 	<select id="allMessages" parameterType="java.util.HashMap" resultType="model.MessageCommand">
-		select no,content,reg_date,sender,receiver,checked,alarm 
-		from (select no,content,reg_date,sender,receiver,checked,alarm,rownum r from message where receiver=#{receiver} 
-		order by reg_date desc) where r &lt;= #{start} and r &gt;= #{end}
+		select * from (select no,content,reg_date,sender,receiver,checked,alarm,rownum r 
+		from (select no,content,reg_date,sender,receiver,checked,alarm from message where receiver=#{receiver} 
+		order by reg_date desc)) where r &gt;= #{start} and r &lt;= #{end}
 	</select>
 	
 <!-- 	<select id="allMessages" parameterMap="String" resultType="model.MessageCommand"> -->

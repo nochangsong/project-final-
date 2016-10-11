@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,13 +34,16 @@ public class MessageController {
 		
 		int totalMsgCount = service.getTotalMessageCount("joo@naver.com");
 		int pageCount = totalMsgCount/perPage+(totalMsgCount%perPage==0?0:1);
-		int start = totalMsgCount-perPage*(pageNum-1); 
-		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
+//		int start = totalMsgCount-perPage*(pageNum-1); 
+//		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
 		int previous = (pageNum-5)/5*5+1;
 		int next = (pageNum/5+1)*5+1;
+
+		int start = perPage*(pageNum-1)+1;
+		int end = start+(perPage-1) > totalMsgCount ? totalMsgCount : start+(perPage-1);
 		
-//		int start = perPage*(pageNum-1)+1;
-//		int end = start+(perPage-1);
+//		System.out.println(start);
+//		System.out.println(end);
 		
 		List<MessageCommand> list = service.getAllMessages("joo@naver.com", start, end);
 		
@@ -57,21 +61,21 @@ public class MessageController {
 		return "redirect:messageList.puzzle";
 	}
 	
-	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String alarmList(HttpServletResponse resp) throws Exception{
-		resp.setContentType("text/html;charset=utf-8");
-		List<MessageCommand> list = service.getAlarmList("joo@naver.com");
-		int msgNum = service.getNewMessageNumber("joo@naver.com");
-		JSONObject json = new JSONObject();
-		json.put("data", list);
-		json.put("msgNum", msgNum);
-		for(int idx=0; idx<list.size();idx++){
-			service.updateAlarm(list.get(idx));
-		}
-//		System.out.println(json.toString());
-		return json.toString();
-	}
+//	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+//	@ResponseBody
+//	public String alarmList(HttpServletResponse resp) throws Exception{
+//		resp.setContentType("text/html;charset=utf-8");
+//		List<MessageCommand> list = service.getAlarmList("joo@naver.com");
+//		int msgNum = service.getNewMessageNumber("joo@naver.com");
+//		JSONObject json = new JSONObject();
+//		json.put("data", list);
+//		json.put("msgNum", msgNum);
+//		for(int idx=0; idx<list.size();idx++){
+//			service.updateAlarm(list.get(idx));
+//		}
+////		System.out.println(json.toString());
+//		return json.toString();
+//	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.GET)
 	public ModelAndView messageForm(MessageCommand messageCommand, String sender) throws Exception {
@@ -82,12 +86,18 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	public String send(MessageCommand messageCommand, HttpServletResponse resp) throws Exception {
+	public ModelAndView send(MessageCommand messageCommand, HttpServletResponse resp) throws Exception {
+		ModelAndView mav = new ModelAndView("sendSuccess");
 		resp.setContentType("text/html;charset=utf-8");
 		messageCommand.setSender("koo@naver.com");
 		service.send(messageCommand);
-//		return "sendSuccess";
-		return "redirect:messageList.puzzle";
+		
+		JSONObject json = new JSONObject();
+		json.put("message", messageCommand);
+//		System.out.println(json.toString());
+		mav.addObject("message", json.toString());
+		return mav;
+//		return "redirect:messageList.puzzle";
 	}
 	
 	@RequestMapping(value= "showMessage.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
@@ -102,6 +112,16 @@ public class MessageController {
 		JSONObject json = new JSONObject();
 		json.put("sender", message.getSender());
 		json.put("content", message.getContent());
+		return json.toString();
+	}
+	
+	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String alarmList(HttpServletResponse resp, String data) throws Exception{
+		resp.setContentType("text/html;charset=utf-8");
+		JSONParser parser = new JSONParser();
+		org.json.simple.JSONObject json = (org.json.simple.JSONObject) parser.parse(data);
+		System.out.println(json.toString());
 		return json.toString();
 	}
 }
