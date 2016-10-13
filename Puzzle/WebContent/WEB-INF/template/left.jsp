@@ -2,10 +2,6 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	String authority = (String)request.getSession().getAttribute("authority");
-	request.setAttribute("authority", authority);
-%>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,7 +47,7 @@
   
  <div class="container">
 	<ul class="nav nav-stacked">
-		<c:if test="${authority=='1'}">
+		<c:if test="${sessionScope.authority=='1'}">
 		<li class="col-sm-2" id="menu"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;包府磊</a>
 			<ul class="hide">
 				<li><a href="#"><span class="glyphicon glyphicon-user"> 炼流包府</span></a></li>
