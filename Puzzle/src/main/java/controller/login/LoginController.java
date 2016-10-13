@@ -31,7 +31,13 @@ public class LoginController {
 		String certify = service.loginselect(getEmail);
 		
 		if(certify.equals("Y")){
+<<<<<<< HEAD
 			response.sendRedirect("main.puzzle");
+=======
+			String authoriry = service.getAuthority(getEmail);
+			request.getSession().setAttribute("authority", authoriry);
+			return "main";
+>>>>>>> branch 'master' of https://github.com/nochangsong/project-final-.git
 		}else{
 			response.sendRedirect("index.jsp");
 		}
