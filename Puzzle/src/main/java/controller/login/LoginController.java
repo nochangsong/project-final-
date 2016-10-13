@@ -1,6 +1,8 @@
 package controller.login;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
 	@Autowired
@@ -20,19 +21,23 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="LoginView.puzzle", method=RequestMethod.GET)
-	public String loginpage(HttpServletRequest request)throws Exception {
+	public void loginpage(HttpServletRequest request, HttpServletResponse response)throws Exception {
 		String getEmail = request.getParameter("email");
 		
-		System.out.println("가져온 이메일:::"+getEmail);
+		HttpSession session = request.getSession();
+		session.setAttribute("email", getEmail);
+		
 		
 		String certify = service.loginselect(getEmail);
 		
-		System.out.println("메일인증여부:::"+certify);
-		
 		if(certify.equals("Y")){
-			return "main";
+			response.sendRedirect("main.puzzle");
 		}else{
-			return "index.puzzle";
+			response.sendRedirect("index.jsp");
 		}
+	}
+	@RequestMapping("/main.puzzle")
+	public String login(){
+		return "main";
 	}
 }
