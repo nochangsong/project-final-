@@ -1,32 +1,33 @@
 package model;
 
-import java.sql.Date;
 
 public class WorkCommand {
+	
 	 private int work_Num;
-	 private Date startTime;
-	 private Date endTime;
+	 private String startTime;
+	 private String endTime;
 	 private String work_type;
 	 private String email;
 	 private String dept_Type;
 	 private String positionType;
 	 private String name;
+	
 	public int getWork_Num() {
 		return work_Num;
 	}
 	public void setWork_Num(int work_Num) {
 		this.work_Num = work_Num;
 	}
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public String getWork_type() {
