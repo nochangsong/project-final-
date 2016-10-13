@@ -21,7 +21,7 @@ public class LoginController {
 	
 	@RequestMapping(value="LoginView.puzzle", method=RequestMethod.GET)
 	public String loginpage(HttpServletRequest request)throws Exception {
-		String getEmail = request.getParameter("Email");
+		String getEmail = request.getParameter("email");
 		
 		System.out.println("가져온 이메일:::"+getEmail);
 		
@@ -30,7 +30,7 @@ public class LoginController {
 		System.out.println("메일인증여부:::"+certify);
 		
 		if(certify.equals("Y")){
-			return "main/main.puzzle";
+			return "main";
 		}else{
 			return "index.puzzle";
 		}
