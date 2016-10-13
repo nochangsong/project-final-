@@ -18,7 +18,6 @@ public class WorkService {
 	   }
 	   public List<WorkCommand> getWorkList(String name){
 	      List<WorkCommand> list = null;
-	      System.out.println("¼­ºñ½º");
 	      try{
 	         list = dao.selectWorkList(name);
 	      }catch(Exception e){
@@ -28,5 +27,12 @@ public class WorkService {
 	      return list;
 	      
 	   }
-
+	   
+	   public void setVacation(WorkCommand command){
+		   try{
+			   dao.insertVacation(command);			   
+		   } catch(Exception e){
+			   System.out.println(e.toString());
+		   }
+	   }
 }
