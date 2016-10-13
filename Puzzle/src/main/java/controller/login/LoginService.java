@@ -24,4 +24,14 @@ public class LoginService {
 		}
 		return getEmail;
 	}
+	
+	public String getAuthority(String email){
+		String authority = "";
+		try {
+			authority = dao.getAuthority(email);
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return authority;
+	}
 }

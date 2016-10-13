@@ -30,7 +30,11 @@ public class LoginController {
 		System.out.println("메일인증여부:::"+certify);
 		
 		if(certify.equals("Y")){
-			return "main";
+			String authority = service.getAuthority(getEmail);
+			if(authority.equals("1")){
+				return "admin_main";
+			} 
+			return "user_main";
 		}else{
 			return "index.puzzle";
 		}
