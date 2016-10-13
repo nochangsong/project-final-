@@ -4,10 +4,64 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-signin-scope" content="profile email">
-	<meta name="google-signin-client_id"
-	content="977592781685-ap644q9liv0bomoj8omiu152lvd5ru2l.apps.googleusercontent.com">
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
+  		<script type="text/javascript">
+		function logout() {
+
+			location.replace('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8088/Puzzle/login.jsp');
+		}
+		function login() {
+			var myParams = {
+				'clientid' : '977592781685-ap644q9liv0bomoj8omiu152lvd5ru2l.apps.googleusercontent.com',
+				'cookiepolicy' : 'single_host_origin',
+				'callback' : 'loginCallback',
+				'approvalprompt' : 'force',
+				'scope' : 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+			};
+			gapi.auth.signIn(myParams);
+
+		}
+
+		function loginCallback(result) {
+			if (result['status']['signed_in']) {
+				var request = gapi.client.plus.people.get({
+					'userId' : 'me'
+				});
+				request.execute(function(resp) {
+						var email = '';
+						if (resp['emails']) {
+							for (i = 0; i < resp['emails'].length; i++) {
+								if (resp['emails'][i]['type'] == 'account') {
+									email = resp['emails'][i]['value'];
+								}
+							}
+						}
+
+						var str =  email ;
+						alert(str);
+						var link = "LoginView.puzzle"+"&email="+str;
+						location.replace(link);
+					}); 
+
+			}
+			
+		}
+		function onLoadCallback() {
+			gapi.client.setApiKey('AIzaSyAeyWt8Ccq6I-xRk78IZvFFMAVz2UMzRYw');
+			gapi.client.load('plus', 'v1', function() {
+			});
+		}
+	</script>
+
+	<script type="text/javascript">
+		(function() {
+			var po = document.createElement('script');
+			po.type = 'text/javascript';
+			po.async = true;
+			po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(po, s);
+		})();
+	</script>
     
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
@@ -33,46 +87,7 @@
     <link href="Startr - Free Startup Landing page Template/css/animate.min.css" rel="stylesheet" type="text/css">
     <link href="Startr - Free Startup Landing page Template/css/popup.css" rel="stylesheet" type="text/css">
 
-	<script>
-		function onSignIn(googleUser) {
-			var options = new gapi.auth2.SigninOptionsBuilder({
-				'scope' : 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata'
-			});
-
-			var profile = googleUser.getBasicProfile();
-			console.log("ID: " + profile.getId()); 
-			console.log('Full Name: ' + profile.getName());
-			console.log('Given Name: ' + profile.getGivenName());
-			console.log('Family Name: ' + profile.getFamilyName());
-			console.log("Image URL: " + profile.getImageUrl());
-			console.log("Email: " + profile.getEmail());
 	
-			// The ID token you need to pass to your backend:
-			var id_token = googleUser.getAuthResponse().id_token;
-			console.log("ID Token: " + id_token);
-			gapi.load('auth2', function() {
-				gapi.auth2.init();
-			});
-		};
-		
-		function signOut() {
-			gapi.load('auth2', function() {
-				var auth2 = gapi.auth2.getAuthInstance();
-				gapi.auth.signOut();
-				alert('User signed out.');
-			});
-		}
-		
-		function logout()
-		{
-		    alert('logging out');
-		    var auth2 = gapi.auth2.getAuthInstance();
-		        auth2.signOut().then(function () {
-		        alert('User signed out.');
-		        });
-		}
-		
-	</script>
 </head>
 
 <body class="module-home" data-spy="scroll" data-target=".navbar">
@@ -125,7 +140,7 @@
 				<h2>PUZZLE</h2>
 				<p>MAKE SMART DECISIONS WITH PUZZLE!</p>	
 							
-				<a  href="main/admin.puzzle" class="button-header">Get Strated</a>
+				<a href="#" class="button-header" onclick="login()">Get Strated</a>
 				
 			</section>
 			<!-- banner Text -->   
