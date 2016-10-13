@@ -108,7 +108,7 @@
 	</tr>
 	<c:if test="${fn:length(msg)==0}">
 		<tr>
-			<td colspan="2">쪽지가 없습니다.</td>
+			<td colspan="4">쪽지가 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:if test="${fn:length(msg)!=0}">
