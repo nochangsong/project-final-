@@ -45,4 +45,8 @@ public class MessageDAO extends SqlSessionDaoSupport{
 	public int deleteMessages(int no){
 		return getSqlSession().delete("message.deleteMessage", no);
 	}
+	
+	public List<MessageCommand> searchEmail(String search){
+		return getSqlSession().selectList("message.searchEmail", search);
+	}
 }

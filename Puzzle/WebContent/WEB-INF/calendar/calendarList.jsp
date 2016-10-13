@@ -71,6 +71,7 @@
 	        
 		    },
 		    eventClick: function(calEvent, jsEvent, view){
+		    	$("[checked]").removeAttr("checked");
 		    	modal2.style.display = "block";
 		    	span2.onclick = function() {
 		            modal2.style.display = "none";

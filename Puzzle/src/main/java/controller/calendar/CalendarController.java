@@ -25,6 +25,8 @@ import net.sf.json.JSONObject;
 @RequestMapping("/calendar")
 public class CalendarController {
 
+	private String userEmail = "joo@naver.com";
+	
 	@Autowired
 	private CalendarDAO service;
 	public void setService(CalendarDAO service) {
@@ -40,7 +42,7 @@ public class CalendarController {
 	@ResponseBody
 	public String getSchedules(HttpServletResponse resp) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
-		List<CalendarCommand> list = service.getSchedules("joo@naver.com");
+		List<CalendarCommand> list = service.getSchedules(userEmail);
 		
 		List l = new ArrayList();
 		for(int i=0; i<list.size(); i++){

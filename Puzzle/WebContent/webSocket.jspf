@@ -35,7 +35,10 @@
 			}
 			,dataType:"json"
 			,success:function(args){	
-				alertify.log(args.message.sender+"로 부터 메시지 : " + args.message.content);
+// 				alert(args);
+				if(args.message!=null)
+					alertify.log(args.message.sender+"로 부터 메시지 : " + args.message.content);
+				$(".badge").text(args.msgNum);
 			}
 		    ,error:function(e) {	
 		    	Console.log(e.responseText);
@@ -47,5 +50,21 @@
     function onError(event) {
 //       alert(event.data);
     }
+    
+    $(function(){
+    	var url = "/Puzzle/message/getMessageCount.puzzle";
+		$.ajax({
+			type:"post"		// 포스트방식
+			,url:url	// url 주소	
+			,dataType:"json"
+			,success:function(args){
+// 				alert(args.msgNum);
+				$(".badge").text(args.msgNum);
+			}
+		    ,error:function(e) {	
+		    	Console.log(e.responseText);
+		    }
+		});
+    })
     
 </script>

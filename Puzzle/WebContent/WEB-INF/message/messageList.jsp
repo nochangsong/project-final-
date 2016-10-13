@@ -133,21 +133,21 @@
 </form:form>
 </div>
 <div class="paging">
-	<c:if test="${pageNum>5}">
+	<c:if test="${startPage>5}">
 		<ul class="pager">
-			<li><a href="messageList.puzzle?pageNum=${previous}">Previous</a></li>
+			<li><a href="messageList.puzzle?pageNum=${startPage-1}">Previous</a></li>
 		</ul>
 	</c:if>
 	<ul class="pagination">
-		<c:forEach var="i" begin="1" end="${pageCount}">
+		<c:forEach var="i" begin="${startPage}" end="${endPage}">
 			<li id="${i}"><a href="messageList.puzzle?pageNum=${i}">${i}</a></li>
 		</c:forEach>
 <!-- 		<li class="active"><a href="#">2</a></li> -->
 	</ul>
 	
-	<c:if test="${pageCount>5 && pageNum<=(pageCount-pageCount%5)}">
+	<c:if test="${pageCount>endPage}">
 	<ul class="pager">
-		<li><a href="messageList.puzzle?pageNum=${next}">Next</a></li>
+		<li><a href="messageList.puzzle?pageNum=${startPage+5}">Next</a></li>
 	</ul>
 	</c:if>
 </div>

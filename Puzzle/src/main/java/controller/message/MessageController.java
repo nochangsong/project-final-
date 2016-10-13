@@ -1,5 +1,6 @@
 package controller.message;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import net.sf.json.JSONObject;
 @RequestMapping("/message")
 public class MessageController {
 
+	private String userEmail = "joo@naver.com";
+	
 	private MessageService service;
 	@Autowired
 	public void setService(MessageService service) {
@@ -32,26 +35,31 @@ public class MessageController {
 	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum) throws Exception {
 		ModelAndView mav = new ModelAndView("messageList");
 		
-		int totalMsgCount = service.getTotalMessageCount("joo@naver.com");
-		int pageCount = totalMsgCount/perPage+(totalMsgCount%perPage==0?0:1);
+		int totalMsgCount = service.getTotalMessageCount(userEmail); //51
+		int pageCount = totalMsgCount/perPage+(totalMsgCount%perPage==0?0:1); //6
 //		int start = totalMsgCount-perPage*(pageNum-1); 
 //		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
-		int previous = (pageNum-5)/5*5+1;
-		int next = (pageNum/5+1)*5+1;
-
-		int start = perPage*(pageNum-1)+1;
+		
+		int start = perPage*(pageNum-1)+1; 
 		int end = start+(perPage-1) > totalMsgCount ? totalMsgCount : start+(perPage-1);
 		
-//		System.out.println(start);
-//		System.out.println(end);
 		
-		List<MessageCommand> list = service.getAllMessages("joo@naver.com", start, end);
+		int startPage = (pageNum-1) / 5 * 5 + 1; //1
+		int endPage = startPage + 5 - 1; //5
+		if(endPage>pageCount){
+			endPage=pageCount;
+		}
 		
-		mav.addObject("pageCount", pageCount);
+//		System.out.println(startPage);
+//		System.out.println(endPage);
+		
+		List<MessageCommand> list = service.getAllMessages(userEmail, start, end);
+		
+		mav.addObject("pageCount", pageCount); //6
 		mav.addObject("pageNum", pageNum);
-		mav.addObject("previous", previous);
-		mav.addObject("next", next);
 		mav.addObject("msg", list);
+		mav.addObject("startPage", startPage);
+		mav.addObject("endPage",endPage);
 		return mav;
 	}
 	
@@ -60,22 +68,6 @@ public class MessageController {
 		service.deleteMessages(no); 
 		return "redirect:messageList.puzzle";
 	}
-	
-//	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
-//	@ResponseBody
-//	public String alarmList(HttpServletResponse resp) throws Exception{
-//		resp.setContentType("text/html;charset=utf-8");
-//		List<MessageCommand> list = service.getAlarmList("joo@naver.com");
-//		int msgNum = service.getNewMessageNumber("joo@naver.com");
-//		JSONObject json = new JSONObject();
-//		json.put("data", list);
-//		json.put("msgNum", msgNum);
-//		for(int idx=0; idx<list.size();idx++){
-//			service.updateAlarm(list.get(idx));
-//		}
-////		System.out.println(json.toString());
-//		return json.toString();
-//	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.GET)
 	public ModelAndView messageForm(MessageCommand messageCommand, String sender) throws Exception {
@@ -89,7 +81,7 @@ public class MessageController {
 	public ModelAndView send(MessageCommand messageCommand, HttpServletResponse resp) throws Exception {
 		ModelAndView mav = new ModelAndView("sendSuccess");
 		resp.setContentType("text/html;charset=utf-8");
-		messageCommand.setSender("koo@naver.com");
+		messageCommand.setSender(userEmail);
 		service.send(messageCommand);
 		
 		JSONObject json = new JSONObject();
@@ -118,10 +110,42 @@ public class MessageController {
 	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String alarmList(HttpServletResponse resp, String data) throws Exception{
+		String out="";
 		resp.setContentType("text/html;charset=utf-8");
 		JSONParser parser = new JSONParser();
 		org.json.simple.JSONObject json = (org.json.simple.JSONObject) parser.parse(data);
-		System.out.println(json.toString());
+		int msgNum = service.getNewMessageNumber(userEmail);
+		json.put("msgNum", msgNum);
+		org.json.simple.JSONObject message = (org.json.simple.JSONObject) json.get("message");
+		if(message.get("receiver").equals(userEmail)){
+			out = json.toString();
+		}
+		return out;
+	}
+	
+	@RequestMapping(value="getMessageCount.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String getMessageCount() throws Exception {
+		int count = 0;
+		if(userEmail!=null){
+			count = service.getNewMessageNumber(userEmail);
+		}
+		JSONObject json = new JSONObject();
+		json.put("msgNum", count);
 		return json.toString();
 	}
+	
+	@RequestMapping(value="searchEmail.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String searchEmail(String search) throws Exception {
+		List<MessageCommand> list = service.searchEmail(search);
+		for(int i=0; i<list.size(); i++){
+			list.get(i).setName(URLEncoder.encode(list.get(i).getName(),"UTF-8"));
+			list.get(i).setDept_type(URLEncoder.encode(list.get(i).getDept_type(),"UTF-8"));
+		}
+		JSONObject json = new JSONObject();
+		json.put("list", list);
+		return json.toString();
+	}
+
 }

@@ -111,4 +111,14 @@ public class MessageService {
 			System.out.println(e.toString());
 		}
 	}
+	
+	public List<MessageCommand> searchEmail(String search){
+		List<MessageCommand> list = null;
+		try {
+			list = dao.searchEmail(search);
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return list;
+	}
 }

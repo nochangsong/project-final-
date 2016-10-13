@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 public class MessageCommand {
 
+	private String name;
+	private String dept_Type;
 	private int no;
 	private String content;
 	private Timestamp reg_date;
@@ -11,7 +13,19 @@ public class MessageCommand {
 	private String receiver;
 	private String checked;
 	private int alarm;
-	
+		
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDept_type() {
+		return dept_Type;
+	}
+	public void setDept_type(String dept_Type) {
+		this.dept_Type = dept_Type;
+	}
 	public int getNo() {
 		return no;
 	}
