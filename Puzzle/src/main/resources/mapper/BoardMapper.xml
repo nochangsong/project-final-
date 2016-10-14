@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+
+<!--게시판 글쓰기 -->
+
+<insert id="insertBoard" parameterType="model.BoardCommand">
+	insert into BO_BOARD(
+	BNO, DEPT_NUM, SUBJECT, B_CONTENT, REG_DATE, BOARD_TYPE, WRITE_TYPE, WRITER)
+	values(
+	SEQ_BO_BOARD_BNO.nextval, #{DEPT_NUM}, #{SUBJECT}, #{B_CONTENT}, sysdate, 'board', #{WRITE_TYPE}, #{WRITER}
+	)
+</insert>
+
+<!--게시판 글수정 -->
+<update id="updateBoard" parameterType="model.BoardCommand">
+    UPDATE BO_BOARD SET SUBJECT =#{SUBJECT}, B_CONTENT =#{B_CONTENT},
+    WRITE_TYPE =#{WRITE_TYPE} WHERE BNO =#{BNO}
+</update>
+
+<!--게시판 글삭제 -->
+<delete id="deleteBoard" parameterType="model.BoardCommand">
+    DELETE FROM BO_BOARD WHERE BNO =#{BNO}
+</delete>
+
+
+
+<!--게시판 글목록 -->
+<select id="selectList" parameterType="Map" resultType="model.BoardCommand">
+SELECT 
+	BNO
+	,DEPT_NUM
+	,SUBJECT
+	,B_CONTENT
+	,REG_DATE
+	,BOARD_TYPE
+	,WRITE_TYPE
+	,WRITER 
+	,NAME
+FROM (
+	SELECT 
+		ROWNUM RNUM
+		,BNO
+		,DEPT_NUM
+		,SUBJECT
+		,B_CONTENT
+		,REG_DATE
+		,BOARD_TYPE
+		,WRITE_TYPE
+		,WRITER		 
+		,NAME
+	FROM (
+		SELECT 
+			A.BNO
+			,A.DEPT_NUM
+			,A.SUBJECT
+			,A.B_CONTENT
+			,A.REG_DATE
+			,A.BOARD_TYPE
+			,A.WRITE_TYPE
+			,A.WRITER 
+			,B.NAME
+	FROM BO_BOARD A 
+		INNER JOIN PROSNNELCARD B ON A.WRITER = B.EMAIL
+	<where>
+		<if test="keyWord != '' and keyField == 'subject'">
+			subject like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'content'">
+			content like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'writer'">
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'all'">
+			subject like '%' ||#{keyWord}||'%' or
+			content like '%' ||#{keyWord}||'%' or
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+	</where>
+		order by A.BNO desc) 
+		) 
+	<![CDATA[
+        WHERE rnum >= #{start} AND rnum <= #{end} AND DEPT_NUM = #{DEPT_NUM}
+        ]]><!-- AND Dept_Num = 부서번호 -->
+</select>
+
+<!--게시판 글갯수(검색시 포함) -->
+<select id="selectCount" parameterType="Map" resultType="Integer">
+	select count(*) from BO_BOARD 
+	<where>
+		<if test="keyWord != '' and keyField == 'subject'">
+			subject like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'content'">
+			content like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'writer'">
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'all'">
+			subject like '%' ||#{keyWord}||'%' or
+			content like '%' ||#{keyWord}||'%' or
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+	</where>
+	<![CDATA[
+        WHERE DEPT_NUM = #{DEPT_NUM}
+        ]]>
+</select>
+
+<!--게시판 글상세 -->
+<select id="selectBoard" parameterType="model.BoardCommand" resultType="model.BoardCommand">
+SELECT 
+	A.BNO
+	,A.DEPT_NUM
+	,A.SUBJECT
+	,A.B_CONTENT
+	,A.REG_DATE
+	,A.BOARD_TYPE
+	,A.WRITE_TYPE
+	,A.WRITER 
+	,B.NAME
+FROM BO_BOARD A 
+INNER JOIN PROSNNELCARD B ON A.WRITER = B.EMAIL
+WHERE BNO = #{BNO}
+</select>
+
+
+<!-- 코멘트쓰기 -->
+<insert id="insertBoardComment" parameterType="model.BoardCommand">
+  INSERT INTO BO_COMMENT(
+	 CNO 
+	,BNO 
+	,EMAIL
+	,CONTENT
+	,REG_DATE
+) VALUES (
+   #{CNO}
+  ,#{BNO}
+  ,#{EMAIL}
+  ,#{CONTENT}
+  ,SYSDATE
+)
+</insert>
+ 
+<!-- 코멘트삭제 -->
+<delete id="deleteBoardComment" parameterType="model.BoardCommand">
+    DELETE FROM BO_COMMENT WHERE BNO = #{BNO} AND CNO = #{CNO}
+</delete>
+
+
+<!-- 코멘트조회 -->
+<select id="selectListComment" parameterType="Map" resultType="model.BoardCommand">
+	SELECT 
+	  A.BNO
+	  ,A.CNO
+	  ,A.CONTENT
+	  ,A.EMAIL
+	  ,A.REG_DATE
+	  ,B.NAME
+	FROM BO_COMMENT A
+	INNER JOIN PROSNNELCARD B ON A.EMAIL = B.EMAIL
+	WHERE BNO = #{BNO} 
+</select>
+ 
+ <!-- 댓글갯수조회 -->
+<select id="CommentCount" parameterType="Map" resultType="Integer">
+select count(*) from BO_COMMENT WHERE BNO = #{BNO}
+</select>
+ 
+ 
+ <!--공지사항 글쓰기 -->
+
+<insert id="insertNotify" parameterType="model.BoardCommand">
+	insert into BO_NOTIFY(
+	BNO, SUBJECT, N_CONTENT, REG_DATE, BOARD_TYPE, WRITER)
+	values(
+	SEQ_BO_BOARD_BNO.nextval, #{SUBJECT}, #{N_CONTENT}, sysdate, 'notify', #{WRITER}
+	)
+</insert>
+
+<!--공지사항 글수정 -->
+<update id="updateNotify" parameterType="model.BoardCommand">
+    UPDATE BO_NOTIFY SET SUBJECT =#{SUBJECT}, N_CONTENT =#{N_CONTENT}
+    WHERE BNO =#{BNO}
+</update>
+
+<!--공지사항 글삭제 -->
+<delete id="deleteNotify" parameterType="model.BoardCommand">
+    DELETE FROM BO_NOTIFY WHERE BNO =#{BNO}
+</delete>
+
+
+
+<!--공지사항 글목록 -->
+<select id="selectNotifyList" parameterType="Map" resultType="model.BoardCommand">
+SELECT 
+	BNO
+	,SUBJECT
+	,N_CONTENT
+	,REG_DATE
+	,BOARD_TYPE
+	,WRITER 
+	,NAME
+FROM (
+	SELECT 
+		ROWNUM RNUM
+		,BNO
+		,SUBJECT
+		,N_CONTENT
+		,REG_DATE
+		,BOARD_TYPE
+		,WRITER		 
+		,NAME
+	FROM (
+		SELECT 
+			A.BNO
+			,A.SUBJECT
+			,A.N_CONTENT
+			,A.REG_DATE
+			,A.BOARD_TYPE
+			,A.WRITER 
+			,B.NAME
+	FROM BO_NOTIFY A 
+		INNER JOIN PROSNNELCARD B ON A.WRITER = B.EMAIL
+	<where>
+		<if test="keyWord != '' and keyField == 'subject'">
+			subject like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'content'">
+			content like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'writer'">
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'all'">
+			subject like '%' ||#{keyWord}||'%' or
+			content like '%' ||#{keyWord}||'%' or
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+	</where>
+		order by A.BNO desc) 
+		) 
+	<![CDATA[
+        WHERE rnum >= #{start} AND rnum <= #{end}
+        ]]>
+</select>
+
+<!--공지사항 글갯수(검색시 포함) -->
+<select id="selectNotifyCount" parameterType="Map" resultType="Integer">
+	select count(*) from BO_NOTIFY 
+	<where>
+		<if test="keyWord != '' and keyField == 'subject'">
+			subject like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'content'">
+			content like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'writer'">
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+		<if test="keyWord != '' and keyField == 'all'">
+			subject like '%' ||#{keyWord}||'%' or
+			content like '%' ||#{keyWord}||'%' or
+			writer like '%' ||#{keyWord}||'%'
+		</if>
+	</where>
+</select>
+
+<!--공지사항 글상세 -->
+<select id="selectNotify" parameterType="model.BoardCommand" resultType="model.BoardCommand">
+SELECT 
+	A.BNO
+	,A.SUBJECT
+	,A.N_CONTENT
+	,A.REG_DATE
+	,A.BOARD_TYPE
+	,A.WRITER 
+	,B.NAME
+FROM BO_NOTIFY A 
+INNER JOIN PROSNNELCARD B ON A.WRITER = B.EMAIL
+WHERE BNO = #{BNO}
+</select>
+
+</mapper>
