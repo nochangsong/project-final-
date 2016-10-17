@@ -24,7 +24,7 @@ import model.listCommand;
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/department")
 public class DepartmentController {
 	
 	@Autowired
@@ -39,83 +39,53 @@ public class DepartmentController {
 		this.service = service;
 	}  
 	
-//	private int perPage = 6;
-	
-/*	ModelAndView mav = null;
-	
-	@RequestMapping("departmentList.puzzle")
-	   public ModelAndView list() throws Exception {
-	      List<PersonnelCommand> list = null;
-
-	      mav = new ModelAndView("nlist");
-	      int pageNum = 1;
-	      int pagesize = 6;
-	      Map<String, Object> map = new HashMap<String, Object>();
-
-	      int startRow = (pageNum * 10) - 9;
-	      int endRow = (pageNum * pagesize);
-	      map.put("startRow", startRow);
-	      map.put("endRow", endRow);
-
-	      int cnt = service.getTotalCount(); // 전체 글 갯수
-	      // cnt(전체 글 갯수가)가 0이면 저장된 글 없음
-	      if (cnt > 0) {
-	         list = service.memAll();
-	      }
-
-	      *//**** 페이지 수 연산 ****//*
-	      int pageCount = cnt / pagesize + (cnt % pagesize == 0 ? 0 : 1);
-	      int startPage = (int) (pageNum / 5) * 5 + 1;
-	      int pageBlock = 5;
-	      int endPage = startPage + pageBlock - 1;
-	      if (endPage > pageCount)
-	         endPage = pageCount;
-
-	      mav.addObject("pageNumber", pageNum); // 페이지 번호
-	      mav.addObject("totalcnt", cnt); // 전체 글 수
-	      mav.addObject("pageCount", pageCount); // 페이지 수
-	      mav.addObject("startPage", startPage); // 시작 페이지
-	      mav.addObject("endPage", endPage); // 끝 페이지
-	      mav.addObject("list", list);
-
-	      return mav;
-	   }*/
+	private int perPage = 6;
 	
 	
-/*	@RequestMapping(value="departmentList.puzzle", method=RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum) throws Exception {
-		ModelAndView mav = new ModelAndView("departmentList");
+	@RequestMapping(value="/departmentList.puzzle", method=RequestMethod.GET)
+	public ModelAndView dept(@RequestParam(value="pageNum", defaultValue = "1")int pageNum) throws Exception{
+		ModelAndView mav =new ModelAndView("departmentList");
 		
-		int totalCount = service.getTotalCount();
-		int pageCount = totalCount/perPage+(totalCount%perPage==0?0:1);
-		int start = totalCount-perPage*(pageNum-1); 
-		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
+		
+		int totalCount = service.getTotalCount();  //8
+		int pageCount = totalCount/perPage+(totalCount%perPage==0?0:1); //2
+
+		int start = perPage*(pageNum-1)+1; 
+
+		int end = start+(perPage-1) > totalCount ? totalCount : start+(perPage-1);  //6
+		
+		int startPage = (pageNum-1) / 5 * 5 + 1; //1
+		int endPage = startPage + 5 - 1; //5
+		if(endPage>pageCount){
+			endPage=pageCount;
+		}
+		
 		int previous = (pageNum-5)/5*5+1;
 		int next = (pageNum/5+1)*5+1;
 		
-//		int start = perPage*(pageNum-1)+1;
-//		int end = start+(perPage-1);
-		
-		List<PersonnelCommand> list = service.memAll();
-		
-		mav.addObject("pageCount", pageCount);
-		mav.addObject("pageNum", pageNum);
-		mav.addObject("previous", previous);
-		mav.addObject("next", next);
-		mav.addObject("mem", list);
-		return mav;
-	}*/
-	
-	
-	@RequestMapping(value="/department/departmentList.puzzle", method=RequestMethod.GET)
-	public ModelAndView dept() throws Exception{
-		ModelAndView mav =new ModelAndView("departmentList");
 		List<listCommand> list = service.selectAll();
 		mav.addObject("mem", list);
+		
+		System.out.println("totalCount1 : " + totalCount);
+		System.out.println("pageCount1 :"+ pageCount);
+		System.out.println("start1 : " + start);
+		System.out.println("end1 : " + end);
+		System.out.println("pageNum1 : " +pageNum);
+		System.out.println("startPage1 : " +startPage);
+		System.out.println("endPage1 : " + endPage);
+		
+		mav.addObject("startPage1",startPage);
+		mav.addObject("endPage1",endPage);
+		mav.addObject("pageCount1", pageCount);
+		mav.addObject("pageNum1", pageNum);
+		mav.addObject("previous1", previous);
+		mav.addObject("next1", next);
+		
 		return mav;
+
 	}
 	
-	@RequestMapping(value="/department/departmentList.puzzle", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
+	@RequestMapping(value="/departmentList.puzzle", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String getList(HttpServletResponse resp, String type, String dept_Num, String dept_Type) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
@@ -145,14 +115,37 @@ public class DepartmentController {
 		return json.toString();
 	}
 
-	@RequestMapping(value="/department/departmemList.puzzle", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
+	@RequestMapping(value="/departmemList.puzzle", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
 	@ResponseBody
 	public String getselect(HttpServletResponse resp, String dept_Type) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
 
 		listCommand command = new listCommand();
 		command.setDept_Type(dept_Type);
-				
+		int pageNum =1;
+		
+		List<listCommand> dept = service.deptTypeint(command);
+		int totalCount = dept.size();
+		
+		int pageCount = totalCount/perPage+(totalCount%perPage==0?0:1);
+		int start = totalCount-perPage*(pageNum-1); 
+		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
+		
+		int startPage = (pageNum-1) / 5 * 5 + 1; //1
+		int endPage = startPage + 5 - 1; //5
+		if(endPage>pageCount){
+			endPage=pageCount;
+		}
+		
+		int previous = (pageNum-5)/5*5+1;
+		int next = (pageNum/5+1)*5+1;
+		
+		System.out.println("totalCount2 : " + totalCount);
+		System.out.println("pageCount2 :"+ pageCount);
+		System.out.println("start2 : " + start);
+		System.out.println("end2 : " + end);
+		System.out.println("pageNum2 : " +pageNum);
+		
 		List<listCommand> list = service.memList(command);
 		for(int i=0; i<list.size(); i++){
 			list.get(i).setName(URLEncoder.encode(list.get(i).getName(),"UTF-8"));
@@ -161,6 +154,14 @@ public class DepartmentController {
 		}
 		System.out.println(list.size());		
 		JSONObject json = new JSONObject();
+		
+
+		json.put("startPage", startPage);
+		json.put("endPage", endPage);
+		json.put("pageCount", pageCount);
+		json.put("pageNum", pageNum);
+		json.put("previous", previous);
+		json.put("next", next);
 		json.put("list", list);
 		return json.toString();
 		

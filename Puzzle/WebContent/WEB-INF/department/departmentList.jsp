@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ page isELIgnored="false" %>
 <%
 
 	request.setCharacterEncoding("UTF-8");    
@@ -35,28 +36,109 @@
 		padding-top: 5px;
 		padding-bottom: 5px;
 	}
+	
+	.pasing{
+		padding-top: 10px;
+	}
+	
+	#memadd>a{
+		font-size: small;
+	}
 </style>
 <script>
 
-
 	var selected_deptType;
-	
+
 	function sel(dept_Num){
 		selected_deptType = dept_Num;
+		
+		var dept_Type = $("#"+dept_Num).val();
+		var url = "/Puzzle/department/departmemList.puzzle";
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				dept_Type: dept_Type
+			}
+			,url: url	// url 주소	
+			,dataType:"json"
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,success:function(args){
+				$("#memAll").remove();
+				$(".memAll").remove();
+				$("#paging").remove();
+				for(var idx=0; idx<args.list.length; idx++){
+						var name = decodeURIComponent(args.list[idx].name);
+						var email = decodeURIComponent(args.list[idx].email);
+						var authority = decodeURIComponent(args.list[idx].authority);
+						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
+						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+						
+						$("#info2").append(
+								"<div class='memAll'>"+
+								"<div class='col-sm-6'>"+
+								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
+								"<div class='panel-img'>"+
+								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);'>"+
+								"<span>"+name+"</span>"+
+								"</div>"+
+								"</div>"+
+								"<div class='panel-content'>"+
+								"<div class='member_isAdmin'>"+
+								"<span class='label label-orange'>"+authority+"</span>"+
+								"</div>"+
+								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+email+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>");	
+						
+					}
+				var startPage = args.startPage;
+				alert(startPage);
+				
+				$(".paging").append(
+					"<div id='paging'>"+
+					"<c:if test='${startPage>5}'>"+
+					"<ul class='pager'>"+
+					"<li><a href='departmentList.puzzle?pageNum=${startPage-1}'>Previous</a></li>"+
+					"</ul>"+
+					"</c:if>"+
+					"<ul class='pagination'>"+
+					"<c:forEach var='i' begin='${startPage}' end='${endPage}'>"+
+					"<li id='${i}'><a href='departmentList.puzzle?pageNum=${i}'>${i}</a></li>"+
+					"</c:forEach>"+
+					"</ul>"+
+					"<c:if test='${pageCount>endPage}'>"+
+					"<ul class='pager'>"+
+					"<li><a href='departmentList.puzzle?pageNum=${startPage+5}'>Next</a></li>"+
+					"</ul>"+
+					"</c:if>"+
+					"</div>"
+				);
+
+			}
+		    ,error:function(e) {	
+		    	Console.log(e.responseText);
+		    }
+		});
+		
 	}
 
 	
 	function add(){
-		var deptType = $("#newdeptType").val();
-		
-		if(deptType==''){
+		var dept_Type = $("#newdeptType").val;
+		alert(dept_Type);
+		if(dept_Type==''){
 			alert("부서명을 입력해주세요.");
 			return false;
 		}
-		getList("insert", "", deptType);
+		getList("insert", "", dept_Type);
 		
 		$("#newdeptType").val("부서추가");
 	}
+	
 	
 	function del(){
 		if(selected_deptType==null){
@@ -79,8 +161,6 @@
 		getList("update", selected_deptType, dept_Type);
 	}
 
-
-	
 	function cancel(){
 		getList();
 	}
@@ -95,10 +175,34 @@
 		$("#"+selected_deptType).removeAttr("readonly").focus().after("<input type='button' class='btn btn-default temp' onclick='return edit()' value='수정'/>"
 				+"<input type='button' class='btn btn-default temp' id='cancle' onclick='edit_cancle()' value='취소'/>");
 	}
+	
+	
+	
+	function search(){
 		
+		 if(document.all.spot.style.visibility=="hidden") {
+			   document.all.spot.style.visibility="visible";
+			   return false;
+			 }
+			 if(document.all.spot.style.visibility=="visible") {
+			  document.all.spot.style.visibility="hidden";
+			  return false;
+			 }
+			 
+		/* $(this).unbind().bind("click", function(){
+			 $("#search").append(
+				"<input type='text' id='sarch' size='15' placeholder='사원명 입력'/>");
+			}); */
+	}
 		
+	
+	 
+   
+ 
+        
 	function getList(type, dept_Num, dept_Type){
-		var url = "/Puzzle/admin/department/departmentList.puzzle";
+		
+		var url = "/Puzzle/department/departmentList.puzzle";
 		$.ajax({
 			type:"post"		// 포스트방식
 			,data: {
@@ -120,7 +224,8 @@
 						$(".deptlist").append(
 								"<div class='panel-body'><input id='"+dept_Num+"' class='form-control' " +
 								"value='"+dept_Type+"' onclick='sel("+dept_Num+")' readonly/></div>");
-					}
+						
+					}		
 				}
 			}
 		    ,error:function(e) {	
@@ -128,52 +233,18 @@
 		    }
 		});
 	}
-	
+
 	$(function(){	
-		
-		getList();
-		
+
+		$(".paging .pagination li#"+${pageNum1}).addClass("active");
+
+
 	});
-
-// 	function getpersonList(type, Name, Email, Position_Num, ){
-// 		var url = "/Puzzle/admin/department/departmentList.puzzle";
-// 		$.ajax({
-// 			type:"post"		// 포스트방식
-// 			,data: {
-// 				type: type,
-// 				dept_Num: dept_Num,
-// 				dept_Type: dept_Type
-// 			}
-// 			,url: url	// url 주소	
-// 			,dataType:"json"
-// 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-// 			,success:function(args){	
-// 				$(".deptlist").html("");
-// 				if(args.list.length==0){
-// 					$(".deptlist").append("<div class='panel-body'>직급/직책을 추가해주세요.</div>");
-// 				} else {
-// 					for(var idx=0; idx<args.list.length; idx++){
-// 						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
-// 						var dept_Num = args.list[idx].dept_Num;
-// 						$(".deptlist").append(
-// 								"<div class='panel-body'><input id='"+dept_Num+"' class='form-control' " +
-// 								"value='"+dept_Type+"' onclick='sel("+dept_Num+")' readonly/></div>");
-// 					}
-// 				}
-// 			}
-// 		    ,error:function(e) {	
-// 		    	Console.log(e.responseText);
-// 		    }
-// 		});
-// 	}
-
-	
-
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-<body>
+<body onload="getList()">
 <h3>조직도/조직원 관리</h3>
 <h5>조직의 조직도/조직원을 관리 할 수 있습니다.</h5>
 <br>
@@ -189,7 +260,7 @@
 					<input type="button" class="btn btn-default" onclick="return del();" value="삭제">
 				</div>
 				<div class="panel">
-					<input type="button" class="btn btn-default" value="puzzle">
+					<input type="button" class="btn btn-default" id="searchButton" value="puzzle">
 				</div>
 				<div class='panel-body'>
 					<input  id="newdeptType" type="text" class="form-control" placeholder="부서추가"/>
@@ -202,15 +273,18 @@
 		<div class="col-sm-8">
  			<div class="panel-grop">
 				<div class="panel panel-default">
-					<div class="panel-heading">조직원<span> [전체 : 2 재직 : 2 휴직 : 0 퇴직 : 0] </span> <button id="select">검색</button>
-					
+					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span> <button id="select" onclick="return search(spot)">검색</button>
+					<div id="spot" style="position:absolute; left:520px; top:500px; visibility:hidden;">
+					사원명 : <input type="text" id='search_n' size='15' placeholder='사원명 입력'/><input type="button" value="검색"/><br/>
+					직급명 : <input type="text" id='search_a' size='15' placeholder='직급명 입력'/><input type="button" value="검색"/>
+					</div>
 					</div>
 						<div class="panel-body">
 							<div class="bodyOne">
-							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit">조직원 편집</button><button id="memadd">조직원 추가</button>
+							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit">조직원 편집</button><button id="memadd"><a href="/Puzzle/PersonnelView/P_Card_in.puzzle">조직원 추가</a></button>
 							</div>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body" id="tabmenu">
 							<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
 								<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
 									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
@@ -220,79 +294,74 @@
 									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
 										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
 									</c:forEach>
+								<li><a href="#" data-toggle="tab" data-id="2" class="">휴직</a></li>
+									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+									</c:forEach>
+								<li><a href="#" data-toggle="tab" data-id="2" class="">퇴직</a></li>
+									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+									</c:forEach>
 								  
 							</ul>
-						</div>
-						<div class="panel-body">
-						<div class="col-sm-6">
-						<div class="tab-content">
-							<div class="panel-body detailMemberBtn" data-id="29243" style="cursor:pointer; margin-top:0px;">
-								<div class="panel-img ">					
-									<div class="default-img " data-code="12609" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
-										<span>ㅁ</span>
-									</div>				
-								</div>
-								<div class="panel-content">
-									<div class="member_isAdmin ">			
-										<span data-id="29243" class="label label-orange">문서관리자</span>
-							        </div>
-								<div class="infinite_name panel-workflow">
-									ㅁ
-								</div>
-								<div class="infinite_name panel-workflow">
-									CEO
-								</div>
-								<div class="infinite_name panel-workflow">
-									인사팀,홍보팀
-								</div>
-								</div>
-								<div class="panel-email infinite_name">
-									<i class="ti ti-email"></i>
-									<a href="https://mail.google.com/mail/u/0/?view=cm&amp;fs=1&amp;to=joobk1225@naver.com" target="_blank">
-										joobk1225@naver.com
-									</a>
-									<input type="text" pa ></input>
-								</div>
+						
+						<!-- 시작하자마자 전체조직원 정보 표시 -->
+						
+						<div id="info">
+						<div id="info2">
+						<div  id="memAll"> 
+						<c:if test="${mem != null}">
+							<c:forEach var="list" items="${mem}">
+							<div class="col-sm-6">
+							<div class="panel-body detailMemberBtn" style="cursor:pointer; margin-top:0px;">
+							<div class="panel-img">
+							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
+							<span>${list.name }</span>
 							</div>
-						</div>
-						</div>
-						<div class="col-sm-6">
-						<div class="tab-content">
-							<div class="panel-body detailMemberBtn" data-id="29243" style="cursor:pointer; margin-top:0px;">
-								<div class="panel-img ">					
-									<div class="default-img " data-code="12609" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
-										<span>ㅁ</span>
-									</div>				
-								</div>
-								<div class="panel-content">
-									<div class="member_isAdmin ">			
-										<span data-id="29243" class="label label-orange">문서관리자</span>
-							        </div>
-								<div class="infinite_name panel-workflow">
-									ㅁ
-								</div>
-								<div class="infinite_name panel-workflow">
-									CEO
-								</div>
-								<div class="infinite_name panel-workflow">
-									인사팀,홍보팀
-								</div>
-								</div>
-								<div class="panel-email infinite_name">
-									<i class="ti ti-email"></i>
-									<a href="https://mail.google.com/mail/u/0/?view=cm&amp;fs=1&amp;to=joobk1225@naver.com" target="_blank">
-										joobk1225@naver.com
-									</a>
-									<input type="text" pa ></input>
-								</div>
 							</div>
+							<div class="panel-content">
+							<div class="member_isAdmin">
+							<span class="label label-orange">${list.authority}</span>
+							</div>
+							<div class="infinite_name panel-workflow">${list.name}</div>
+							<div class="infinite_name panel-workflow">${list.email}</div>
+							<div class="infinite_name panel-workflow">
+							${list.dept_Type}
+							</div>								
+							</div>
+							</div>	
+							</div>							
+							</c:forEach>
+						</c:if>
+					</div>
+					</div>
+					<div class="panel-body">
+					<div class="paging">
+						<div id="paging">
+						<c:if test="${startPage1>5}">
+							<ul class="pager">
+								<li><a href="departmentList.puzzle?pageNum=${startPage1-1}">Previous</a></li>
+							</ul>
+						</c:if>
+						<ul class="pagination">
+							<c:forEach var="i" begin="${startPage1}" end="${endPage1}">
+								<li id="${i}"><a href="departmentList.puzzle?pageNum=${i}">${i}</a></li>
+							</c:forEach>
+						</ul>
+						<c:if test="${pageCount1>endPage1}">
+						<ul class="pager">
+							<li><a href="departmentList.puzzle?pageNum=${startPage1+5}">Next</a></li>
+						</ul>
+						</c:if>
 						</div>
-					</div>	
+					</div>
+					</div>
+					</div>
 				</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
 </body>
 </html>
