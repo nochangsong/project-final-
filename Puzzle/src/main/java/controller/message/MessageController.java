@@ -22,8 +22,6 @@ import net.sf.json.JSONObject;
 @RequestMapping("/message")
 public class MessageController {
 
-//	private String userEmail = "joo@naver.com";
-	
 	private MessageService service;
 	@Autowired
 	public void setService(MessageService service) {
