@@ -37,8 +37,8 @@
 						}
 
 						var str =  email ;
-						alert(str);
-						var link = "LoginView.puzzle"+"&email="+str;
+						
+						var link = "LoginView.puzzle"+"?email="+str;
 						location.replace(link);
 					}); 
 
