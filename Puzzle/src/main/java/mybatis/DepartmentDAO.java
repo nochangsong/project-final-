@@ -5,7 +5,9 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import model.DepartMentCommand;
+import model.PersonnelCommand;
 import model.PositionCommand;
+import model.listCommand;
 
 public class DepartmentDAO extends SqlSessionDaoSupport{
 	
@@ -20,12 +22,7 @@ public class DepartmentDAO extends SqlSessionDaoSupport{
 	public void insertDeptType(DepartMentCommand command){
 		getSqlSession().insert("dept.insert_deptType", command);
 	}
-	
-//	public String selectdeptNum(String string){
-//		String dept_Num = getSqlSession().selectOne(string);
-//		return dept_Num;		
-//	}
-//	
+
 	public void updateDeptType(DepartMentCommand command){
 		getSqlSession().update("dept.updateDept", command);
 	}
@@ -33,4 +30,45 @@ public class DepartmentDAO extends SqlSessionDaoSupport{
 	public void deleteDeptType(int dept_Num){
 		getSqlSession().delete("dept.deleteDept", dept_Num);
 	}
+	
+//	조직원 구성 정보에 대한 쿼리 
+	public List<listCommand> listAll(){
+		List<listCommand> list = getSqlSession().selectList("dept.selectAll");
+/*		System.out.println("dao " + list.size());
+		
+		for(listCommand li:list){
+			System.out.println(li.getName());
+		}*/
+		return list;
+	}
+	
+	public List<PersonnelCommand> workAll(){
+		return getSqlSession().selectList("dept.workAll");
+	}
+	
+	public List<PersonnelCommand> timeoffAll(){
+		return getSqlSession().selectList("dept.timeoffAll");
+	}
+	
+	public List<PersonnelCommand> resignAll(){
+		return getSqlSession().selectList("dept.resignAll");
+	}
+	
+	public List<listCommand> detpTypeList(listCommand command){
+		return getSqlSession().selectList("dept.detpTypeList",command);
+	}
+	
+	public List<listCommand> deptTypeint(listCommand command){
+		return getSqlSession().selectList("dept.deptTypeint",command);
+	}
+	
+	public int getTotalCount(){
+		System.out.println("DAO접근");
+		return getSqlSession().selectOne("dept.getTotalCount");
+	}
+	
+	public List<PersonnelCommand> memAll(){
+		return getSqlSession().selectList("dept.memAll");
+	}
+	
 }

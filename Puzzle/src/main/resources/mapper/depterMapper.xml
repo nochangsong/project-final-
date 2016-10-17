@@ -28,4 +28,59 @@
 	<update id="updateDept" parameterType="model.DepartMentCommand">
 		update DEPARTMENT set dept_Type=#{dept_Type} where dept_Num=#{dept_Num}
 	</update>
+	
+	<select id="selectAll" resultType="model.listCommand">
+		select name,email,authority,d.dept_type,p.positiontype
+		from mem m
+ 		inner join depttable d
+  		on m.dept_num=d.dept_num
+    	inner join position p
+    	on m.POSITION_NUM=p.POSITION_NUM
+	</select>
+
+	<select id="detpTypeList" parameterType="model.DepartMentCommand" resultType="model.listCommand">
+		select name,email,authority,dept_type,positiontype,rownum r
+		from mem m, depttable d, position p
+		where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=#{dept_Type}
+	</select>
+	
+	<select id="deptTypeint" parameterType="model.DepartMentCommand" resultType="model.listCommand">
+		SELECT NAME, email,authority,dept_type,positiontype, rownum r    
+   		from (select name,email,authority,dept_type,positiontype
+		from mem m, depttable d, position p
+		where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=dept_type)
+    	where dept_type=#{dept_Type}
+	</select>
+	
+	<select id="workAll" resultType="model.PersonnelCommand">
+		select * from mem where work_num=1
+	</select>
+	
+	<select id="timeoffAll" resultType="model.PersonnelCommand">
+		select * from mem where work_num=2
+	</select>
+	
+	<select id="resignAll" resultType="model.PersonnelCommand">
+		select * from mem where work_num=4
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from mem
+	</select>
+	
+	<select id="memAll" resultType="model.PersonnelCommand">
+		select * from mem
+	</select>
+	
+	<select id="searchmem" parameterType="String" resultType="model.listCommand">
+		select name,email,authority,dept_type,positiontype 
+		from mem m, depttable d, position p
+  	 	where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=dept_type
+    	and m.name like '%'|| '#{search}' || '%'
+	</select>
+<!-- 	<select id="deptlist"> -->
+<!-- 		select name,email,authority,dept_type,positiontype,rownum r -->
+<!-- 		from mem m, depttable d, position p -->
+<!-- 		where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=#{dept_Type}; -->
+<!-- 	</select> -->
 </mapper>
