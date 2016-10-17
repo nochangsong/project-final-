@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="Docu">
+	<select id="selectAll"  parameterType="java.util.HashMap" resultType="model.DocuBoxCommand">
+			select * from (select DOC_NUM,FILENAME,REG_DATE,PATH,FILETYPE WRITER,CONFIRM,EMAIL,rownum r from DOCU_BOX) where r &gt;= #{start} and r &lt;= #{end}
+	</select>
+	<select id="selectCount" parameterType="int" resultType="int">
+		select count(*) from Docu_Box
+	</select>
+	<!-- <select id="selectPG" parameterType="" resultType="">
+	select * from Docu_Box where Docu_Num=2 
+	</select>
+	<select id="selectFN" parameterType="" resultType="">
+	select * from Docu_Box where Douc_Num=3
+	</select>
+	<select id="selectRB" parameterType="" resultType="">
+	select * from Docu_Box where Douc_Num=4
+	</select> -->
+	</mapper>
