@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 
 	request.setCharacterEncoding("UTF-8");    
@@ -48,7 +49,8 @@
 <script>
 
 	var selected_deptType;
-
+	
+	
 	function sel(dept_Num){
 		selected_deptType = dept_Num;
 		
@@ -96,7 +98,7 @@
 						
 					}
 				var startPage = args.startPage;
-				alert(startPage);
+				// alert(startPage);
 				
 				$(".paging").append(
 					"<div id='paging'>"+
@@ -139,7 +141,6 @@
 		$("#newdeptType").val("부서추가");
 	}
 	
-	
 	function del(){
 		if(selected_deptType==null){
 			alert("부서를 선택해주세요.");			
@@ -175,31 +176,13 @@
 		$("#"+selected_deptType).removeAttr("readonly").focus().after("<input type='button' class='btn btn-default temp' onclick='return edit()' value='수정'/>"
 				+"<input type='button' class='btn btn-default temp' id='cancle' onclick='edit_cancle()' value='취소'/>");
 	}
-	
-	
-	
-	function search(){
 		
-		 if(document.all.spot.style.visibility=="hidden") {
-			   document.all.spot.style.visibility="visible";
-			   return false;
-			 }
-			 if(document.all.spot.style.visibility=="visible") {
-			  document.all.spot.style.visibility="hidden";
-			  return false;
-			 }
-			 
-		/* $(this).unbind().bind("click", function(){
-			 $("#search").append(
+	/* function search(){
+		$("#search").append(
 				"<input type='text' id='sarch' size='15' placeholder='사원명 입력'/>");
-			}); */
-	}
 		
+	} */
 	
-	 
-   
- 
-        
 	function getList(type, dept_Num, dept_Type){
 		
 		var url = "/Puzzle/department/departmentList.puzzle";
@@ -262,51 +245,73 @@
 				<div class="panel">
 					<input type="button" class="btn btn-default" id="searchButton" value="puzzle">
 				</div>
-				<div class='panel-body'>
-					<input  id="newdeptType" type="text" class="form-control" placeholder="부서추가"/>
+				<div class="panel-body">
+					<input type="text" id="newdeptType" class="form-control" placeholder="부서추가">
 				</div>
 				<div class="deptlist">
 				</div>
 				</div>
 			</div>
 		</div>
+		
 		<div class="col-sm-8">
  			<div class="panel-grop">
 				<div class="panel panel-default">
-					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span> <button id="select" onclick="return search(spot)">검색</button>
-					<div id="spot" style="position:absolute; left:520px; top:500px; visibility:hidden;">
-					사원명 : <input type="text" id='search_n' size='15' placeholder='사원명 입력'/><input type="button" value="검색"/><br/>
-					직급명 : <input type="text" id='search_a' size='15' placeholder='직급명 입력'/><input type="button" value="검색"/>
+					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span>
+						<input type="button" id="select" data-toggle="modal" data-target="#myModal" value="검색"/>
 					</div>
-					</div>
-						<div class="panel-body">
-							<div class="bodyOne">
-							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit">조직원 편집</button><button id="memadd"><a href="/Puzzle/PersonnelView/P_Card_in.puzzle">조직원 추가</a></button>
-							</div>
+					<div class="panel-body">
+						<div class="bodyOne">
+						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memedit">조직원 편집</button>
+						<button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</a></button>
 						</div>
-						<div class="panel-body" id="tabmenu">
-							<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
-								<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								<li><a href="#" data-toggle="tab" data-id="2" class="">재직</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								<li><a href="#" data-toggle="tab" data-id="2" class="">휴직</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								<li><a href="#" data-toggle="tab" data-id="2" class="">퇴직</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								  
-							</ul>
+					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+						<!-- Modal content-->
+						<div class="modal-content">
+				      
+						<div class="modal-body">
+							<div id="search">
+							<form:form name="searchform" method="post" action="/Puzzle/department/searchList.puzzle">
+							조직원 이름 : <input type="text" size="20" id="search" name="search" placeholder="사원명으로 검색"/><input type="submit" value="검색" /><br/>
+							조직원 직급 : <input type="text" size="20" id="search" placeholder="직급명으로 검색"/><input type="submit" value="검색"/>
+							</form:form>
+							</div>
+				<!--           <input type="button" value="클릭" onclick="modal()" data-dismiss="modal"/> -->
+						</div>
+				        
+				        <div class="modal-footer">
+				        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>
+				      	</div>
+				    </div>
+				    </div>
+				    
+					<div class="panel-body" id="tabmenu">
+						<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
+							<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+							<li><a href="#" data-toggle="tab" data-id="2" class="">재직</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+							<li><a href="#" data-toggle="tab" data-id="2" class="">휴직</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+							<li><a href="#" data-toggle="tab" data-id="2" class="">퇴직</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+						</ul>
 						
-						<!-- 시작하자마자 전체조직원 정보 표시 -->
-						
+						<!-- 시작하자마자 전체조직원 정보 표시 -->						
 						<div id="info">
 						<div id="info2">
 						<div  id="memAll"> 
@@ -325,9 +330,8 @@
 							</div>
 							<div class="infinite_name panel-workflow">${list.name}</div>
 							<div class="infinite_name panel-workflow">${list.email}</div>
-							<div class="infinite_name panel-workflow">
-							${list.dept_Type}
-							</div>								
+							<div class="infinite_name panel-workflow">${list.positiontype}</div>
+							<div class="infinite_name panel-workflow">${list.dept_Type}</div>								
 							</div>
 							</div>	
 							</div>							
@@ -335,6 +339,8 @@
 						</c:if>
 					</div>
 					</div>
+					
+					<!-- paging -->
 					<div class="panel-body">
 					<div class="paging">
 						<div id="paging">
@@ -362,6 +368,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

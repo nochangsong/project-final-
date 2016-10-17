@@ -17,16 +17,12 @@
 		select count(*) from message where checked='new' and receiver=#{receiver}
 	</select>
 	<select id="allMessages" parameterType="java.util.HashMap" resultType="model.MessageCommand">
-		select * from (select no,content,reg_date,sender,receiver,checked,name,dept_Type,rownum r 
-		from (select no,content,reg_date,sender,receiver,checked,name,dept_Type 
-		from message m, personnelcard p, department d 
-		where receiver=#{receiver} and  m.sender=p.email and p.dept_num=d.dept_num
+		select * from (select no,content,reg_date,sender,receiver,checked,rownum r 
+		from (select no,content,reg_date,sender,receiver,checked from message where receiver=#{receiver} 
 		order by reg_date desc)) where r &gt;= #{start} and r &lt;= #{end}
 	</select>
 	<select id="selectMessage" parameterType="int" resultType="model.MessageCommand">
-		select no,content,reg_date,sender,receiver,checked,name,dept_Type 
-		from message m, personnelcard p, department d 
-		where no=#{no} and m.sender=p.email and p.dept_num=d.dept_num
+		select * from message where no=#{no}
 	</select>
 	<select id="selectTotalMessageCount" parameterType="String" resultType="int">
 		select count(*) from message where receiver=#{receiver}

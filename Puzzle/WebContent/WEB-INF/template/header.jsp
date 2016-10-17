@@ -45,7 +45,7 @@
   </style>
 <div class="well" id="well">
   <div class="row" style="width: 100%">
-    <div class="col-sm-2" id="logo"><a href="/Puzzle/main/main.puzzle"><img src="/Puzzle/img/puzzle_logo.png" width="170px"></a></div>
+    <div class="col-sm-2" id="logo"><a href="/Puzzle/main/main.puzzle"><img src="/Puzzle/img/logo.png" width="200px"></a></div>
     
     <div class="col-sm-8"></div>
     
