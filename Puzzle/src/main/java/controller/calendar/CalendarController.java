@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,10 @@ public class CalendarController {
 	
 	@RequestMapping(value= "/getSchedules.puzzle", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public String getSchedules(HttpServletResponse resp) throws Exception{
+	public String getSchedules(HttpServletResponse resp, HttpServletRequest request) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
+		
+//		String userEmail = (String)request.getSession().getAttribute("email");
 		List<CalendarCommand> list = service.getSchedules(userEmail);
 		
 		List l = new ArrayList();

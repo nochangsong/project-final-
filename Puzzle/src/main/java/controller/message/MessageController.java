@@ -32,8 +32,10 @@ public class MessageController {
 	private int perPage = 10;
 	
 	@RequestMapping(value="messageList.puzzle", method=RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum) throws Exception {
+	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView("messageList");
+		
+//		String userEmail = (String)request.getSession().getAttribute("email");
 		
 		int totalMsgCount = service.getTotalMessageCount(userEmail); //51
 		int pageCount = totalMsgCount/perPage+(totalMsgCount%perPage==0?0:1); //6
@@ -78,9 +80,11 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	public ModelAndView send(MessageCommand messageCommand, HttpServletResponse resp) throws Exception {
+	public ModelAndView send(MessageCommand messageCommand, HttpServletResponse resp, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView("sendSuccess");
 		resp.setContentType("text/html;charset=utf-8");
+		
+//		String userEmail = (String)request.getSession().getAttribute("email");
 		messageCommand.setSender(userEmail);
 		service.send(messageCommand);
 		
@@ -110,7 +114,10 @@ public class MessageController {
 	
 	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String alarmList(HttpServletResponse resp, String data) throws Exception{
+	public String alarmList(HttpServletRequest request, HttpServletResponse resp, String data) throws Exception{
+		
+//		String userEmail = (String)request.getSession().getAttribute("email");
+		
 		String out="";
 		resp.setContentType("text/html;charset=utf-8");
 		JSONParser parser = new JSONParser();
@@ -126,7 +133,8 @@ public class MessageController {
 	
 	@RequestMapping(value="getMessageCount.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String getMessageCount() throws Exception {
+	public String getMessageCount(HttpServletRequest request) throws Exception {
+//		String userEmail = (String)request.getSession().getAttribute("email");
 		int count = 0;
 		if(userEmail!=null){
 			count = service.getNewMessageNumber(userEmail);
