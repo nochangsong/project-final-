@@ -207,7 +207,7 @@
 					</div>
 						<div class="panel-body">
 							<div class="bodyOne">
-							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit">조직원 편집</button><button id="memadd">조직원 추가</button>
+							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit"onclick="location.href='/Puzzle/PersonnelView/P_Modify.puzzle'">조직원 편집</button><button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</button>
 							</div>
 						</div>
 						<div class="panel-body">
