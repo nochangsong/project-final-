@@ -63,7 +63,7 @@
 		</c:if>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docusuc.png" width="25px;">&nbsp;결제할문서</a></li>
-    	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a></li>
+    	<li class="col-sm-2"><a href="/Puzzle/board/boardList.puzzle"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a></li>
    	 	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/userinfo.png" width="25px;">&nbsp;조직원정보</a></li>
      	<li class="col-sm-2"><a href="/Puzzle/calendar/calendarList.puzzle"><img src="/Puzzle/img/a.png" width="25px;">&nbsp;일정관리</a></li>
 	</ul>

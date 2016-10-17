@@ -26,7 +26,7 @@ import net.sf.json.JSONObject;
 @RequestMapping("/calendar")
 public class CalendarController {
 
-	private String userEmail = "joo@naver.com";
+//	private String userEmail = "joo@naver.com";
 	
 	@Autowired
 	private CalendarDAO service;
@@ -44,7 +44,7 @@ public class CalendarController {
 	public String getSchedules(HttpServletResponse resp, HttpServletRequest request) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
 		
-//		String userEmail = (String)request.getSession().getAttribute("email");
+		String userEmail = (String)request.getSession().getAttribute("email");
 		List<CalendarCommand> list = service.getSchedules(userEmail);
 		
 		List l = new ArrayList();
@@ -74,8 +74,9 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value="/insertSchedule.puzzle", method=RequestMethod.POST)
-	public String insertSchedule(CalendarCommand calendarCommand) throws Exception{
-		calendarCommand.setEmail("joo@naver.com");
+	public String insertSchedule(CalendarCommand calendarCommand, HttpServletRequest request) throws Exception{
+		String userEmail = (String)request.getSession().getAttribute("email");
+		calendarCommand.setEmail(userEmail);
 		service.insertSchedule(calendarCommand);
 		return "redirect:calendarList.puzzle";
 	}

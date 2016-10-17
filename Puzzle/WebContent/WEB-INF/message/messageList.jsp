@@ -50,10 +50,15 @@
 			,url: url	// url 주소	
 			,dataType:"json"
 			,success:function(args){	
-				var sender = decodeURIComponent(args.sender);
+				var name = decodeURIComponent(args.name);
+				var email = args.email;
+				var dept_type = decodeURIComponent(args.dept_type);
 				var content = decodeURIComponent(args.content);
+				var sender = name + " (" + email + ", " + dept_type + ")";
 				$("#sender").html(sender);
 				$("#content").html(content);
+				
+				$("#email").val(email);
 // 				$("#messagebox").append(
 // 						"<div class='form-group'><label>보낸 사람: </label>"+args.sender+"</div>" +
 // 						"<div class='form-group'><label>내용: </label><br>"+args.content+"</div>" +
@@ -75,7 +80,7 @@
 	}
 	
 	function reply(){
-		var sender = $("span#sender").html();
+		var sender = $("#email").val();
 // 		alert(sender);
 		location.href="messageForm.puzzle?sender="+sender;
 	}
@@ -95,7 +100,7 @@
 </style>
 </head>
 <body>
-<h2>쪽지함</h2>
+<h2>쪽지함 (${newMsgNumber}/${totalMsgCount})</h2>
 <br>
 <div class="container">
 <form:form>
@@ -110,7 +115,7 @@
 	</tr>
 	<c:if test="${fn:length(msg)==0}">
 		<tr>
-			<td colspan="2">쪽지가 없습니다.</td>
+			<td colspan="4">쪽지가 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:if test="${fn:length(msg)!=0}">
@@ -163,6 +168,7 @@
 			<label>내용: </label><br>
 			<span id="content"></span>
 		</div>
+		<div><input type="hidden" id="email"></div>
 		<div><input type="button" class="btn btn-default" value="답장하기" onclick="reply()"/></div>
 	</div>
 </div>
