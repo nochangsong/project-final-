@@ -32,7 +32,7 @@ public class LoginController {
 		
 		if(certify.equals("Y")){
 
-			response.sendRedirect("main.puzzle");
+			response.sendRedirect("main/main.puzzle");
 
 			String authoriry = service.getAuthority(getEmail);
 			request.getSession().setAttribute("authority", authoriry);
@@ -40,9 +40,5 @@ public class LoginController {
 		}else{
 			response.sendRedirect("index.jsp");
 		}
-	}
-	@RequestMapping("/main.puzzle")
-	public String login(){
-		return "main";
 	}
 }
