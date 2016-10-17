@@ -102,8 +102,9 @@ public class MessageController {
 			service.updateRead(message);
 		}
 		JSONObject json = new JSONObject();
-		json.put("sender", message.getSender());
-		json.put("content", message.getContent());
+		String sender = URLEncoder.encode(message.getName(),"UTF-8") + "(" + message.getSender() + ", " +  URLEncoder.encode(message.getDept_type(),"UTF-8") + ")";
+		json.put("sender", sender);
+		json.put("content", URLEncoder.encode(message.getContent(),"UTF-8"));
 		return json.toString();
 	}
 	
