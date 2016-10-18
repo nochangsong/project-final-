@@ -42,6 +42,9 @@
     	width: 140px;
     	list-style: none;
     }
+    .hide li a span {
+    	font-size: x-small;
+    }
 </style>
     
   
@@ -52,12 +55,12 @@
 			<ul class="hide">
 				<li><a href="#"><span class="glyphicon glyphicon-user"> 조직관리</span></a></li>
 				<li><a href="/Puzzle/admin/position/positionList.puzzle">직급관리</a></li> 
-				<li><a href="/Puzzle/PersonnelView/P_Card_in.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</a></li>
-				<li><a href="/Puzzle/department/departmentList.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-inbox">전체문서함</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-pencil">문서양식</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-list-alt">게시판관리</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-calendar">근태관리</a></li>   
+<!-- 				<li><a href="/Puzzle/PersonnelView/P_Card_in.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</a></li> -->
+				<li><a href="/Puzzle/department/departmentList.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</span></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-inbox">전체문서함</span></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-pencil">문서양식</span></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-list-alt">게시판관리</span></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-calendar">근태관리</span></a></li>   
 			</ul>
 		</li>
 		</c:if>
