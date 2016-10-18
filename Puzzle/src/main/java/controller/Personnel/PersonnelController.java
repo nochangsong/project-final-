@@ -80,7 +80,6 @@ public class PersonnelController {
 		for(PersonnelCommand dn:list){
 			System.out.println(dn.getEmail()+","+dn.getName());
 		}
-		
 		mv.addObject("list",list);
 		return mv;
 	}
