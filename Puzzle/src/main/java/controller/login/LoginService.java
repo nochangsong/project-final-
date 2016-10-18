@@ -10,7 +10,7 @@ public class LoginService {
 	
 	@Autowired
 	private LoginDAO dao;
-
+ 
 	public void setDao(LoginDAO dao) {
 		this.dao = dao;
 	}

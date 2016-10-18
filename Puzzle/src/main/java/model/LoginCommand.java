@@ -4,7 +4,7 @@ public class LoginCommand {
 	
 	private String Email;
 	private String Certify;
-	
+	 
 	
 	public String getEmail() {
 		return Email;
