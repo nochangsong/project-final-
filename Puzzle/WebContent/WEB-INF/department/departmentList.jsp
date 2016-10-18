@@ -74,6 +74,8 @@
 						var authority = decodeURIComponent(args.list[idx].authority);
 						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
 						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+						$("#d_type").html(dept_Type);
+						
 						
 						$("#info2").append(
 								"<div class='memAll'>"+
@@ -127,7 +129,6 @@
 		});
 		
 	}
-
 	
 	function add(){
 		var dept_Type = $("#newdeptType").val();
@@ -164,14 +165,6 @@
 		}
 		getList("delete", selected_deptType);
 	}
-	
-// 	추가한 입력폼 취소
-	function cancel(){
-		$("#add").on('click',function(){
-			$(this).remove();
-		});
-		return false;
-	}
 
 	function edit(){
 		var dept_Type = $("#"+selected_deptType).val();
@@ -182,6 +175,9 @@
 		getList();
 	}
 	
+	function edit_cancle(){
+		getList();
+	}
 // 	수정하는 부분
 	function editCheck() {
 		if(selected_deptType == null){
@@ -193,12 +189,6 @@
 				+"<input type='button' class='btn btn-default temp' id='cancle' onclick='edit_cancle()' value='취소'/>");
 	}
 		
-	/* function search(){
-		$("#search").append(
-				"<input type='text' id='sarch' size='15' placeholder='사원명 입력'/>");
-		
-	} */
-	
 	function getList(type, dept_Num, dept_Type){
 		var url = "/Puzzle/department/departmentList.puzzle";
 		$.ajax({
@@ -276,13 +266,38 @@
 								"</div>");	
 						
 					}
+					
+				$("input#search").val("");
+				
 			}
 		})
 		
 	}
 	
+	function chk(abc){
+		var a = abc; 
+		$(":radio[value='"+a+"']").prop( "checked", true );
 	
+		var email = $("."+a).html();
+		alert(email);
+		sessionStorage.setItem('email',email);
+		var a = sessionStorage.getItem('email');
+		alert(a);
+		
+		//$.session.set("email", email);
+	}
 	
+	function memedit(){
+		var email = sessionStorage.getItem('email');
+		alert(email);
+		if(email==''){
+			alert("편집할 조직원을 선택하세요.");
+		}
+		
+		var link = "/Puzzle/PersonnelView/P_Modify.puzzle";
+		location.replace(link);
+		
+	}
 	
 	
 	$(function(){	
@@ -324,35 +339,20 @@
 		<div class="col-sm-8">
  			<div class="panel-grop">
 				<div class="panel panel-default">
-					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span>
+					<div class="panel-heading">조직원
 						<input id="search" name="search" size="25" placeholder="사원명을 입력해주세요."/>
 						<input type="button" value="검색" onclick="search()"/>
 					</div>
 					<div class="panel-body">
 						<div class="bodyOne">
-						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memedit">조직원 편집</button>
+						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memedit" onclick="return memedit();">조직원 편집</button>
 						<button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</a></button>
 						</div>
 					</div>
 
 					<div class="panel-body" id="tabmenu">
 						<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
-							<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
-								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-								</c:forEach>
-							<li><a href="#" data-toggle="tab" data-id="2" class="">재직</a></li>
-								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-								</c:forEach>
-							<li><a href="#" data-toggle="tab" data-id="2" class="">휴직</a></li>
-								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-								</c:forEach>
-							<li><a href="#" data-toggle="tab" data-id="2" class="">퇴직</a></li>
-								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-								</c:forEach>
+							<li><a href="#" id="d_type" data-toggle="tab" data-id="1">전체</a></li>
 						</ul>
 						
 						<!-- 시작하자마자 전체조직원 정보 표시 -->						
@@ -360,22 +360,23 @@
 						<div id="info2">
 						<div  id="memAll"> 
 						<c:if test="${mem != null}">
-							<c:forEach var="list" items="${mem}">
+							<c:forEach var="list" items="${mem}" varStatus="abc">
 							<div class="col-sm-6">
 							<div class="panel-body detailMemberBtn" style="cursor:pointer; margin-top:0px;">
-							<input type="radio" id="${list }" name="check_email"/><div class="panel-img">
-							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
-							<span>${list.name }</span>
+							<div class="panel-img">
+							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);"  onclick="chk(${abc.count});">
+							<label for="${list }"><span id="${abc.count }">${list.name }</span><input type="radio"
+							 value="${abc.count }" name="check_email"/></label>
 							</div>
 							</div>
 							<div class="panel-content">
 							<div class="member_isAdmin">
 							<span class="label label-orange">${list.authority}</span>
 							</div>
-							<div class="infinite_name panel-workflow">${list.name}</div>
-							<div class="infinite_name panel-workflow">${list.email}</div>
-							<div class="infinite_name panel-workflow">${list.positiontype}</div>
-							<div class="infinite_name panel-workflow">${list.dept_Type}</div>								
+							<div class="name">${list.name}</div>
+							<div class="${abc.count }">${list.email}</div>
+							<div class="positiontype">${list.positiontype}</div>
+							<div class="dept_type">${list.dept_Type}</div>								
 							</div>
 							</div>	
 							</div>							

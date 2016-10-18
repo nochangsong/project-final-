@@ -157,8 +157,8 @@ public class DepartmentController {
 			list.get(i).setDept_Type(URLEncoder.encode(list.get(i).getDept_Type(),"UTF-8"));
 			list.get(i).setEmail(URLEncoder.encode(list.get(i).getEmail(),"UTF-8"));
 		}
-//		System.out.println(list.size());		
-
+//		System.out.println(list.size());
+		
 		json.put("startPage", startPage);
 		json.put("endPage", endPage);
 		json.put("pageCount", pageCount);
