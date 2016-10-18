@@ -363,7 +363,7 @@
 							<c:forEach var="list" items="${mem}">
 							<div class="col-sm-6">
 							<div class="panel-body detailMemberBtn" style="cursor:pointer; margin-top:0px;">
-							<input type="radio" id="${list }"/><div class="panel-img">
+							<input type="radio" id="${list }" name="check_email"/><div class="panel-img">
 							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
 							<span>${list.name }</span>
 							</div>
