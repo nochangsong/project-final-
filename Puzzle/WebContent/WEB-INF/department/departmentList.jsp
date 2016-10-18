@@ -130,15 +130,31 @@
 
 	
 	function add(){
-		var dept_Type = $("#newdeptType").val;
-		alert(dept_Type);
+		var dept_Type = $("#newdeptType").val();
+// 		alert(dept_Type);
 		if(dept_Type==''){
 			alert("부서명을 입력해주세요.");
 			return false;
 		}
-		getList("insert", "", dept_Type);
-		
-		$("#newdeptType").val("부서추가");
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				dept_Type: dept_Type
+			}
+			,url: "/Puzzle/department/checkType.puzzle"	// url 주소	
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,dataType: "json"
+			,success:function(args){
+				var check = decodeURIComponent(args.check);
+				if(check==0){
+					getList("insert", "", dept_Type);
+				}else{
+					alert("이미 존재하는 부서입니다.");
+				}
+			}
+		})
+
+		$("#newdeptType").val("");
 	}
 	
 	function del(){
@@ -184,7 +200,6 @@
 	} */
 	
 	function getList(type, dept_Num, dept_Type){
-		
 		var url = "/Puzzle/department/departmentList.puzzle";
 		$.ajax({
 			type:"post"		// 포스트방식
@@ -210,6 +225,7 @@
 						
 					}		
 				}
+				
 			}
 		    ,error:function(e) {	
 		    	Console.log(e.responseText);
@@ -217,13 +233,64 @@
 		});
 	}
 
+	function search(){
+		var search = $("input#search").val();
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				search: search
+			}
+			,url: "/Puzzle/department/departmemList.puzzle"	// url 주소	
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,dataType: "json"
+			,success:function(args){
+				$("#memAll").remove();
+				$(".memAll").remove();
+				$("#paging").remove();
+				for(var idx=0; idx<args.list.length; idx++){
+						var name = decodeURIComponent(args.list[idx].name);
+						var email = decodeURIComponent(args.list[idx].email);
+						var authority = decodeURIComponent(args.list[idx].authority);
+						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
+						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+						
+						$("#info2").append(
+								"<div class='memAll'>"+
+								"<div class='col-sm-6'>"+
+								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
+								"<div class='panel-img'>"+
+								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);'>"+
+								"<span>"+name+"</span>"+
+								"</div>"+
+								"</div>"+
+								"<div class='panel-content'>"+
+								"<div class='member_isAdmin'>"+
+								"<span class='label label-orange'>"+authority+"</span>"+
+								"</div>"+
+								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+email+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>");	
+						
+					}
+			}
+		})
+		
+	}
+	
+	
+	
+	
+	
 	$(function(){	
 
 		$(".paging .pagination li#"+${pageNum1}).addClass("active");
 
-
 	});
-
+	
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
@@ -238,7 +305,7 @@
 				<div class="panel panel-default">
 				<div class="panel-heading">
 					조직도
-					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add()">
+					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add();">
 					<input type="button" class="btn btn-default" onclick="return editCheck();" value="수정">
 					<input type="button" class="btn btn-default" onclick="return del();" value="삭제">
 				</div>
@@ -258,7 +325,8 @@
  			<div class="panel-grop">
 				<div class="panel panel-default">
 					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span>
-						<input type="button" id="select" data-toggle="modal" data-target="#myModal" value="검색"/>
+						<input id="search" name="search" size="25" placeholder="사원명을 입력해주세요."/>
+						<input type="button" value="검색" onclick="search()"/>
 					</div>
 					<div class="panel-body">
 						<div class="bodyOne">
@@ -267,30 +335,6 @@
 						</div>
 					</div>
 
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" role="dialog">
-				    <div class="modal-dialog">
-				    
-						<!-- Modal content-->
-						<div class="modal-content">
-				      
-						<div class="modal-body">
-							<div id="search">
-							<form:form name="searchform" method="post" action="/Puzzle/department/searchList.puzzle">
-							조직원 이름 : <input type="text" size="20" id="search" name="search" placeholder="사원명으로 검색"/><input type="submit" value="검색" /><br/>
-							조직원 직급 : <input type="text" size="20" id="search" placeholder="직급명으로 검색"/><input type="submit" value="검색"/>
-							</form:form>
-							</div>
-				<!--           <input type="button" value="클릭" onclick="modal()" data-dismiss="modal"/> -->
-						</div>
-				        
-				        <div class="modal-footer">
-				        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        </div>
-				      	</div>
-				    </div>
-				    </div>
-				    
 					<div class="panel-body" id="tabmenu">
 						<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
 							<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
@@ -319,7 +363,7 @@
 							<c:forEach var="list" items="${mem}">
 							<div class="col-sm-6">
 							<div class="panel-body detailMemberBtn" style="cursor:pointer; margin-top:0px;">
-							<div class="panel-img">
+							<input type="radio" id="${list }"/><div class="panel-img">
 							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
 							<span>${list.name }</span>
 							</div>

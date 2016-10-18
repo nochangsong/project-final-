@@ -42,6 +42,17 @@ public class DepartmentService{
 	         return list;
 	   }
    
+   public List<String> selectdept(){
+	   List<String> list = null;
+	   try{
+		   list = dao.selectdept();
+	   }catch(Exception e){
+		   System.out.println(e.toString());
+	   }
+	   return list;
+	   
+   }
+   
    public void insertDeptType(DepartMentCommand command){
       try{
          dao.insertDeptType(command);
@@ -139,17 +150,25 @@ public class DepartmentService{
 	   
    }
    public int getTotalCount(){
-	   System.out.println("SERVICE Á¢±Ù");
 		int count = 0;
 		try {
 			count = dao.getTotalCount();
-			System.out.println("count : " + count);
 		} catch(Exception e){
 			System.out.println(e.toString());
 		}
 		return count;
 	}
 	
+   public List<listCommand> searchMem(String search) {
+	   List<listCommand> list = null;
+	   try {
+		   list = dao.searchMem(search);
+	   } catch(Exception e){
+		   System.out.println(e.toString());
+	   }
+	   
+	   return list;
+   }
    
 }
 

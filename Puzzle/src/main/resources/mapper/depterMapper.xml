@@ -5,14 +5,18 @@
 <!-- 	부서종류 가져옴  -->
 <mapper namespace="dept">	
 	<select id="selectAlldeptType" resultType="model.DepartMentCommand">
-		select distinct * from DEPARTMENT order by dept_Type asc
+		select distinct * from depttable order by dept_Type asc
 <!-- 		select distinct Dept_Type from depttable order by Dept_Type asc -->
 	</select>
 
 <!-- localdb 다른 테이블로 test중 -->
+
+	<select id="selectdept" resultType="String">
+		select dept_type from depttable
+	</select>
 	<insert id="insert_deptType" parameterType="model.DepartMentCommand">
 <!-- 		insert into department values (#{Dept_Num},#{Dept_Type}) -->
-		insert into DEPARTMENT values(dept_num.NEXTVAL,#{dept_Type})
+		insert into depttable values(dept_num.NEXTVAL,#{dept_Type})
 	</insert>
 	
 	<select id="deptnum" resultType="model.DepartMentCommand">
@@ -22,7 +26,7 @@
 	
 	
 	<delete id="deleteDept" parameterType="int">
-		delete from DEPARTMENT where dept_Num=#{dept_Num}
+		delete from depttable where dept_Num=#{dept_Num}
 	</delete>
 	
 	<update id="updateDept" parameterType="model.DepartMentCommand">
@@ -76,7 +80,7 @@
 		select name,email,authority,dept_type,positiontype 
 		from mem m, depttable d, position p
   	 	where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=dept_type
-    	and m.name like '%'|| '#{search}' || '%'
+    	and m.name like '%'|| #{search} || '%'
 	</select>
 <!-- 	<select id="deptlist"> -->
 <!-- 		select name,email,authority,dept_type,positiontype,rownum r -->
