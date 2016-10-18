@@ -16,7 +16,7 @@ public class LoginController {
 	@Autowired
 	private LoginService service;
 
-	public void setService(LoginService service) {
+	public void setService(LoginService service) { 
 		this.service = service;
 	}
 	
