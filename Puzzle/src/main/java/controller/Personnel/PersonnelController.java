@@ -68,7 +68,7 @@ public class PersonnelController {
 		}
 		return "CertifySuccess";
 	}
-
+ 
 	
 	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.GET)
 	public ModelAndView Modichange(HttpServletRequest reqeust,String eamil, PersonnelCommand command)throws Exception{

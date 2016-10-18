@@ -42,6 +42,9 @@
     	width: 140px;
     	list-style: none;
     }
+    .hide li a span {
+    	font-size: x-small;
+    }
 </style>
     
   

@@ -5,28 +5,26 @@
 <!-- 	부서종류 가져옴  -->
 <mapper namespace="dept">	
 	<select id="selectAlldeptType" resultType="model.DepartMentCommand">
-		select distinct * from depttable order by dept_Type asc
-<!-- 		select distinct Dept_Type from depttable order by Dept_Type asc -->
+		select distinct * from department order by dept_Type asc
 	</select>
 
 <!-- localdb 다른 테이블로 test중 -->
 
 	<select id="selectdept" resultType="String">
-		select dept_type from depttable
+		select dept_type from department
 	</select>
 	<insert id="insert_deptType" parameterType="model.DepartMentCommand">
 <!-- 		insert into department values (#{Dept_Num},#{Dept_Type}) -->
-		insert into depttable values(dept_num.NEXTVAL,#{dept_Type})
+		insert into department values(dept_num.NEXTVAL,#{dept_Type})
 	</insert>
 	
 	<select id="deptnum" resultType="model.DepartMentCommand">
-		select dept_num from DEPARTMENT where dept_Type=#{dept_Type}
-<!-- 		select distinct Dept_Type from depttable order by Dept_Type asc -->
+		select dept_num from department where dept_Type=#{dept_Type}
 	</select>
 	
 	
 	<delete id="deleteDept" parameterType="int">
-		delete from depttable where dept_Num=#{dept_Num}
+		delete from department where dept_Num=#{dept_Num}
 	</delete>
 	
 	<update id="updateDept" parameterType="model.DepartMentCommand">
@@ -35,8 +33,8 @@
 	
 	<select id="selectAll" resultType="model.listCommand">
 		select name,email,authority,d.dept_type,p.positiontype
-		from mem m
- 		inner join depttable d
+		from personnelcard m
+ 		inner join department d
   		on m.dept_num=d.dept_num
     	inner join position p
     	on m.POSITION_NUM=p.POSITION_NUM
@@ -44,47 +42,42 @@
 
 	<select id="detpTypeList" parameterType="model.DepartMentCommand" resultType="model.listCommand">
 		select name,email,authority,dept_type,positiontype,rownum r
-		from mem m, depttable d, position p
+		from personnelcard m, department d, position p
 		where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=#{dept_Type}
 	</select>
 	
 	<select id="deptTypeint" parameterType="model.DepartMentCommand" resultType="model.listCommand">
 		SELECT NAME, email,authority,dept_type,positiontype, rownum r    
    		from (select name,email,authority,dept_type,positiontype
-		from mem m, depttable d, position p
+		from personnelcard m, department d, position p
 		where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=dept_type)
     	where dept_type=#{dept_Type}
 	</select>
 	
 	<select id="workAll" resultType="model.PersonnelCommand">
-		select * from mem where work_num=1
+		select * from personnelcard where work_num=1
 	</select>
 	
 	<select id="timeoffAll" resultType="model.PersonnelCommand">
-		select * from mem where work_num=2
+		select * from personnelcard where work_num=2
 	</select>
 	
 	<select id="resignAll" resultType="model.PersonnelCommand">
-		select * from mem where work_num=4
+		select * from personnelcard where work_num=4
 	</select>
 	
 	<select id="getTotalCount" resultType="int">
-		select count(*) from mem
+		select count(*) from personnelcard
 	</select>
 	
 	<select id="memAll" resultType="model.PersonnelCommand">
-		select * from mem
+		select * from personnelcard
 	</select>
 	
 	<select id="searchmem" parameterType="String" resultType="model.listCommand">
 		select name,email,authority,dept_type,positiontype 
-		from mem m, depttable d, position p
+		from personnelcard m, department d, position p
   	 	where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=dept_type
     	and m.name like '%'|| #{search} || '%'
 	</select>
-<!-- 	<select id="deptlist"> -->
-<!-- 		select name,email,authority,dept_type,positiontype,rownum r -->
-<!-- 		from mem m, depttable d, position p -->
-<!-- 		where m.dept_num=d.dept_num and m.POSITION_NUM=p.POSITION_NUM and dept_type=#{dept_Type}; -->
-<!-- 	</select> -->
 </mapper>
