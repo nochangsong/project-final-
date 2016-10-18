@@ -22,6 +22,8 @@ import net.sf.json.JSONObject;
 @RequestMapping("/message")
 public class MessageController {
 
+//	private String userEmail = "joo@naver.com";
+	
 	private MessageService service;
 	@Autowired
 	public void setService(MessageService service) {
@@ -54,7 +56,6 @@ public class MessageController {
 //		System.out.println(endPage);
 		
 		List<MessageCommand> list = service.getAllMessages(userEmail, start, end);
-//		System.out.println("list.size  " + list.size());
 		mav.addObject("pageCount", pageCount); //6
 		mav.addObject("pageNum", pageNum);
 		mav.addObject("msg", list);
@@ -98,9 +99,9 @@ public class MessageController {
 	
 	@RequestMapping(value= "showMessage.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String showMessage(HttpServletResponse resp, HttpServletRequest request) throws Exception{
+	public String showMessage(HttpServletResponse resp, @RequestParam("no")int no) throws Exception{
 		resp.setContentType("text/html;charset=utf-8");
-		int no = Integer.parseInt(request.getParameter("no"));
+//		int no = Integer.parseInt(request.getParameter("no"));
 		MessageCommand message = service.getMessage(no);
 		if(message.getChecked().equals("new")){
 			service.updateRead(message);

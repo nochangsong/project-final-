@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 
     <meta charset="utf-8">
@@ -140,7 +139,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Puzzle에 대한 설명 및 이용방법을 소개합니다.</h3>
                 </div>
             </div>
             <div class="row">
@@ -148,65 +147,59 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
+                                <img class="img-circle img-responsive" src="template/img/logos/logo.png" style="width: 140px; padding-left: 15px; padding-top:17px;">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                    <h4 class="subheading">Our Company Beginnings</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">Puzzle은  Google 계정을 이용하여 기업 내 문서결재<br>시스템을 보다 간편하고 효율적으로 사용할 수 있도록 <br>서비스를 제공합니다. </p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
+                                <img class="img-circle img-responsive" src="template/img/about/file-document.png" style="width: 156px;" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
+                                    <h4 class="subheading">기안문서 작성</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">사용자는 Google Docs 문서로 <br>간편하게 기안문서를 작성할 수 있습니다.<br>또한 원하는 대로 프로세스를 지정하고,<br>드래그앤드롭으로 순서를 변경할 수 있습니다.</p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
+                                <img class="img-circle img-responsive" src="template/img/about/file-contacts.png" style="width: 156px;" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
+                                    <h4 class="subheading">결재와 의견 작성</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">결재자는 결재요청에 대한 알림메일을 받을 수 있고<br> 메일에서 바로 결재가 가능합니다.<br>또한 해당 문서에 의견을 작성하여 <br>조직원들과 소통할 수 있습니다.</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                                <img class="img-circle img-responsive" src="template/img/about/google-drive.png" style="width: 157px; padding-top:21px;" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                    <h4 class="subheading">Google Drive에 자동 저장</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted">작성한 문서와 첨부파일은 <br>대표계정의 Google Drive에 자동으로 저장됩니다.<br>Puzzle에서 사용된 모든 기안문서, 첨부파일, 게시물은 대표계정의 Google Drive에 자동으로<br> 정리되어 저장됩니다.</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
+                                <h4>About<br>Puzzle</h4>
                             </div>
                         </li>
                     </ul>
@@ -281,36 +274,61 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
+				<div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#" class="portfolio-link" data-toggle="modal">
-                        <img src="template/img/logos/chachacha.png" class="img-responsive"/>
+                        <img src="template/img/logos/chachacha.png" class="img-responsive" width="360px" height="260px">
                     </a>
+                    <div class="portfolio-caption" style="text-align: center">
+                        <h4>chachacha</h4>
+                        <p class="text-muted">다함께 차차차</p>
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#" class="portfolio-link" data-toggle="modal">
-                        <img src="template/img/logos/gaebals.png" class="img-responsive"/>
+                        <img src="template/img/logos/pis.png" class="img-responsive" width="360px" height="260px">
                     </a>
+                    <div class="portfolio-caption" style="text-align: center">
+                        <h4>Parking Info System</h4>
+                        <p class="text-muted">PIS</p>
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#" class="portfolio-link" data-toggle="modal">
-                        <img src="template/img/logos/forki.png" class="img-responsive"/>
+                        <img src="template/img/logos/forki.png" class="img-responsive" width="360px" height="260px">
                     </a>
+                    <div class="portfolio-caption" style="text-align: center">
+                        <h4>forki</h4>
+                        <p class="text-muted">Forki</p>
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#" class="portfolio-link" data-toggle="modal">
-                        <img src="template/img/logos/chachacha.png" class="img-responsive"/>
+                        <img src="template/img/logos/gaebals.png" class="img-responsive" width="360px" height="260px">
                     </a>
+                    <div class="portfolio-caption" style="text-align: center">
+                        <h4>gaebals</h4>
+                        <p class="text-muted">Gaebals</p>
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#" class="portfolio-link" data-toggle="modal">
-                        <img src="template/img/logos/chachacha.png" class="img-responsive"/>
+                        <img src="template/img/logos/honeycomb.png" class="img-responsive" width="360px" height="260px">
                     </a>
+                    <div class="portfolio-caption" style="text-align: center">
+                        <h4>honeycomb</h4>
+                        <p class="text-muted">Honeycomb</p>
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#" class="portfolio-link" data-toggle="modal">
-                        <img src="template/img/logos/chachacha.png" class="img-responsive"/>
+                        <img src="template/img/logos/interhash.png" class="img-responsive" width="360px" height="260px">
                     </a>
+                    <div class="portfolio-caption" style="text-align: center">
+                        <h4>interhash</h4>
+                        <p class="text-muted">코딩네이터</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>

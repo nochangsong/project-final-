@@ -12,7 +12,6 @@ public class MessageCommand {
 	private String sender;
 	private String receiver;
 	private String checked;
-	private int alarm;
 		
 	public String getName() {
 		return name;
@@ -61,11 +60,5 @@ public class MessageCommand {
 	}
 	public void setChecked(String checked) {
 		this.checked = checked;
-	}
-	public int getAlarm() {
-		return alarm;
-	}
-	public void setAlarm(int alarm) {
-		this.alarm = alarm;
 	}
 }

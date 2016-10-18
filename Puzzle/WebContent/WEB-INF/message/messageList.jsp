@@ -50,7 +50,6 @@
 			,url: url	// url 주소	
 			,dataType:"json"
 			,success:function(args){	
-<<<<<<< HEAD
 				var name = decodeURIComponent(args.name);
 				var email = args.email;
 				var dept_type = decodeURIComponent(args.dept_type);
@@ -60,10 +59,6 @@
 				$("#content").html(content);
 				
 				$("#email").val(email);
-=======
-				$("#sender").html(args.sender);
-				$("#content").html(args.content);
->>>>>>> branch 'master' of https://github.com/nochangsong/project-final-.git
 // 				$("#messagebox").append(
 // 						"<div class='form-group'><label>보낸 사람: </label>"+args.sender+"</div>" +
 // 						"<div class='form-group'><label>내용: </label><br>"+args.content+"</div>" +
@@ -129,12 +124,12 @@
 <%-- 			<form:checkbox path="checkList" value="${msg.no}"/> --%>
 			<td><input type="checkbox" name="checkList" value="${msg.no}"></td>
 			<c:if test="${msg.checked=='new'}">
-				<td><b>${msg.sender}</b></td>
+				<td><b>${msg.name} (${msg.sender}, ${msg.dept_type})</b></td>
 				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')"><b>${msg.content}</b></a></td>
 				<td><b>${msg.reg_date}</b></td>
 			</c:if>
 			<c:if test="${msg.checked=='read'}">
-				<td>${msg.sender}</td>
+				<td>${msg.name} (${msg.sender}, ${msg.dept_type})</td>
 				<td><a href="#messageBox" class="open-popup-link" onclick="showMessage('${msg.no}')">${msg.content}</a></td>
 				<td>${msg.reg_date}</td>
 			</c:if>
