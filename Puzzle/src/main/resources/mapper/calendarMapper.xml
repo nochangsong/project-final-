@@ -13,7 +13,15 @@
 	<delete id="deleteSchedule" parameterType="int">
 		delete from calendar where no=#{no}
 	</delete>
+<!-- 	<select id="selectSchedules" parameterType="String" resultType="model.CalendarCommand"> -->
+<!-- 		select no,type,content,to_char(startDate, 'yyyy-mm-dd') startDate,to_char(endDate, 'yyyy-mm-dd') endDate from calendar where email=#{email} -->
+<!-- 	</select> -->
+	
 	<select id="selectSchedules" parameterType="String" resultType="model.CalendarCommand">
-		select no,type,content,to_char(startDate, 'yyyy-mm-dd') startDate,to_char(endDate, 'yyyy-mm-dd') endDate from calendar where email=#{email}
+		(select no, type, content, to_char(startDate, 'yyyy-mm-dd') startDate, to_char(endDate, 'yyyy-mm-dd') endDate 
+		from calendar where email=#{email} and type='p') union 
+		(select no, type, content, to_char(startDate, 'yyyy-mm-dd') startDate, to_char(endDate, 'yyyy-mm-dd') endDate 
+		from PERSONNELCARD p, CALENDAR c 
+		where p.EMAIL=c.EMAIL and type='s' and dept_num=(select dept_num from personnelcard where email=#{email}))
 	</select>
 </mapper>

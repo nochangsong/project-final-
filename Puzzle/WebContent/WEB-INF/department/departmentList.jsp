@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 
 	request.setCharacterEncoding("UTF-8");    
@@ -48,24 +49,113 @@
 <script>
 
 	var selected_deptType;
-
+	
+	
 	function sel(dept_Num){
 		selected_deptType = dept_Num;
+		
+		var dept_Type = $("#"+dept_Num).val();
+		var url = "/Puzzle/department/departmemList.puzzle";
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				dept_Type: dept_Type
+			}
+			,url: url	// url 주소	
+			,dataType:"json"
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,success:function(args){
+				$("#memAll").remove();
+				$(".memAll").remove();
+				$("#paging").remove();
+				for(var idx=0; idx<args.list.length; idx++){
+						var name = decodeURIComponent(args.list[idx].name);
+						var email = decodeURIComponent(args.list[idx].email);
+						var authority = decodeURIComponent(args.list[idx].authority);
+						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
+						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+						
+						$("#info2").append(
+								"<div class='memAll'>"+
+								"<div class='col-sm-6'>"+
+								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
+								"<div class='panel-img'>"+
+								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);'>"+
+								"<span>"+name+"</span>"+
+								"</div>"+
+								"</div>"+
+								"<div class='panel-content'>"+
+								"<div class='member_isAdmin'>"+
+								"<span class='label label-orange'>"+authority+"</span>"+
+								"</div>"+
+								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+email+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>");	
+						
+					}
+				var startPage = args.startPage;
+				// alert(startPage);
+				
+				$(".paging").append(
+					"<div id='paging'>"+
+					"<c:if test='${startPage>5}'>"+
+					"<ul class='pager'>"+
+					"<li><a href='departmentList.puzzle?pageNum=${startPage-1}'>Previous</a></li>"+
+					"</ul>"+
+					"</c:if>"+
+					"<ul class='pagination'>"+
+					"<c:forEach var='i' begin='${startPage}' end='${endPage}'>"+
+					"<li id='${i}'><a href='departmentList.puzzle?pageNum=${i}'>${i}</a></li>"+
+					"</c:forEach>"+
+					"</ul>"+
+					"<c:if test='${pageCount>endPage}'>"+
+					"<ul class='pager'>"+
+					"<li><a href='departmentList.puzzle?pageNum=${startPage+5}'>Next</a></li>"+
+					"</ul>"+
+					"</c:if>"+
+					"</div>"
+				);
+
+			}
+		    ,error:function(e) {	
+		    	Console.log(e.responseText);
+		    }
+		});
+		
 	}
 
 	
 	function add(){
-		var dept_Type = $("#newdeptType").val;
-		alert(dept_Type);
+		var dept_Type = $("#newdeptType").val();
+// 		alert(dept_Type);
 		if(dept_Type==''){
 			alert("부서명을 입력해주세요.");
 			return false;
 		}
-		getList("insert", "", dept_Type);
-		
-		$("#newdeptType").val("부서추가");
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				dept_Type: dept_Type
+			}
+			,url: "/Puzzle/department/checkType.puzzle"	// url 주소	
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,dataType: "json"
+			,success:function(args){
+				var check = decodeURIComponent(args.check);
+				if(check==0){
+					getList("insert", "", dept_Type);
+				}else{
+					alert("이미 존재하는 부서입니다.");
+				}
+			}
+		})
+
+		$("#newdeptType").val("");
 	}
-	
 	
 	function del(){
 		if(selected_deptType==null){
@@ -102,33 +192,14 @@
 		$("#"+selected_deptType).removeAttr("readonly").focus().after("<input type='button' class='btn btn-default temp' onclick='return edit()' value='수정'/>"
 				+"<input type='button' class='btn btn-default temp' id='cancle' onclick='edit_cancle()' value='취소'/>");
 	}
-	
-	
-	
-	function search(){
 		
-		 if(document.all.spot.style.visibility=="hidden") {
-			   document.all.spot.style.visibility="visible";
-			   return false;
-			 }
-			 if(document.all.spot.style.visibility=="visible") {
-			  document.all.spot.style.visibility="hidden";
-			  return false;
-			 }
-			 
-		/* $(this).unbind().bind("click", function(){
-			 $("#search").append(
+	/* function search(){
+		$("#search").append(
 				"<input type='text' id='sarch' size='15' placeholder='사원명 입력'/>");
-			}); */
-	}
 		
+	} */
 	
-	 
-   
- 
-        
 	function getList(type, dept_Num, dept_Type){
-		
 		var url = "/Puzzle/department/departmentList.puzzle";
 		$.ajax({
 			type:"post"		// 포스트방식
@@ -154,6 +225,7 @@
 						
 					}		
 				}
+				
 			}
 		    ,error:function(e) {	
 		    	Console.log(e.responseText);
@@ -161,13 +233,64 @@
 		});
 	}
 
+	function search(){
+		var search = $("input#search").val();
+		$.ajax({
+			type:"post"		// 포스트방식
+			,data: {
+				search: search
+			}
+			,url: "/Puzzle/department/departmemList.puzzle"	// url 주소	
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,dataType: "json"
+			,success:function(args){
+				$("#memAll").remove();
+				$(".memAll").remove();
+				$("#paging").remove();
+				for(var idx=0; idx<args.list.length; idx++){
+						var name = decodeURIComponent(args.list[idx].name);
+						var email = decodeURIComponent(args.list[idx].email);
+						var authority = decodeURIComponent(args.list[idx].authority);
+						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
+						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+						
+						$("#info2").append(
+								"<div class='memAll'>"+
+								"<div class='col-sm-6'>"+
+								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
+								"<div class='panel-img'>"+
+								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);'>"+
+								"<span>"+name+"</span>"+
+								"</div>"+
+								"</div>"+
+								"<div class='panel-content'>"+
+								"<div class='member_isAdmin'>"+
+								"<span class='label label-orange'>"+authority+"</span>"+
+								"</div>"+
+								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+email+"</div>"+
+								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>");	
+						
+					}
+			}
+		})
+		
+	}
+	
+	
+	
+	
+	
 	$(function(){	
 
 		$(".paging .pagination li#"+${pageNum1}).addClass("active");
 
-
 	});
-
+	
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
@@ -182,58 +305,57 @@
 				<div class="panel panel-default">
 				<div class="panel-heading">
 					조직도
-					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add()">
+					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add();">
 					<input type="button" class="btn btn-default" onclick="return editCheck();" value="수정">
 					<input type="button" class="btn btn-default" onclick="return del();" value="삭제">
 				</div>
 				<div class="panel">
 					<input type="button" class="btn btn-default" id="searchButton" value="puzzle">
 				</div>
-				<div class='panel-body'>
-					<input  id="newdeptType" type="text" class="form-control" placeholder="부서추가"/>
+				<div class="panel-body">
+					<input type="text" id="newdeptType" class="form-control" placeholder="부서추가">
 				</div>
 				<div class="deptlist">
 				</div>
 				</div>
 			</div>
 		</div>
+		
 		<div class="col-sm-8">
  			<div class="panel-grop">
 				<div class="panel panel-default">
-					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span> <button id="select" onclick="return search(spot)">검색</button>
-					<div id="spot" style="position:absolute; left:520px; top:500px; visibility:hidden;">
-					사원명 : <input type="text" id='search_n' size='15' placeholder='사원명 입력'/><input type="button" value="검색"/><br/>
-					직급명 : <input type="text" id='search_a' size='15' placeholder='직급명 입력'/><input type="button" value="검색"/>
+					<div class="panel-heading">조직원<span id="search"> [전체 : 8 재직 : 8 휴직 : 0 퇴직 : 0] </span>
+						<input id="search" name="search" size="25" placeholder="사원명을 입력해주세요."/>
+						<input type="button" value="검색" onclick="search()"/>
 					</div>
-					</div>
-						<div class="panel-body">
-							<div class="bodyOne">
-							<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memlist">조직원 리스트 설정</button><button id="memedit"onclick="location.href='/Puzzle/PersonnelView/P_Modify.puzzle'">조직원 편집</button><button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</button>
-							</div>
+					<div class="panel-body">
+						<div class="bodyOne">
+						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memedit">조직원 편집</button>
+						<button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</a></button>
 						</div>
-						<div class="panel-body" id="tabmenu">
-							<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
-								<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								<li><a href="#" data-toggle="tab" data-id="2" class="">재직</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								<li><a href="#" data-toggle="tab" data-id="2" class="">휴직</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								<li><a href="#" data-toggle="tab" data-id="2" class="">퇴직</a></li>
-									<c:forEach var="memberStatusTab" items="${memberStatusTab}">
-										<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
-									</c:forEach>
-								  
-							</ul>
+					</div>
+
+					<div class="panel-body" id="tabmenu">
+						<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
+							<li><a href="#" data-toggle="tab" data-id="1" class="statusBtn">전체</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+							<li><a href="#" data-toggle="tab" data-id="2" class="">재직</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+							<li><a href="#" data-toggle="tab" data-id="2" class="">휴직</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+							<li><a href="#" data-toggle="tab" data-id="2" class="">퇴직</a></li>
+								<c:forEach var="memberStatusTab" items="${memberStatusTab}">
+									<li><a>${memberStatusTab.value }[${memberStatusTab.num}]</a></li>
+								</c:forEach>
+						</ul>
 						
-						<!-- 시작하자마자 전체조직원 정보 표시 -->
-						
+						<!-- 시작하자마자 전체조직원 정보 표시 -->						
 						<div id="info">
 						<div id="info2">
 						<div  id="memAll"> 
@@ -241,7 +363,7 @@
 							<c:forEach var="list" items="${mem}">
 							<div class="col-sm-6">
 							<div class="panel-body detailMemberBtn" style="cursor:pointer; margin-top:0px;">
-							<div class="panel-img">
+							<input type="radio" id="${list }" name="check_email"/><div class="panel-img">
 							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);">
 							<span>${list.name }</span>
 							</div>
@@ -252,9 +374,8 @@
 							</div>
 							<div class="infinite_name panel-workflow">${list.name}</div>
 							<div class="infinite_name panel-workflow">${list.email}</div>
-							<div class="infinite_name panel-workflow">
-							${list.dept_Type}
-							</div>								
+							<div class="infinite_name panel-workflow">${list.positiontype}</div>
+							<div class="infinite_name panel-workflow">${list.dept_Type}</div>								
 							</div>
 							</div>	
 							</div>							
@@ -262,6 +383,8 @@
 						</c:if>
 					</div>
 					</div>
+					
+					<!-- paging -->
 					<div class="panel-body">
 					<div class="paging">
 						<div id="paging">
@@ -289,6 +412,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

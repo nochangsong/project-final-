@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,14 +68,6 @@ public class DepartmentController {
 		List<listCommand> list = service.selectAll();
 		mav.addObject("mem", list);
 		
-		System.out.println("totalCount1 : " + totalCount);
-		System.out.println("pageCount1 :"+ pageCount);
-		System.out.println("start1 : " + start);
-		System.out.println("end1 : " + end);
-		System.out.println("pageNum1 : " +pageNum);
-		System.out.println("startPage1 : " +startPage);
-		System.out.println("endPage1 : " + endPage);
-		
 		mav.addObject("startPage1",startPage);
 		mav.addObject("endPage1",endPage);
 		mav.addObject("pageCount1", pageCount);
@@ -93,6 +87,8 @@ public class DepartmentController {
 			DepartMentCommand command = new DepartMentCommand();
 			if(type.equals("insert")){
 				command.setDept_Type(dept_Type);
+//				System.out.println("dept_Num : " + dept_Num);
+//				System.out.println("dept_Type: " + dept_Type);
 				service.insertDeptType(command);
 				
 			}else if(type.equals("update")){				
@@ -117,9 +113,24 @@ public class DepartmentController {
 
 	@RequestMapping(value="/departmemList.puzzle", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
 	@ResponseBody
-	public String getselect(HttpServletResponse resp, String dept_Type) throws Exception{
+	public String getselect(HttpServletResponse resp, String dept_Type, String search) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
-
+		JSONObject json = new JSONObject();
+		
+		//검색어가 있으면
+		if(search!=null){
+//			System.out.println("search :: " + search);
+			List<listCommand> list = service.searchMem(search);
+//			System.out.println("list.size :: " + list.size());
+			for(int i=0; i<list.size(); i++){
+				list.get(i).setName(URLEncoder.encode(list.get(i).getName(),"UTF-8"));
+				list.get(i).setDept_Type(URLEncoder.encode(list.get(i).getDept_Type(),"UTF-8"));
+				list.get(i).setEmail(URLEncoder.encode(list.get(i).getEmail(),"UTF-8"));
+			}
+			json.put("list", list);
+			return json.toString();
+		}
+		
 		listCommand command = new listCommand();
 		command.setDept_Type(dept_Type);
 		int pageNum =1;
@@ -140,21 +151,13 @@ public class DepartmentController {
 		int previous = (pageNum-5)/5*5+1;
 		int next = (pageNum/5+1)*5+1;
 		
-		System.out.println("totalCount2 : " + totalCount);
-		System.out.println("pageCount2 :"+ pageCount);
-		System.out.println("start2 : " + start);
-		System.out.println("end2 : " + end);
-		System.out.println("pageNum2 : " +pageNum);
-		
 		List<listCommand> list = service.memList(command);
 		for(int i=0; i<list.size(); i++){
 			list.get(i).setName(URLEncoder.encode(list.get(i).getName(),"UTF-8"));
 			list.get(i).setDept_Type(URLEncoder.encode(list.get(i).getDept_Type(),"UTF-8"));
-//			list.get(i).setAuthority(URLEncoder.encode(list.get(i).getAuthority(),"UTF-8"));
+			list.get(i).setEmail(URLEncoder.encode(list.get(i).getEmail(),"UTF-8"));
 		}
-		System.out.println(list.size());		
-		JSONObject json = new JSONObject();
-		
+//		System.out.println(list.size());		
 
 		json.put("startPage", startPage);
 		json.put("endPage", endPage);
@@ -166,4 +169,22 @@ public class DepartmentController {
 		return json.toString();
 		
 	}
+	
+	
+	@RequestMapping(value="/checkType.puzzle", method=RequestMethod.POST, produces="text/plain; charset=UTF-8")
+	@ResponseBody
+	public String check_dept_type(HttpServletResponse resp, String dept_Type) throws Exception{
+		resp.setContentType("text/html; charset=UTF-8");
+		List<String> list = service.selectdept();
+		JSONObject json = new JSONObject();
+		int check = 0;
+		for(int i=0; i<list.size(); i++){
+			if(dept_Type.equals(list.get(i))){
+				check++;
+			}
+		}
+		json.put("check",check);
+		return json.toString();
+	}
+	
 }

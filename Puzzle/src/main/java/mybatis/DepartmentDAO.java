@@ -19,6 +19,10 @@ public class DepartmentDAO extends SqlSessionDaoSupport{
 	
 
 //	type추가
+	public List<String> selectdept(){
+		return getSqlSession().selectList("dept.selectdept");
+	}
+	
 	public void insertDeptType(DepartMentCommand command){
 		getSqlSession().insert("dept.insert_deptType", command);
 	}
@@ -63,12 +67,15 @@ public class DepartmentDAO extends SqlSessionDaoSupport{
 	}
 	
 	public int getTotalCount(){
-		System.out.println("DAO접근");
 		return getSqlSession().selectOne("dept.getTotalCount");
 	}
 	
 	public List<PersonnelCommand> memAll(){
 		return getSqlSession().selectList("dept.memAll");
+	}
+	
+	public List<listCommand> searchMem(String search){
+		return getSqlSession().selectList("dept.searchmem", search);
 	}
 	
 }

@@ -52,18 +52,18 @@
 			<ul class="hide">
 				<li><a href="#"><span class="glyphicon glyphicon-user"> 조직관리</span></a></li>
 				<li><a href="/Puzzle/admin/position/positionList.puzzle">직급관리</a></li> 
-				<li><a href="/Puzzle/PersonnelView/P_Card_in.puzzle">조직도/조직원관리</a></li>
-				<li><a href="/Puzzle/admin/department/departmentList.puzzle">조직도/조직원관리</a></li>
-				<li><a href="#">전체문서함</a></li>
-				<li><a href="#">문서양식</a></li>
-				<li><a href="#">게시판관리</a></li>
-				<li><a href="#">근태관리</a></li>   
+				<li><a href="/Puzzle/PersonnelView/P_Card_in.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</a></li>
+				<li><a href="/Puzzle/department/departmentList.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-inbox">전체문서함</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-pencil">문서양식</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-list-alt">게시판관리</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-calendar">근태관리</a></li>   
 			</ul>
 		</li>
 		</c:if>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docusuc.png" width="25px;">&nbsp;결제할문서</a></li>
-    	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a></li>
+    	<li class="col-sm-2"><a href="/Puzzle/board/boardList.puzzle"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a></li>
    	 	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/userinfo.png" width="25px;">&nbsp;조직원정보</a></li>
      	<li class="col-sm-2"><a href="/Puzzle/calendar/calendarList.puzzle"><img src="/Puzzle/img/a.png" width="25px;">&nbsp;일정관리</a></li>
 	</ul>

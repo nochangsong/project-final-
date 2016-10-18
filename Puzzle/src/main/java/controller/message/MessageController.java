@@ -22,7 +22,7 @@ import net.sf.json.JSONObject;
 @RequestMapping("/message")
 public class MessageController {
 
-	private String userEmail = "joo@naver.com";
+//	private String userEmail = "joo@naver.com";
 	
 	private MessageService service;
 	@Autowired
@@ -32,10 +32,12 @@ public class MessageController {
 	private int perPage = 10;
 	
 	@RequestMapping(value="messageList.puzzle", method=RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum) throws Exception {
+	public ModelAndView getList(@RequestParam(value="pageNum", defaultValue = "1")int pageNum, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView("messageList");
 		
-		int totalMsgCount = service.getTotalMessageCount(userEmail); //51
+		String userEmail = (String)request.getSession().getAttribute("email");
+		
+		int totalMsgCount = service.getTotalMessageCount(userEmail); //52
 		int pageCount = totalMsgCount/perPage+(totalMsgCount%perPage==0?0:1); //6
 //		int start = totalMsgCount-perPage*(pageNum-1); 
 //		int end = (start-perPage)+1 > 0 ? (start-perPage)+1 : 1; 
@@ -43,23 +45,24 @@ public class MessageController {
 		int start = perPage*(pageNum-1)+1; 
 		int end = start+(perPage-1) > totalMsgCount ? totalMsgCount : start+(perPage-1);
 		
-		
 		int startPage = (pageNum-1) / 5 * 5 + 1; //1
 		int endPage = startPage + 5 - 1; //5
 		if(endPage>pageCount){
 			endPage=pageCount;
 		}
 		
+		int newMsgNumber = service.getNewMessageNumber(userEmail);
 //		System.out.println(startPage);
 //		System.out.println(endPage);
 		
 		List<MessageCommand> list = service.getAllMessages(userEmail, start, end);
-		
 		mav.addObject("pageCount", pageCount); //6
 		mav.addObject("pageNum", pageNum);
 		mav.addObject("msg", list);
 		mav.addObject("startPage", startPage);
 		mav.addObject("endPage",endPage);
+		mav.addObject("totalMsgCount", totalMsgCount);
+		mav.addObject("newMsgNumber", newMsgNumber);
 		return mav;
 	}
 	
@@ -78,9 +81,11 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="messageForm.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	public ModelAndView send(MessageCommand messageCommand, HttpServletResponse resp) throws Exception {
+	public ModelAndView send(MessageCommand messageCommand, HttpServletResponse resp, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView("sendSuccess");
 		resp.setContentType("text/html;charset=utf-8");
+		
+		String userEmail = (String)request.getSession().getAttribute("email");
 		messageCommand.setSender(userEmail);
 		service.send(messageCommand);
 		
@@ -94,22 +99,27 @@ public class MessageController {
 	
 	@RequestMapping(value= "showMessage.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String showMessage(HttpServletResponse resp, HttpServletRequest request) throws Exception{
+	public String showMessage(HttpServletResponse resp, @RequestParam("no")int no) throws Exception{
 		resp.setContentType("text/html;charset=utf-8");
-		int no = Integer.parseInt(request.getParameter("no"));
+//		int no = Integer.parseInt(request.getParameter("no"));
 		MessageCommand message = service.getMessage(no);
 		if(message.getChecked().equals("new")){
 			service.updateRead(message);
 		}
 		JSONObject json = new JSONObject();
-		json.put("sender", message.getSender());
-		json.put("content", message.getContent());
+		json.put("name", URLEncoder.encode(message.getName(),"UTF-8"));
+		json.put("dept_type", URLEncoder.encode(message.getDept_type(),"UTF-8"));
+		json.put("email", message.getSender());
+		json.put("content", URLEncoder.encode(message.getContent(),"UTF-8"));
 		return json.toString();
 	}
 	
 	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String alarmList(HttpServletResponse resp, String data) throws Exception{
+	public String alarmList(HttpServletRequest request, HttpServletResponse resp, String data) throws Exception{
+		
+		String userEmail = (String)request.getSession().getAttribute("email");
+		
 		String out="";
 		resp.setContentType("text/html;charset=utf-8");
 		JSONParser parser = new JSONParser();
@@ -125,7 +135,8 @@ public class MessageController {
 	
 	@RequestMapping(value="getMessageCount.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String getMessageCount() throws Exception {
+	public String getMessageCount(HttpServletRequest request) throws Exception {
+		String userEmail = (String)request.getSession().getAttribute("email");
 		int count = 0;
 		if(userEmail!=null){
 			count = service.getNewMessageNumber(userEmail);
