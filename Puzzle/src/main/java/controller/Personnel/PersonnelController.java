@@ -1,6 +1,9 @@
 package controller.Personnel;
 
 
+import java.util.List;
+
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import model.DocuBoxCommand;
 import model.PersonnelCommand;
 
 @Controller
@@ -53,13 +59,30 @@ public class PersonnelController {
 	public String SubChaeck(HttpServletRequest request) throws Exception{
 		String SeEm = request.getParameter("email");
 		String random = request.getParameter("certify");
-		String  ra = service.select(SeEm);
+		String ra = service.select(SeEm);
+
 		if(ra.equals(random)){
 		service.updateCard(SeEm); 
 		}else{
 		return "Certifyfail";
 		}
 		return "CertifySuccess";
+	}
+
+	
+	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.GET)
+	public ModelAndView Modichange(HttpServletRequest reqeust,String eamil, PersonnelCommand command)throws Exception{
+		String Email = (String)reqeust.getSession().getAttribute("email");
+		System.out.println("email:::"+Email);
+		
+		ModelAndView mv = new ModelAndView("P_Modify");
+		List<PersonnelCommand> list = service.getlist(command,Email);
+		for(PersonnelCommand dn:list){
+			System.out.println(dn.getEmail()+","+dn.getName());
+		}
+		
+		mv.addObject("list",list);
+		return mv;
 	}
 	
 	

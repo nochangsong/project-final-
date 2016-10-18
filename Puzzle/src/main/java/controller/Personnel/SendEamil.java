@@ -29,7 +29,7 @@ public class SendEamil {
        
            subject = "Puzzle가입"; /*이메일의 제목*/
            code = key; //키값을 키 파라메터에 입력
-           url = "http://localhost:8089/Puzzle/PersonnelView/CertifyCheck.puzzle";
+           url = "http://localhost:8088/Puzzle/PersonnelView/CertifyCheck.puzzle";
            content = "위 주소를 클릭하시면 회원가입이 완료됩니다."; /*전송할 메세지*/
        
        /* if (state == 2) {
@@ -48,7 +48,7 @@ public class SendEamil {
  
         // 메일 관련
         msg.setSubject(subject); /*이메일 제목 세팅*/
-        msg.setText(code + "\n" + url + "\n" + content); /*이메일 내용 세팅 :: 키값이 포함된 인증 주소와 메세지 새팅*/
+        msg.setText("인증번호::"+code + "\n" + url + "\n" + content); /*이메일 내용 세팅 :: 키값이 포함된 인증 주소와 메세지 새팅*/
         msg.setFrom(new InternetAddress(user)); /*보낸사람 이메일 주소 세팅*/
         msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); /*받는사람 주소를 추가*/
  

@@ -95,10 +95,10 @@
 						<tr>
 							<td><input type="checkbox" name="allcheck"></td>
 							<td>${All.fileName}</td>
-							<td>${All.reg_Date}</td>
+							<td>${All.email}</td>
 							<td>${All.fileType}</td>
 							<td>${All.confirm}</td>
-							<td>${All.email}</td>
+							<td>${All.reg_Date}</td>
 						</tr>
 					</C:forEach>
 

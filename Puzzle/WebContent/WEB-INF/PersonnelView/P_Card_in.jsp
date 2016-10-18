@@ -1,14 +1,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags/form"%>
 <%@ page import="java.util.*, java.util.Calendar,  java.util.Date, java.text.SimpleDateFormat"%>
 
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src=”http://code.jquery.com/jquery-2.2.4.js”></script>
 <title>Puzzle</title>
 <script>
 
@@ -144,11 +150,9 @@
 				<input type="hidden" name="RANDOMCODE" id="RANDOMCODE">
 				<input type="hidden" value="N" name="certify" id="certify">
 			<br>
-			<div>
-				<p align="right">
+			<div align="center">
 					<input class="CheckButton" type="submit" value="저장"/>
 					<input type="button" value="취소"/>
-				</p>
 			</div>
 		</form:form>
 	</div>

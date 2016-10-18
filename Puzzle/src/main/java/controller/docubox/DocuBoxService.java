@@ -33,17 +33,7 @@ public class DocuBoxService {
 		}
 		return list;
 	}
-/*	public List<DocuBoxCommand> getlist(DocuBoxCommand DocuCommand){
-		List<DocuBoxCommand> list = null;
-		HashMap<String, Object> map = new HashMap<String,Object>();
-		map.put("list", DocuCommand);
-		try{
-			list = dao.selectList(map);
-		}catch(Exception e){
-			System.out.println(e.toString());
-		}
-		return list;
-	}*/
+
 	
 	public int getTotalCount(int num){
 		int count = 0;

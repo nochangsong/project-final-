@@ -80,15 +80,15 @@
 				</p>
 				<tr>
 				 	<th>E-mail:</th>
-					<td><input type="text" value="${list.Email}" name="Email" id="Email" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" value="${list.email}" name="Email" id="Email" placeholder="! 필수 항목 입니다."/></td>
 				</tr>
 				<tr>
 					<th>이름:</th>
-					<td><input type="text" value="${list.Name}" name="Name" id="Name" readonly/></td>
+					<td><input type="text" value="${list.name}" name="Name" id="Name" readonly/></td>
 				</tr>
 				<tr>
 					<th>나이:</th>
-					<td><input type="text" value="${list.Age}" name="Age" id="Age" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" value="${list.age}" name="Age" id="Age" placeholder="! 필수 항목 입니다."/></td>
 				</tr>
 				<tr>
 					<th>입사일:</th>

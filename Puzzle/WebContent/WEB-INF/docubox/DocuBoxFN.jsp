@@ -18,6 +18,7 @@
 .dropdown {
 	position: relative;
 	display: inline-block;
+	width: 200px;
 }
 
 .dropdown-content {
@@ -25,7 +26,7 @@
 	position: absolute;
 	right: 0;
 	background-color: #f9f9f9;
-	min-width: 160px;
+	min-width: 10px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -50,42 +51,38 @@
 </style>
 <script>
 	$(document).ready(function() {
-		// 체크 박스 모두 체크
-		$("#allcheck").click(function() {
-			$("input[name=box]:checkbox").each(function() {
+		$("#checkAll").click(function() {
+			$("input[name=allcheck]:checkbox").each(function() {
 				$(this).attr("checked", true);
 			});
 		});
-
-		// 체크 박스 모두 해제
-		$("#allcheck").click(function() {
-			$("input[name=box]:checkbox").each(function() {
+		$("#checkAll").click(function() {
+			$("input[name=allcheck]:checkbox").each(function() {
 				$(this).attr("checked", false);
-			});
 		});
-
 	});
+});
 </script>
 </head>
 <body>
-
 	<div align="center">
-		<div class="dropdown" style="float: left;">
-			<label>전체문서함</label>
+	<h2>전체문서함</h2>
+		<div class="dropdown" style="float:center;">
 			<button class="dropbt">전체문서</button>
 			<div class="dropdown-content">
-				<a href="/Puzzle/DocuBox/DocuBoxAll">전체문서</a> <a
-					href="/Puzzle/DocuBox/DocuBoxPG">진행중인 문서</a> <a
-					href="/Puzzle/DocuBox/DocuBoxFN">최종승인 문서</a> <a
-					href="/Puzzle/DocuBox/DocuBoxRB">반려문서</a>
+				<a href="DocuBoxAll.puzzle">전체문서</a> 
+				<a href="DocuBoxPG.puzzle">진행중인 문서</a> 
+				<a href="DocuBoxFN.puzzle">최종승인 문서</a> 
+				<a href="DocuBoxRB.puzzle">반려문서</a>
 			</div>
 		</div>
-
+		<br>
+		<br>
 		<form:form>
 			<table id="doc" border="1">
 				<thead>
 					<tr>
-						<th><input type="checkbox" name="check" id="allcheck"></th>
+						<th><input type="checkbox" name="checkAll" id="checkAll" value="전체선택"></th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>문서양식</th>
@@ -96,12 +93,12 @@
 				<tbody>
 					<C:forEach var="All" items="${list}">
 						<tr>
-							<td><input type="checkbox" class="check" name="FileName"></td>
-							<td>${All.FileName}</td>
-							<td>${All.Reg_Date}</td>
-							<td>${All.FileType}</td>
-							<td>${All.Confirm}</td>
-							<td>${All.Email}</td>
+							<td><input type="checkbox" name="allcheck"></td>
+							<td>${All.fileName}</td>
+							<td>${All.reg_Date}</td>
+							<td>${All.fileType}</td>
+							<td>${All.confirm}</td>
+							<td>${All.email}</td>
 						</tr>
 					</C:forEach>
 
@@ -115,14 +112,15 @@
 		</form:form>
 		<div><input class="check" type="button" name="delete" value="선택삭제"></div>
 	</div>
+	<div align="center">
 	<div class="pageing">
-		<C:if test="${startpage>4}">
+		<C:if test="${startPage>4}">
 			<ul class="pager">
-				<li><a href="DocuBoxAll.puzzle?pageNum=${startPage-1}"></a></li>
+				<li><a href="DocuBoxAll.puzzle?pageNum=${startPage-1}">Back</a></li>
 			</ul>
 		</C:if>
 		<ul class="pagination">
-			<C:forEach var="i" begin="${startPage}" end="${endpage}">
+			<C:forEach var="i" begin="${startPage}" end="${endPage}">
 				<li id="${i}"><a href="DocuBoxAll.puzzle?pageNum=${i}">${i}</a></li>
 			</C:forEach>
 		</ul>
@@ -131,6 +129,7 @@
 				<li><a href="DocuBoxAll.puzzle?pageNum=${startPage+5}">Next</a></li>
 			</ul>
 		</C:if>
+	</div>
 	</div>
 </body>
 </html>

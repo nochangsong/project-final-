@@ -1,5 +1,8 @@
 package controller.Personnel;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,4 +44,18 @@ public class PersonnelService {
 		}
 		return SeEm;
 	}
+	
+	public List<PersonnelCommand> getlist(PersonnelCommand command,String Email){
+		List<PersonnelCommand> list = null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", command);
+		map.put("Email", Email);
+		try{
+			list = dao.selectList(map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
 }

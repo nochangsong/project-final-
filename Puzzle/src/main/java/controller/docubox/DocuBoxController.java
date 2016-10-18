@@ -34,14 +34,13 @@ public class DocuBoxController {
 	}
 
 	@RequestMapping(value ="/DocuBoxAll.puzzle", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, DocuBoxCommand DocuCommand) throws Exception {
+	public ModelAndView getListAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, DocuBoxCommand DocuCommand) throws Exception {
 		/*@RequestParam(value = "pageNum", defaultValue = "1") int pageNum*/
 /*		int pageNum=1;*/
 		int Num=0;
 		int doc = DocuCommand.getDoc_Num();
 		
-		ModelAndView mv = new ModelAndView("DocuBoxAll");
-		System.out.println("pageNum:::"+pageNum);
+		
 		int totalCount = service.getTotalCount(Num);
 		int pageCount = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
 
@@ -53,23 +52,17 @@ public class DocuBoxController {
 		if (endPage > pageCount) {
 			endPage = pageCount;
 		}
-		System.out.println("count::::"+totalCount);
-		System.out.println("stpage:::"+start);
-		System.out.println("endpage:::"+end);
 		
+		ModelAndView mv = new ModelAndView("DocuBoxAll");
 		List<DocuBoxCommand> list = service.getlist(DocuCommand,start,end);
-		for(DocuBoxCommand dn:list){
-			System.out.println(dn.getDoc_Num()+","+dn.getFileName());
-		}
 		
 		mv.addObject("pageCount", pageCount);
-		mv.addObject("pageNum", pageNum);
+		mv.addObject("pageNum", pageNum);	
 		mv.addObject("list", list);
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
 		
-
 		return mv;
+		
 	}
-
 }
