@@ -44,8 +44,8 @@ public class PersonnelController {
 	@RequestMapping(value="/P_Card_in.puzzle", method=RequestMethod.POST)
 	public String Submit(@ModelAttribute("command")PersonnelCommand command) throws Exception{
 		SendEamil se = new SendEamil();
-		command.setRANDOMCODE(String.valueOf(System.currentTimeMillis()));
-		se.sendCode(command.getEmail(), command.getRANDOMCODE());
+		command.setRandomcode(String.valueOf(System.currentTimeMillis()));
+		se.sendCode(command.getEmail(), command.getRandomcode());
 		service.insertCard(command);
 		return "P_Success";
 	}
@@ -71,12 +71,12 @@ public class PersonnelController {
  
 	
 	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.GET)
-	public ModelAndView Modichange(HttpServletRequest reqeust,String eamil, PersonnelCommand command)throws Exception{
-		String Email = (String)reqeust.getSession().getAttribute("email");
-		System.out.println("email:::"+Email);
+	public ModelAndView Modichange(HttpServletRequest reqeust,String eamil)throws Exception{
+		String email = (String)reqeust.getSession().getAttribute("email");
+		System.out.println("email:::"+email);
 		
 		ModelAndView mv = new ModelAndView("P_Modify");
-		List<PersonnelCommand> list = service.getlist(command,Email);
+		List<PersonnelCommand> list = service.getlist(email);
 		for(PersonnelCommand dn:list){
 			System.out.println(dn.getEmail()+","+dn.getName());
 		}
@@ -84,5 +84,9 @@ public class PersonnelController {
 		return mv;
 	}
 	
-	
+	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.POST)
+	public String updateModi(@ModelAttribute("command")PersonnelCommand command)throws Exception{
+		service.updateCard(command);
+		return "P_Success";
+	}
 }

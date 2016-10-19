@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -80,37 +81,37 @@
 				</p>
 				<tr>
 				 	<th>E-mail:</th>
-					<td><input type="text" name="Email" id="Email" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" name="email" id="email" placeholder="! 필수 항목 입니다."/></td>
 				</tr>
 				<tr>
 					<th>이름:</th>
-					<td><input type="text" name="Name" id="Name" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" name="name" id="name" placeholder="! 필수 항목 입니다."/></td>
 				</tr>
 				<tr>
 					<th>나이:</th>
-					<td><input type="text" name="Age" id="Age" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" name="age" id="age" placeholder="! 필수 항목 입니다."/></td>
 				</tr>
 				<tr>
 					<th>입사일:</th>
-					<td><input type="date" name="HireDate" id="HireDate"
+					<td><input type="date" name="hiredate" id="hiredate"
 						placeholder="! 필수 항목 입니다. (날짜를 선택)" /></td>
 				</tr>
 				 <tr>
 					<th>퇴사일:</th>
-					<td><input type="date" name="RetireDate" id="RetireDate"/></td>
+					<td><input type="date" name="retiredate" id="retiredate"/></td>
 				</tr>
 				<tr>
 					<th>핸드폰:</th>
-					<td><input type="text" name="PhoneNum" id="PhoneNum" 
+					<td><input type="text" name="phonenum" id="phonenum" 
 						placeholder="! 필수 항목 입니다. - 없이 입력하세요" maxlength="11" /></td>
 				</tr>
 				 <tr>
 					<th>퇴사사유:</th>
-					<td><input type="text" name="RetireType" id="RetireType"/></td>
+					<td><input type="text" name="retiretype" id="retiretype"/></td>
 				</tr>
 				<tr>
 					<th>부서:</th>
-					<td><select name="Dept_Num" id="Dept_Num">
+					<td><select name="dept_num" id="dept_num">
 							<option value="">팀선택</option>
 							<option value="1">인사팀</option>
 							<option value="2">개발팀</option>
@@ -119,7 +120,7 @@
 				</tr> 
 				<tr>
 					<th>직급/직책:</th>
-					<td><select name="Position_Num" id="Position_Num">
+					<td><select name="position_num" id="position_num">
 							<option>직급선택</option>
 							<option value="1">CEO</option>
 							<option value="2">팀장</option>
@@ -132,7 +133,7 @@
 				</tr>
 				<tr>
 					<th>상태:</th>
-					<td><select name="Work_Num" id="Work_Num">
+					<td><select name="work_num" id="work_num">
 							<option value="1">재직</option>
 							<option value="2">휴직</option>
 							<option value="3">휴가</option>
@@ -147,9 +148,9 @@
 					</select></td>
 				</tr>
 			</table>
-				<input type="hidden" name="RANDOMCODE" id="RANDOMCODE">
+				<input type="hidden" name="randomcode" id="randomcode">
 				<input type="hidden" value="N" name="certify" id="certify">
-			<br>
+			<br> 
 			<div align="center">
 					<input class="CheckButton" type="submit" value="저장"/>
 					<input type="button" value="취소"/>

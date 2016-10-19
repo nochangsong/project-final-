@@ -2,21 +2,14 @@ package model;
 
 public class DocuBoxCommand {
 	
-	private int Doc_Num;
 	private String FileName;
 	private String Reg_Date;
 	private String Path;
-	private String FileType;
 	private String writer;
 	private String Confirm;
 	private String Email;
 	
-	public int getDoc_Num() {
-		return Doc_Num;
-	}
-	public void setDoc_Num(int doc_Num) {
-		Doc_Num = doc_Num;
-	}
+
 	public String getFileName() {
 		return FileName;
 	}
@@ -34,12 +27,6 @@ public class DocuBoxCommand {
 	}
 	public void setPath(String path) {
 		Path = path;
-	}
-	public String getFileType() {
-		return FileType;
-	}
-	public void setFileType(String fileType) {
-		FileType = fileType;
 	}
 	public String getWriter() {
 		return writer;

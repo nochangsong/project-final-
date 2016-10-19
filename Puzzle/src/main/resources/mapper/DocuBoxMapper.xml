@@ -4,18 +4,21 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="Docu">
 	<select id="selectAll"  parameterType="java.util.HashMap" resultType="model.DocuBoxCommand">
-			select * from (select DOC_NUM,FILENAME,REG_DATE,PATH,FILETYPE WRITER,CONFIRM,EMAIL,rownum r from DOCU_BOX) where r &gt;= #{start} and r &lt;= #{end}
+			select * from (select FILENAME,REG_DATE,PATH,WRITER,CONFIRM,EMAIL,rownum r from DOCUBOX) where r &gt;= #{start} and r &lt;= #{end}
 	</select>
 	<select id="selectCount" parameterType="int" resultType="int">
-		select count(*) from Docu_Box
+		select count(*) from DocuBox
 	</select>
-	<!-- <select id="selectPG" parameterType="" resultType="">
-	select * from Docu_Box where Docu_Num=2 
+	<select id="selectFN" parameterType="java.util.HashMap" resultType="model.DocuBoxCommand">
+		select * from (select FILENAME,REG_DATE,PATH,WRITER,CONFIRM,EMAIL,rownum r from DOCUBOX) where r &gt;= #{start} and r &lt;= #{end} and CONFIRM='결재완료'
 	</select>
-	<select id="selectFN" parameterType="" resultType="">
-	select * from Docu_Box where Douc_Num=3
+	<select id="selectPG" parameterType="java.util.HashMap" resultType="model.DocuBoxCommand">
+		select * from (select FILENAME,REG_DATE,PATH,WRITER,CONFIRM,EMAIL,rownum r from DOCUBOX) where r &gt;= #{start} and r &lt;= #{end} and CONFIRM='기안대기'
 	</select>
-	<select id="selectRB" parameterType="" resultType="">
-	select * from Docu_Box where Douc_Num=4
-	</select> -->
+	<select id="selectRB" parameterType="java.util.HashMap" resultType="model.DocuBoxCommand">
+		select * from (select FILENAME,REG_DATE,PATH,WRITER,CONFIRM,EMAIL,rownum r from DOCUBOX) where r &gt;= #{start} and r &lt;= #{end} and CONFIRM='반송'
+	</select>
+<!-- 	<delete id="delete" parameterType="">
+		delete 
+	</delete> -->
 	</mapper>

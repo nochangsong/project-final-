@@ -45,17 +45,24 @@ public class PersonnelService {
 		return SeEm;
 	}
 	
-	public List<PersonnelCommand> getlist(PersonnelCommand command,String Email){
+	public List<PersonnelCommand> getlist(String email){
 		List<PersonnelCommand> list = null;
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", command);
-		map.put("Email", Email);
 		try{
-			list = dao.selectList(map);
+			list = dao.selectList(email);
 		}catch(Exception e){
 			System.out.println(e.toString());
 		}
 		return list;
+	}
+	
+	public int updateCard(PersonnelCommand PrCommand){
+		int Card= 0;
+		try{
+			Card = dao.updatePC(PrCommand);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return Card;
 	}
 
 }

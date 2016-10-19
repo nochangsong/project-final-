@@ -50,54 +50,55 @@
 }
 </style>
 <script>
-	$(document).ready(function() {
+	$(function() {
+		//전체선택 체크박스 클릭
 		$("#checkAll").click(function() {
-			$("input[name=allcheck]:checkbox").each(function() {
-				$(this).attr("checked", true);
-			});
-		});
-		$("#checkAll").click(function() {
-			$("input[name=allcheck]:checkbox").each(function() {
-				$(this).attr("checked", false);
-		});
-	});
-});
+			//만약 전체 선택 체크박스가 체크된상태일경우
+			if ($("#checkAll").prop("checked")) {
+				//해당화면에 전체 checkbox들을 체크해준다
+				$("input[type=checkbox]").prop("checked", true);
+				// 전체선택 체크박스가 해제된 경우
+			} else {
+				//해당화면에 모든 checkbox들의 체크를해제시킨다.
+				$("input[type=checkbox]").prop("checked", false);
+			}
+		})
+	})
 </script>
 </head>
 <body>
 	<div align="center">
-	<h2>전체문서함</h2>
-		<div class="dropdown" style="float:center;">
+		<h2>전체문서함</h2>
+		<div class="dropdown" style="float: center;">
 			<button class="dropbt">전체문서</button>
 			<div class="dropdown-content">
-				<a href="DocuBoxAll.puzzle">전체문서</a> 
-				<a href="DocuBoxPG.puzzle">진행중인 문서</a> 
-				<a href="DocuBoxFN.puzzle">최종승인 문서</a> 
-				<a href="DocuBoxRB.puzzle">반려문서</a>
+				<a href="DocuBoxAll.puzzle">전체문서</a> <a href="DocuBoxPG.puzzle">진행중인
+					문서</a> <a href="DocuBoxFN.puzzle">최종승인 문서</a> <a
+					href="DocuBoxRB.puzzle">반려문서</a>
 			</div>
 		</div>
-		<br>
-		<br>
+		<br> <br>
 		<form:form>
-			<table id="doc" border="1">
+			<table border="1">
 				<thead>
 					<tr>
-						<th><input type="checkbox" name="checkAll" id="checkAll" value="전체선택"></th>
+						<th><input type="checkbox" name="checkAll" id="checkAll"
+							value="전체선택"></th>
 						<th>제목</th>
 						<th>작성자</th>
-						<th>문서양식</th>
-						<th>라벨명</th>
+						<th>결재상태</th>
+						<th>Email</th>
 						<th>기안일</th>
 					</tr>
 				</thead>
 				<tbody>
 					<C:forEach var="All" items="${list}">
 						<tr>
-							<td><input type="checkbox" name="allcheck"></td>
+							<td><input type="checkbox" id="allcheck" name="allcheck"></td>
 							<td>${All.fileName}</td>
-							<td>${All.email}</td>
-							<td>${All.fileType}</td>
+							<td>${All.writer}</td>
 							<td>${All.confirm}</td>
+							<td>${All.email}</td>
 							<td>${All.reg_Date}</td>
 						</tr>
 					</C:forEach>
@@ -109,27 +110,31 @@
 					</tr>
 				</tfoot>
 			</table>
+			<div>
+				<input class="check" type="submit" name="delete" id="delete"
+					value="선택삭제">
+			</div>
 		</form:form>
-		<div><input class="check" type="button" name="delete" value="선택삭제"></div>
+
 	</div>
 	<div align="center">
-	<div class="pageing">
-		<C:if test="${startPage>4}">
-			<ul class="pager">
-				<li><a href="DocuBoxAll.puzzle?pageNum=${startPage-1}">Back</a></li>
+		<div class="pageing">
+			<C:if test="${startPage>4}">
+				<ul class="pager">
+					<li><a href="DocuBoxAll.puzzle?pageNum=${startPage-1}">Back</a></li>
+				</ul>
+			</C:if>
+			<ul class="pagination">
+				<C:forEach var="i" begin="${startPage}" end="${endPage}">
+					<li id="${i}"><a href="DocuBoxAll.puzzle?pageNum=${i}">${i}</a></li>
+				</C:forEach>
 			</ul>
-		</C:if>
-		<ul class="pagination">
-			<C:forEach var="i" begin="${startPage}" end="${endPage}">
-				<li id="${i}"><a href="DocuBoxAll.puzzle?pageNum=${i}">${i}</a></li>
-			</C:forEach>
-		</ul>
-		<C:if test="${pageCount>endPage}">
-			<ul class="pager">
-				<li><a href="DocuBoxAll.puzzle?pageNum=${startPage+5}">Next</a></li>
-			</ul>
-		</C:if>
-	</div>
+			<C:if test="${pageCount>endPage}">
+				<ul class="pager">
+					<li><a href="DocuBoxAll.puzzle?pageNum=${startPage+5}">Next</a></li>
+				</ul>
+			</C:if>
+		</div>
 	</div>
 </body>
 </html>

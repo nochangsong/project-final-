@@ -19,11 +19,6 @@
 <script>
 
 	function Check() {
-		if (document.addPS.Name.value == "") {
-			alert("이름을 입력하세요");
-			document.addPS.Name.focus();
-			return false;
-		}
 		if (document.addPS.Age.value == "") {
 			alert("나이를 입력하세요");
 			document.addPS.Age.focus();
@@ -37,11 +32,6 @@
 		if (document.addPS.PhoneNum.value == "") {
 			alert("폰번호를 입력하세요");
 			document.addPS.PhoneNum.focus();
-			return false;
-		}
-		if (document.addPS.HireDate.value == "") {
-			alert("입사일을 입력하세요");
-			document.addPS.HireDate.focus();
 			return false;
 		}
 		if (document.addPS.Position_Name.value == "") {
@@ -73,43 +63,43 @@
 		<div>
 			<h4>조직원</h4>
 		</div>
-		<form:form commandName="command" method="post" name="addPS">
+		<form:form commandName="command">
 			<table border="1" width="350">
 				<p>
 					<label>※ 필수 항목 미 등록시 저장되지 않습니다.</label>
 				</p>
-				<tr>
+				<c:forEach items="${list }" var="list"><tr>
 				 	<th>E-mail:</th>
-					<td><input type="text" value="${list.email}" name="Email" id="Email" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" value="${list.email}" name="email" id="email" readonly/></td>
 				</tr>
 				<tr>
 					<th>이름:</th>
-					<td><input type="text" value="${list.name}" name="Name" id="Name" readonly/></td>
+					<td><input value="${list.name}" name="name" id="name" readonly/></td>
 				</tr>
 				<tr>
 					<th>나이:</th>
-					<td><input type="text" value="${list.age}" name="Age" id="Age" placeholder="! 필수 항목 입니다."/></td>
+					<td><input type="text" value="${list.age}" name="age" id="age" placeholder="! 필수 항목 입니다."/></td>
 				</tr>
 				<tr>
 					<th>입사일:</th>
-					<td><input  value="${list.date}"  name="HireDate" id="HireDate" readonly /></td>
+					<td><input  value="${list.hiredate}"  name="hireDate" id="hiredate" readonly /></td>
 				</tr>
 				 <tr>
 					<th>퇴사일:</th>
-					<td><input type="date"name="RetireDate" id="RetireDate"/></td>
+					<td><input type="date" value="${list.retiredate}" name="retiredate" id="retiredate"/></td>
 				</tr>
 				<tr>
 					<th>핸드폰:</th>
-					<td><input type="text" name="PhoneNum" id="PhoneNum" 
+					<td><input type="text" value="${list.phonenum}" name="phonenum" id="phonenum" 
 						placeholder="! 필수 항목 입니다. - 없이 입력하세요" maxlength="11" /></td>
 				</tr>
 				 <tr>
 					<th>퇴사사유:</th>
-					<td><input type="text" name="RetireType" id="RetireType"/></td>
+					<td><input type="text" value="${list.retiretype}" name="retiretype" id="retiretype"/></td>
 				</tr>
 				<tr>
 					<th>부서:</th>
-					<td><select name="Dept_Num" id="Dept_Num">
+					<td><select name="dept_num" id="dept_num">
 							<option value="">팀선택</option>
 							<option value="1">인사팀</option>
 							<option value="2">개발팀</option>
@@ -118,7 +108,7 @@
 				</tr> 
 				<tr>
 					<th>직급/직책:</th>
-					<td><select name="Position_Num" id="Position_Num">
+					<td><select name="position_num" id="position_num">
 							<option>직급선택</option>
 							<option value="1">CEO</option>
 							<option value="2">팀장</option>
@@ -131,7 +121,7 @@
 				</tr>
 				<tr>
 					<th>상태:</th>
-					<td><select name="Work_Num" id="Work_Num">
+					<td><select name="work_num" id="work_num">
 							<option value="1">재직</option>
 							<option value="2">휴직</option>
 							<option value="3">휴가</option>
@@ -145,8 +135,9 @@
 							<option value="2">일반사용자</option>
 					</select></td>
 				</tr>
+				</c:forEach>
 			</table>
-				<input type="hidden" name="RANDOMCODE" id="RANDOMCODE">
+				<input type="hidden" name="randomcode" id="randomcode">
 				<input type="hidden" value="N" name="certify" id="certify">
 			<br>
 			<div align="center">

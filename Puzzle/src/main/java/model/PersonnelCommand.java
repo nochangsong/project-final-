@@ -3,122 +3,96 @@ package model;
 
 public class PersonnelCommand {
 	
-	private String Email;
-	private String Name;
-	private int Age;
-	private String HireDate;
-	private String RetireDate;
-	private String RetireType; 
-	private int Dept_Num;
-	private int Work_Num;
-	private int Position_Num;
-	private int PhoneNum;
+	private String email;
+	private String name;
+	private int age;
+	private String hiredate;
+	private String retiredate;
+	private String retiretype; 
+	private int dept_num;
+	private int work_num;
+	private int position_num;
+	private int phonenum;
 	private String authority;
-	private String RANDOMCODE;
+	private String randomcode;
 	private String certify;
-
-
-	public String getCertify() {
-		return certify;
-	}
-
-	public void setCertify(String certify) {
-		this.certify = certify;
-	}
-
+	
 	public String getEmail() {
-		return Email;
+		return email;
 	}
-
-	public String getRANDOMCODE() {
-		return RANDOMCODE;
-	}
-
-	public void setRANDOMCODE(String rANDOMCODE) {
-		RANDOMCODE = rANDOMCODE;
-	}
-
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
-
 	public String getName() {
-		return Name;
+		return name;
 	}
-
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-
 	public int getAge() {
-		return Age;
+		return age;
 	}
-
 	public void setAge(int age) {
-		Age = age;
+		this.age = age;
 	}
-
-	public String getHireDate() {
-		return HireDate;
+	public String getHiredate() {
+		return hiredate;
 	}
-
-	public void setHireDate(String hireDate) {
-		HireDate = hireDate;
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
 	}
-
-	public String getRetireDate() {
-		return RetireDate;
+	public String getRetiredate() {
+		return retiredate;
 	}
-
-	public void setRetireDate(String retireDate) {
-		RetireDate = retireDate;
+	public void setRetiredate(String retiredate) {
+		this.retiredate = retiredate;
 	}
-
-	public String getRetireType() {
-		return RetireType;
+	public String getRetiretype() {
+		return retiretype;
 	}
-
-	public void setRetireType(String retireType) {
-		RetireType = retireType;
+	public void setRetiretype(String retiretype) {
+		this.retiretype = retiretype;
 	}
-
-	public int getDept_Num() {
-		return Dept_Num;
+	public int getDept_num() {
+		return dept_num;
 	}
-
-	public void setDept_Num(int dept_Num) {
-		Dept_Num = dept_Num;
+	public void setDept_num(int dept_num) {
+		this.dept_num = dept_num;
 	}
-
-	public int getWork_Num() {
-		return Work_Num;
+	public int getWork_num() {
+		return work_num;
 	}
-
-	public void setWork_Num(int work_Num) {
-		Work_Num = work_Num;
+	public void setWork_num(int work_num) {
+		this.work_num = work_num;
 	}
-
-	public int getPosition_Num() {
-		return Position_Num;
+	public int getPosition_num() {
+		return position_num;
 	}
-
-	public void setPosition_Num(int position_Num) {
-		Position_Num = position_Num;
+	public void setPosition_num(int position_num) {
+		this.position_num = position_num;
 	}
-
-	public int getPhoneNum() {
-		return PhoneNum;
+	public int getPhonenum() {
+		return phonenum;
 	}
-
-	public void setPhoneNum(int phoneNum) {
-		PhoneNum = phoneNum;
+	public void setPhonenum(int phonenum) {
+		this.phonenum = phonenum;
 	}
-
 	public String getAuthority() {
 		return authority;
 	}
-
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+	public String getRandomcode() {
+		return randomcode;
+	}
+	public void setRandomcode(String randomcode) {
+		this.randomcode = randomcode;
+	}
+	public String getCertify() {
+		return certify;
+	}
+	public void setCertify(String certify) {
+		this.certify = certify;
 	}
 }

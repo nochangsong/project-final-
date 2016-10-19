@@ -18,7 +18,10 @@ public class PersonnelDAO extends SqlSessionDaoSupport {
 	public void update(String Email){
 		getSqlSession().update("P_Card.Check",Email);
 	}
-	public List<PersonnelCommand> selectList(HashMap<String,Object> map){
-		return getSqlSession().selectList("P_Card.getPC",map);
+	public List<PersonnelCommand> selectList(String email){
+		return getSqlSession().selectList("P_Card.getPC",email);
+	}
+	public int updatePC(PersonnelCommand command){
+		return getSqlSession().update("P_Card.upcard",command);
 	}
 }
