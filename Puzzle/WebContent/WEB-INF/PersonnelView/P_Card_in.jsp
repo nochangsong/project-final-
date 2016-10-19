@@ -120,7 +120,7 @@
 			
 			<div class="form-group">
 				<label for="dept_num">부서</label>
-				<select class="form-control" id="dept_num">
+				<select class="form-control" id="dept_num" name="dept_num">
 					<option value="">팀선택</option>
 					<option value="1">인사팀</option>
 					<option value="2">개발팀</option>
@@ -130,7 +130,7 @@
 			
 			<div class="form-group">
 				<label for="position_num">직급/직책</label>
-				<select class="form-control" id="position_num">
+				<select class="form-control" id="position_num" name="position_num">
 					<option>직급선택</option>
 					<option value="1">CEO</option>
 					<option value="2">팀장</option>

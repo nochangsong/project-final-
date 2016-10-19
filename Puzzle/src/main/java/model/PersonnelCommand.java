@@ -16,6 +16,7 @@ public class PersonnelCommand {
 	private String authority;
 	private String randomcode;
 	private String certify;
+	private String dept_type;
 	
 	public String getEmail() {
 		return email;

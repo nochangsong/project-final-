@@ -49,14 +49,9 @@ public class PersonnelService {
 		return dao.selectName(email);
 	}
 	
-	public List<PersonnelCommand> getlist(String email){
-		List<PersonnelCommand> list = null;
-		try{
-			list = dao.selectList(email);
-		}catch(Exception e){
-			System.out.println(e.toString());
-		}
-		return list;
+	public PersonnelCommand getlist(String email){
+		
+		return dao.selectList(email);
 	}
 	
 	public int updateCard(PersonnelCommand PrCommand){
@@ -67,6 +62,13 @@ public class PersonnelService {
 			System.out.println(e.toString());
 		}
 		return Card;
+	}
+	public void delCard(String email){
+		try{
+			dao.delCard(email);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
 	}
 
 }

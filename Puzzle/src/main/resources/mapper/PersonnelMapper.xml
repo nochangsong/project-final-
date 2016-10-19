@@ -10,16 +10,15 @@
 		(#{email},#{name},#{age},to_date(#{hiredate}),to_date(#{retiredate}),#{phonenum},#{retiretype},#{dept_num},#{position_num},#{work_num},#{authority},#{randomcode},#{certify})
 	</insert>
 	<select id="select" resultType="String" parameterType="String">
-		select RANDOMCODE from PersonnelCard where email=#{email}
+		select randomcode from PersonnelCard where email=#{email}
 	</select>
 	
 	<select id="findname" resultType="String" parameterType="String">
-		select Name from PersonnelCard where Email=#{Email}
+		select name from PersonnelCard where email=#{email}
 	</select>
 	
-	
 	<update id="Check" parameterType="String">
-		update PersonnelCard set CERTIFY='Y' where email=#{email}
+		update PersonnelCard set certify='Y' where email=#{email}
 	</update>
 	<select id="getPC" parameterType="String" resultType="model.PersonnelCommand">
 		select * from PersonnelCard where email=#{email}
@@ -27,4 +26,7 @@
 	<update id="upcard" parameterType="model.PersonnelCommand">
 		update PersonnelCard set age=#{age},retiredate=to_date(#{retiredate}),phonenum=#{phonenum},retiretype=#{retiretype},dept_num=#{dept_num},position_num=#{position_num},work_num=#{work_num} where email=#{email}
 	</update>
+	<delete id="delcard" parameterType="model.PersonnelCommand">
+		delete from PersonnelCard where email=#{email} 
+	</delete>
 </mapper>  

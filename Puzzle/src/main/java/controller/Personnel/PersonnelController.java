@@ -1,6 +1,5 @@
 package controller.Personnel;
 
-
 import java.util.List;
 
 import javax.mail.Session;
@@ -22,71 +21,74 @@ import model.PersonnelCommand;
 @Controller
 @RequestMapping("/PersonnelView")
 public class PersonnelController {
-	
+
 	@Autowired
 	private PersonnelService service;
 
-	public void setService(PersonnelService service){
+	public void setService(PersonnelService service) {
 		this.service = service;
 	}
-	
+
 	@ModelAttribute("command")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	public PersonnelCommand getCommand(){
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public PersonnelCommand getCommand() {
 		return new PersonnelCommand();
 	}
-	
-	@RequestMapping(value="/P_Card_in.puzzle", method=RequestMethod.GET)
-	public String WriteCard() throws Exception{
+
+	@RequestMapping(value = "/P_Card_in.puzzle", method = RequestMethod.GET)
+	public String WriteCard() throws Exception {
 		return "P_Card_in";
 	}
-	
-	@RequestMapping(value="/P_Card_in.puzzle", method=RequestMethod.POST)
-	public String Submit(@ModelAttribute("command")PersonnelCommand command) throws Exception{
+
+	@RequestMapping(value = "/P_Card_in.puzzle", method = RequestMethod.POST)
+	public String Submit(@ModelAttribute("command") PersonnelCommand command) throws Exception {
 		SendEamil se = new SendEamil();
 		command.setRandomcode(String.valueOf(System.currentTimeMillis()));
 		se.sendCode(command.getEmail(), command.getRandomcode());
 		service.insertCard(command);
 		return "P_Success";
 	}
-	
-	@RequestMapping(value="/CertifyCheck.puzzle", method=RequestMethod.GET)
-	public String StartCheck()throws Exception{
+
+	@RequestMapping(value = "/CertifyCheck.puzzle", method = RequestMethod.GET)
+	public String StartCheck() throws Exception {
 		return "CertifyCheck";
 	}
-	
-	@RequestMapping(value="/CertifyCheck.puzzle", method=RequestMethod.POST)
-	public String SubChaeck(HttpServletRequest request) throws Exception{
+
+	@RequestMapping(value = "/CertifyCheck.puzzle", method = RequestMethod.POST)
+	public String SubChaeck(HttpServletRequest request) throws Exception {
 		String SeEm = request.getParameter("email");
 		String random = request.getParameter("certify");
 		String ra = service.select(SeEm);
 
-		if(ra.equals(random)){
-		service.updateCard(SeEm); 
-		}else{
-		return "Certifyfail";
+		if (ra.equals(random)) {
+			service.updateCard(SeEm);
+		} else {
+			return "Certifyfail";
 		}
 		return "CertifySuccess";
 	}
- 
-	
-	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.GET)
-	public ModelAndView Modichange(HttpServletRequest reqeust,String eamil)throws Exception{
-		String email = (String)reqeust.getSession().getAttribute("email");
-		System.out.println("email:::"+email);
-		
+
+	@RequestMapping(value = "/P_Modify.puzzle", method = RequestMethod.GET)
+	public ModelAndView Modichange(HttpServletRequest request, PersonnelCommand command) throws Exception {
+		String email = (String) request.getParameter("checkemail");
+
 		ModelAndView mv = new ModelAndView("P_Modify");
-		List<PersonnelCommand> list = service.getlist(email);
-		for(PersonnelCommand dn:list){
-			System.out.println(dn.getEmail()+","+dn.getName());
-		}
-		mv.addObject("list",list);
+		PersonnelCommand pc = service.getlist(email);
+		mv.addObject("pc", pc);
+		System.out.println("³¡");
 		return mv;
 	}
-	
-	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.POST)
-	public String updateModi(@ModelAttribute("command")PersonnelCommand command)throws Exception{
-		service.updateCard(command);
+
+	@RequestMapping(value = "/P_Modify.puzzle", method = RequestMethod.POST)
+	public String updateModi(PersonnelCommand command, HttpServletRequest request) throws Exception {
+		String email = (String) request.getParameter("checkemail");
+		String t = request.getParameter("f");
+
+		if (t.equals("sav")) {
+			service.updateCard(command);
+		} else if (t.equals("del")) {
+			service.delCard(email);
+		}
 		return "P_Success";
 	}
 }

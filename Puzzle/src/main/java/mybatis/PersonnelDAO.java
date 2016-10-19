@@ -18,8 +18,9 @@ public class PersonnelDAO extends SqlSessionDaoSupport {
 	public void update(String Email){
 		getSqlSession().update("P_Card.Check",Email);
 	}
-	public List<PersonnelCommand> selectList(String email){
-		return getSqlSession().selectList("P_Card.getPC",email);
+	public PersonnelCommand selectList(String email){
+		
+		return getSqlSession().selectOne("P_Card.getPC",email);
 	}
 	public int updatePC(PersonnelCommand command){
 		return getSqlSession().update("P_Card.upcard",command);
@@ -27,6 +28,8 @@ public class PersonnelDAO extends SqlSessionDaoSupport {
 	
 	public String selectName(String email){
 		return getSqlSession().selectOne("P_Card.findname", email);
-				
+	}
+	public void delCard(String email){
+		getSqlSession().delete("P_Card.delcard",email);
 	}
 }
