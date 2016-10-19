@@ -1,6 +1,6 @@
 package controller.calendar;
 
-import java.net.URLEncoder;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class CalendarController {
 	
 	@RequestMapping(value= "/getSchedules.puzzle", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public String getSchedules(HttpServletResponse resp, HttpServletRequest request) throws Exception{
+	public void getSchedules(HttpServletResponse resp, HttpServletRequest request) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		String userEmail = (String)request.getSession().getAttribute("email");
@@ -56,16 +56,16 @@ public class CalendarController {
 			map.put("start", list.get(i).getStartDate());
 			map.put("end", list.get(i).getEndDate());
 			if(list.get(i).getType().equals("p")){
-				map.put("color", "blue");
+				map.put("color", "#3a87ad");
 			} else if(list.get(i).getType().equals("s")){
-				map.put("color", "red");
+				map.put("color", "#de690a");
 			}
 			l.add(map);
 		}
 		JSONObject json = new JSONObject();
 		json.put("list", l);
-//		System.out.println(json);
-		return json.toString();
+		PrintWriter out = resp.getWriter();
+		out.print(json.toString());
 	}  
 	
 	@ModelAttribute("calendarCommand")

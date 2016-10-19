@@ -89,6 +89,12 @@
 		        $("#_content").html(calEvent.title);
 		    },
 			events : eval(list)
+// 			events: [ {
+// 				title : 'All Day Event',
+// 				start : '2016-10-10',
+// 				end : '2016-10-12 12:00'
+
+// 			} ]
 			
 		});
 		

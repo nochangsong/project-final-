@@ -1,5 +1,6 @@
 package controller.admin;
 
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class PositionController {
 	
 	@RequestMapping(value= "/position/positionList.puzzle", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public String getList(HttpServletResponse resp, String type, String position_num, String positionType) throws Exception{
+	public void getList(HttpServletResponse resp, String type, String position_num, String positionType) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
 		if(type!=null){
 			PositionCommand position = new PositionCommand();
@@ -47,12 +48,10 @@ public class PositionController {
 			}
 		}
 		List<PositionCommand> list = service.getPositionList();
-		for(int i=0; i<list.size(); i++){
-			list.get(i).setPositionType(URLEncoder.encode(list.get(i).getPositionType(),"UTF-8"));
-		}
 		JSONObject json = new JSONObject();
 		json.put("list", list);
-		return json.toString();
+		PrintWriter out = resp.getWriter();
+		out.print(json.toString());
 	}
 
 }
