@@ -35,11 +35,7 @@ public class DocuBoxController {
 
 	@RequestMapping(value ="/DocuBoxAll.puzzle", method = RequestMethod.GET)
 	public ModelAndView getListAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, DocuBoxCommand DocuCommand) throws Exception {
-		/*@RequestParam(value = "pageNum", defaultValue = "1") int pageNum*/
-/*		int pageNum=1;*/
 		int Num=0;
-		int doc = DocuCommand.getDoc_Num();
-		
 		
 		int totalCount = service.getTotalCount(Num);
 		int pageCount = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
@@ -54,7 +50,7 @@ public class DocuBoxController {
 		}
 		
 		ModelAndView mv = new ModelAndView("DocuBoxAll");
-		List<DocuBoxCommand> list = service.getlist(DocuCommand,start,end);
+		List<DocuBoxCommand> list = service.getlistAll(DocuCommand,start,end);
 		
 		mv.addObject("pageCount", pageCount);
 		mv.addObject("pageNum", pageNum);	
@@ -63,6 +59,96 @@ public class DocuBoxController {
 		mv.addObject("endPage", endPage);
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="/DocuBoxAll.puzzle",method=RequestMethod.POST)
+	public String delDoculist()throws Exception{
 		
+		return "Redirect:DocuBoxAll";
+	}
+	
+	
+	@RequestMapping(value ="/DocuBoxFN.puzzle", method = RequestMethod.GET)
+	public ModelAndView getListFN(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, DocuBoxCommand DocuCommand) throws Exception {
+		int Num=0;
+		
+		int totalCount = service.getTotalCount(Num);
+		int pageCount = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+
+		int start = perPage * (pageNum - 1) + 1;
+		int end = start + (perPage - 1) > totalCount ? totalCount : start + (perPage - 1);
+
+		int startPage = (pageNum - 1) / 5 * 5 + 1;
+		int endPage = startPage + 5 - 1;
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		ModelAndView mv = new ModelAndView("DocuBoxFN");
+		List<DocuBoxCommand> list = service.getlistFN(DocuCommand,start,end);
+		
+		mv.addObject("pageCount", pageCount);
+		mv.addObject("pageNum", pageNum);	
+		mv.addObject("list", list);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value ="/DocuBoxPG.puzzle", method = RequestMethod.GET)
+	public ModelAndView getListPG(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, DocuBoxCommand DocuCommand) throws Exception {
+		int Num=0;
+		
+		int totalCount = service.getTotalCount(Num);
+		int pageCount = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+
+		int start = perPage * (pageNum - 1) + 1;
+		int end = start + (perPage - 1) > totalCount ? totalCount : start + (perPage - 1);
+
+		int startPage = (pageNum - 1) / 5 * 5 + 1;
+		int endPage = startPage + 5 - 1;
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		ModelAndView mv = new ModelAndView("DocuBoxPG");
+		List<DocuBoxCommand> list = service.getlistPG(DocuCommand,start,end);
+		
+		mv.addObject("pageCount", pageCount);
+		mv.addObject("pageNum", pageNum);	
+		mv.addObject("list", list);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value ="/DocuBoxRB.puzzle", method = RequestMethod.GET)
+	public ModelAndView getListRB(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, DocuBoxCommand DocuCommand) throws Exception {
+		int Num=0;
+		
+		int totalCount = service.getTotalCount(Num);
+		int pageCount = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+
+		int start = perPage * (pageNum - 1) + 1;
+		int end = start + (perPage - 1) > totalCount ? totalCount : start + (perPage - 1);
+
+		int startPage = (pageNum - 1) / 5 * 5 + 1;
+		int endPage = startPage + 5 - 1;
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		ModelAndView mv = new ModelAndView("DocuBoxRB");
+		List<DocuBoxCommand> list = service.getlistRB(DocuCommand,start,end);
+		
+		mv.addObject("pageCount", pageCount);
+		mv.addObject("pageNum", pageNum);	
+		mv.addObject("list", list);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		
+		return mv;
 	}
 }

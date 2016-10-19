@@ -5,14 +5,20 @@
 <mapper namespace="P_Card">
 	<insert id="insertCard" parameterType="model.PersonnelCommand">
 		insert into PersonnelCard
-		(Email,Name,Age,HireDate,RetireDate,PhoneNum,RetireType,Dept_Num,Position_Num,Work_Num,authority,RANDOMCODE,certify)
+		(email,name,age,hiredate,retiredate,phonenum,retiretype,dept_num,position_num,work_num,authority,randomcode,certify)
 		values
-		(#{Email},#{Name},#{Age},to_date(#{HireDate}),to_date(#{RetireDate}),#{PhoneNum},#{RetireType},#{Dept_Num},#{Position_Num},#{Work_Num},#{authority},#{RANDOMCODE},#{certify})
+		(#{email},#{name},#{age},to_date(#{hiredate}),to_date(#{retiredate}),#{phonenum},#{retiretype},#{dept_num},#{position_num},#{work_num},#{authority},#{randomcode},#{certify})
 	</insert>
 	<select id="select" resultType="String" parameterType="String">
-		select RANDOMCODE from personnelcard where Email=#{Email}
+		select RANDOMCODE from PersonnelCard where email=#{email}
 	</select>
 	<update id="Check" parameterType="String">
-		update personnelcard set CERTIFY='Y' where Email=#{Email}
+		update PersonnelCard set CERTIFY='Y' where email=#{email}
+	</update>
+	<select id="getPC" parameterType="String" resultType="model.PersonnelCommand">
+		select * from PersonnelCard where email=#{email}
+	</select>
+	<update id="upcard" parameterType="model.PersonnelCommand">
+		update PersonnelCard set age=#{age},retiredate=to_date(#{retiredate}),phonenum=#{phonenum},retiretype=#{retiretype},dept_num=#{dept_num},position_num=#{position_num},work_num=#{work_num} where email=#{email}
 	</update>
 </mapper>  

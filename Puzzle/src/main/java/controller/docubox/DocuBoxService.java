@@ -20,20 +20,62 @@ public class DocuBoxService {
 		this.dao = dao;
 	}
 	
-	public List<DocuBoxCommand> getlist(DocuBoxCommand docuCommand,int startpage,int endpage){
+	public List<DocuBoxCommand> getlistAll(DocuBoxCommand docuCommand,int startpage,int endpage){
 		List<DocuBoxCommand> list = null;
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("reciver", docuCommand);
 		map.put("start",startpage);
 		map.put("end",endpage);
 		try{
-			list = dao.selectList(map);
+			list = dao.selectListAll(map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+	
+	
+	public List<DocuBoxCommand> getlistFN(DocuBoxCommand docuCommand,int startpage,int endpage){
+		List<DocuBoxCommand> list = null;
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("reciver", docuCommand);
+		map.put("start",startpage);
+		map.put("end",endpage);
+		try{
+			list = dao.selectListFN(map);
 		}catch(Exception e){
 			System.out.println(e.toString());
 		}
 		return list;
 	}
 
+	public List<DocuBoxCommand> getlistPG(DocuBoxCommand docuCommand,int startpage,int endpage){
+		List<DocuBoxCommand> list = null;
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("reciver", docuCommand);
+		map.put("start",startpage);
+		map.put("end",endpage);
+		try{
+			list = dao.selectListPG(map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	public List<DocuBoxCommand> getlistRB(DocuBoxCommand docuCommand,int startpage,int endpage){
+		List<DocuBoxCommand> list = null;
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("reciver", docuCommand);
+		map.put("start",startpage);
+		map.put("end",endpage);
+		try{
+			list = dao.selectListRB(map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return list;
+	}
 	
 	public int getTotalCount(int num){
 		int count = 0;
