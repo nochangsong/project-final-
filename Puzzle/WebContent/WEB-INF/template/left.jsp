@@ -15,6 +15,14 @@
             $(this).next("ul").toggleClass("hide");
         });
     });
+   $(document).ready(function(){
+       // board 클래스 바로 하위에 있는 a 태그를 클릭했을때
+       $("#board>a").click(function(){
+           // 현재 클릭한 태그가 a 이기 때문에
+           // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+           $(this).next("ul").toggleClass("hide");
+       });
+   });
 </script>
   
   <style>
@@ -63,9 +71,16 @@
 			</ul>
 		</li>
 		</c:if>
-     	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
+     	<li class="col-sm-2"><a href="/Puzzle/document/lately.puzzle"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docusuc.png" width="25px;">&nbsp;결제할문서</a></li>
-    	<li class="col-sm-2"><a href="/Puzzle/board/boardList.puzzle"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a></li>
+    	<li class="col-sm-2" id="board"><a href="#"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a>
+	    	<ul class="hide">
+				<li><a href="/Puzzle/notify/notifyList.puzzle">공지사항</a></li>
+				<li><a href="/Puzzle/board/boardList.puzzle?DEPT_NUM=1">영업팀</a></li>
+				<li><a href="/Puzzle/board/boardList.puzzle?DEPT_NUM=2">개발팀</a></li>
+				<li><a href="/Puzzle/board/boardList.puzzle?DEPT_NUM=3">인사팀</a></li>   
+			</ul>
+	    </li>
    	 	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/userinfo.png" width="25px;">&nbsp;조직원정보</a></li>
      	<li class="col-sm-2"><a href="/Puzzle/calendar/calendarList.puzzle"><img src="/Puzzle/img/a.png" width="25px;">&nbsp;일정관리</a></li>
 	</ul>
