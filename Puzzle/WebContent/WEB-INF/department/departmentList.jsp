@@ -45,6 +45,22 @@
 	#memadd>a{
 		font-size: small;
 	}
+	
+	#puzzle{
+		padding-top: 5px;
+		padding-left: 8px;
+		border: 0px;
+		border-radius: 0px;
+		font-weight: bold;
+		
+	}
+	
+	#puzzle .panel{
+		border: 0px;
+		border-bottom-style: none;
+	}
+	
+	
 </style>
 <script>
 
@@ -55,6 +71,7 @@
 		selected_deptType = dept_Num;
 		
 		var dept_Type = $("#"+dept_Num).val();
+		alert(dept_Type);
 		var url = "/Puzzle/department/departmemList.puzzle";
 		$.ajax({
 			type:"post"		// 포스트방식
@@ -66,8 +83,11 @@
 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 			,success:function(args){
 				$("#memAll").remove();
+				alert("memAll remove() 1");
 				$(".memAll").remove();
-				$("#paging").remove();
+				alert("memAll remove() 2");
+				$("#paging").remove()
+				alert("memAll remove() 3");;
 				for(var idx=0; idx<args.list.length; idx++){
 						var name = decodeURIComponent(args.list[idx].name);
 						var email = decodeURIComponent(args.list[idx].email);
@@ -81,20 +101,14 @@
 						$("#info2").append(
 								"<div class='memAll'>"+
 								"<div class='col-sm-6'>"+
-								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
-								"<div class='panel-img'>"+
-								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);' onclick='chk("+idx+");'>"+
-								"<label for='"+idx+"'><span id='"+idx+"'>"+name+"</span><input type='radio' value='"+idx+"' name='check_email'/></label>"+
+								"<div class='panel panel-default'>"+
+								"<div class='panel-heading' style='background-color: rgb(111, 167, 235); color: rgb(255, 255, 255);' onclick='chk("+idx+");'>"+
+								"<label for='"+idx+"'><input type='radio' value='"+idx+"' name='check_email'/></label>"+
 								"</div>"+
-								"</div>"+
-								"<div class='panel-content'>"+
-								"<div class='member_isAdmin'>"+
-								"<span class='label label-orange'>"+authority+"</span>"+
-								"</div>"+
-								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
-								"<div class='"+idx+"'>"+email+"</div>"+
-								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
-								"</div>"+
+								"<div class='panel-body'><div class='name'>"+name+"<span class='authority'>"+authority+"</span></div></div>"+
+								"<div class='panel-body'><div class='"+idx+"'>"+email+"</div></div>"+
+								"<div class='panel-body'><div class='positiontype'>"+positiontype+"</div></div>"+
+								"<div class='panel-body'><div class='dept_type'>"+dept_Type+"</div></div>"+
 								"</div>"+
 								"</div>"+
 								"</div>");	
@@ -257,20 +271,14 @@
 						$("#info2").append(
 								"<div class='memAll'>"+
 								"<div class='col-sm-6'>"+
-								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
-								"<div class='panel-img'>"+
-								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);' onclick='chk("+idx+");'>"+
-								"<label for='"+idx+"'><span id='"+idx+"'>"+name+"</span><input type='radio' value='"+idx+"' id='check_email' name='check_email'/></label>"+
+								"<div class='panel panel-default'>"+
+								"<div class='panel-heading' style='background-color: rgb(111, 167, 235); color: rgb(255, 255, 255);' onclick='chk("+idx+");'>"+
+								"<label for='"+idx+"'><input type='radio' value='"+idx+"' id='check_email' name='check_email'/></label>"+
 								"</div>"+
-								"</div>"+
-								"<div class='panel-content'>"+
-								"<div class='member_isAdmin'>"+
-								"<span class='label label-orange'>"+authority+"</span>"+
-								"</div>"+
-								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
-								"<div class='"+idx+"'>"+email+"</div>"+
-								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
-								"</div>"+
+								"<div class='panel-body'><div class='name'>"+name+"<span class='authority'>"+authority+"</span></div></div>"+
+								"<div class='panel-body'><div class='"+idx+"'>"+email+"</div></div>"+
+								"<div class='panel-body'><div class='positiontype'>"+positiontype+"</div></div>"+
+								"<div class='panel-body'><div class='dept_type'>"+dept_Type+"</div></div>"+
 								"</div>"+
 								"</div>"+
 								"</div>");	
@@ -304,7 +312,7 @@
 			alert("편집할 조직원을 선택하세요.");
 		}
 		
-		var link = "/Puzzle/PersonnelView/P_Modify.puzzle?chkemail"+email;
+		var link = "/Puzzle/PersonnelView/P_Modify.puzzle?chkemail="+email;
 		location.replace(link);
 		
 	}
@@ -329,7 +337,7 @@
 		<div class="col-sm-4">
 			<div class="panel-group">
 				<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading" id="button">
 					조직도
 					<c:if test="${sessionScope.authority=='1'}">
 					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add();">
@@ -337,8 +345,8 @@
 					<input type="button" class="btn btn-default" onclick="return del();" value="삭제">
 					</c:if>
 				</div>
-				<div class="panel">
-					<input type="button" class="btn btn-default" id="searchButton" value="puzzle">
+				<div class="panel" id="puzzle">
+					Puzzle
 				</div>
 				<c:if test="${sessionScope.authority=='1'}">
 				<div class="panel-body">
@@ -360,8 +368,8 @@
 					</div>
 					<c:if test="${sessionScope.authority=='1'}">
 					<div class="panel-body">
-						<div class="bodyOne">
-						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memedit" onclick="return memedit();">조직원 편집</button>
+						<div class="bodyOne" style="text-align: right;">
+						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a>&nbsp;<button id="memedit" onclick="return memedit();">조직원 편집</button>
 						<button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</button>
 						</div>
 					</div>
@@ -380,43 +388,19 @@
 						<c:if test="${mem != null}">
 							<c:forEach var="list" items="${mem}" varStatus="abc">
 							<div class="col-sm-6">
-							<table class="table table-bordered">
-							<thead>
-							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);"  onclick="chk(${abc.count});">
-							<label for="${list }"><input type="radio" value="${abc.count }" name="check_email"/></label>
+							<div class="panel panel-default">
+								<div class="panel-heading" style="background-color: rgb(111, 167, 235); color: rgb(255, 255, 255);"  onclick="chk(${abc.count});">
+									<label for="${list }"><input type="radio" value="${abc.count }" name="check_email"/></label>
+								</div>
+								<div class="panel-body"><div class="name">${list.name}<span style="text-align: right;">${list.authority}</span></div></div>
+								<div class="panel-body"><div class="${abc.count }">${list.email}</div></div>
+								<div class="panel-body"><div class="positiontype">${list.positiontype}</div></div>
+								<div class="panel-body"><div class="dept_type">${list.dept_Type}</div></div>
 							</div>
-							</thead>
-							<tbody>
-							<tr>
-							<td>
-							<span class="authority">${list.authority}</span>
-							</td>
-							</tr>
-							<tr>
-							<td>
-							<div class="name">${list.name}</div>
-							</td>
-							</tr>
-							<tr>
-							<td>
-							<div class="${abc.count }">${list.email}</div>
-							</td>
-							</tr>
-							<tr>
-							<td>
-							<div class="positiontype">${list.positiontype}</div>
-							</td>
-							</tr>
-							<tr>
-							<td>
-							<div class="dept_type">${list.dept_Type}</div>								
-							</td>
-							</tr>
-							</tbody>
-							</table>
 							</div>
 							</c:forEach>
 						</c:if>
+					</div>
 					</div>
 					</div>
 					
