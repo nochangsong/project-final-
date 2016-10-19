@@ -71,7 +71,7 @@
 			</ul>
 		</li>
 		</c:if>
-     	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
+     	<li class="col-sm-2"><a href="/Puzzle/document/lately.puzzle"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;기안문서작성</a></li>
      	<li class="col-sm-2"><a href="#"><img src="/Puzzle/img/docusuc.png" width="25px;">&nbsp;결제할문서</a></li>
     	<li class="col-sm-2" id="board"><a href="#"><img src="/Puzzle/img/board.png" width="25px;">&nbsp;게시판</a>
 	    	<ul class="hide">

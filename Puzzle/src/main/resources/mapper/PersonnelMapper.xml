@@ -12,6 +12,12 @@
 	<select id="select" resultType="String" parameterType="String">
 		select RANDOMCODE from PersonnelCard where email=#{email}
 	</select>
+	
+	<select id="findname" resultType="String" parameterType="String">
+		select Name from PersonnelCard where Email=#{Email}
+	</select>
+	
+	
 	<update id="Check" parameterType="String">
 		update PersonnelCard set CERTIFY='Y' where email=#{email}
 	</update>
