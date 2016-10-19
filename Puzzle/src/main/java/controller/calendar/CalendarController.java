@@ -1,6 +1,5 @@
 package controller.calendar;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -56,15 +55,14 @@ public class CalendarController {
 			map.put("start", list.get(i).getStartDate());
 			map.put("end", list.get(i).getEndDate());
 			if(list.get(i).getType().equals("p")){
-				map.put("color", "blue");
+				map.put("color", "#3a87ad");
 			} else if(list.get(i).getType().equals("s")){
-				map.put("color", "red");
+				map.put("color", "#de690a");
 			}
 			l.add(map);
 		}
 		JSONObject json = new JSONObject();
 		json.put("list", l);
-//		System.out.println(json);
 		return json.toString();
 	}  
 	

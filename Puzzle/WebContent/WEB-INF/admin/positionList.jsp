@@ -84,7 +84,7 @@
 					$(".list").append("<div class='panel-body'>직급/직책을 추가해주세요.</div>");
 				} else {
 					for(var idx=0; idx<args.list.length; idx++){
-						var positionType = decodeURIComponent(args.list[idx].positionType);
+						var positionType = args.list[idx].positionType;
 						var position_num = args.list[idx].position_num;
 						$(".list").append(
 							"<div class='panel-body'><input id='"+position_num+"' class='form-control' " +

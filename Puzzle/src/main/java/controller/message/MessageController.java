@@ -1,5 +1,6 @@
 package controller.message;
 
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -97,9 +98,8 @@ public class MessageController {
 //		return "redirect:messageList.puzzle";
 	}
 	
-	@RequestMapping(value= "showMessage.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
-	@ResponseBody
-	public String showMessage(HttpServletResponse resp, @RequestParam("no")int no) throws Exception{
+	@RequestMapping(value= "showMessage.puzzle", method = RequestMethod.POST)
+	public void showMessage(HttpServletResponse resp, @RequestParam("no")int no) throws Exception{
 		resp.setContentType("text/html;charset=utf-8");
 //		int no = Integer.parseInt(request.getParameter("no"));
 		MessageCommand message = service.getMessage(no);
@@ -107,17 +107,17 @@ public class MessageController {
 			service.updateRead(message);
 		}
 		JSONObject json = new JSONObject();
-		json.put("name", URLEncoder.encode(message.getName(),"UTF-8"));
-		json.put("dept_type", URLEncoder.encode(message.getDept_type(),"UTF-8"));
+		json.put("name", message.getName());
+		json.put("dept_type", message.getDept_type());
 		json.put("email", message.getSender());
-		json.put("content", URLEncoder.encode(message.getContent(),"UTF-8"));
-		return json.toString();
+		json.put("content", message.getContent());
+		PrintWriter out = resp.getWriter();
+		out.print(json.toString());
 	}
 	
 	@RequestMapping(value= "messageAlarm.puzzle", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String alarmList(HttpServletRequest request, HttpServletResponse resp, String data) throws Exception{
-		
 		String userEmail = (String)request.getSession().getAttribute("email");
 		
 		String out="";
@@ -148,15 +148,13 @@ public class MessageController {
 	
 	@RequestMapping(value="searchEmail.puzzle", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String searchEmail(String search) throws Exception {
+	public void searchEmail(HttpServletResponse resp, String search) throws Exception {
+		resp.setContentType("text/html;charset=utf-8");
 		List<MessageCommand> list = service.searchEmail(search);
-		for(int i=0; i<list.size(); i++){
-			list.get(i).setName(URLEncoder.encode(list.get(i).getName(),"UTF-8"));
-			list.get(i).setDept_type(URLEncoder.encode(list.get(i).getDept_type(),"UTF-8"));
-		}
 		JSONObject json = new JSONObject();
 		json.put("list", list);
-		return json.toString();
+		PrintWriter out = resp.getWriter();
+		out.print(json.toString());
 	}
 
 }

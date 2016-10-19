@@ -12,7 +12,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="/Puzzle/themes/alertify.min.js"></script>
 <script type="text/javascript">
-	var webSocket = new WebSocket('ws://localhost:8088/Puzzle/ws');
+	var webSocket = new WebSocket('ws://192.168.20.34:8088/Puzzle/ws');
 	
 	webSocket.onerror = function(event) {
 		onError(event)
