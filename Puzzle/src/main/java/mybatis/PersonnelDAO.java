@@ -24,4 +24,9 @@ public class PersonnelDAO extends SqlSessionDaoSupport {
 	public int updatePC(PersonnelCommand command){
 		return getSqlSession().update("P_Card.upcard",command);
 	}
+	
+	public String selectName(String email){
+		return getSqlSession().selectOne("P_Card.findname", email);
+				
+	}
 }
