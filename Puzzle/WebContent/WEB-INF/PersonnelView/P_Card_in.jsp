@@ -17,6 +17,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src=”http://code.jquery.com/jquery-2.2.4.js”></script>
 <title>Puzzle</title>
+<style>
+	#push{
+		text-align: right;
+	}
+</style>
 <script>
 
 	function Check() {
@@ -66,96 +71,109 @@
 			return false;
 		}
 	}
+	
 </script>
 
 </head>
 <body>
-	<div align="center">
-		<div>
-			<h4>조직원</h4>
-		</div>
+
+		<h4>조직원</h4>
 		<form:form commandName="command" method="post" name="addPS">
-			<table border="1" width="350">
-				<p>
-					<label>※ 필수 항목 미 등록시 저장되지 않습니다.</label>
-				</p>
-				<tr>
-				 	<th>E-mail:</th>
-					<td><input type="text" name="email" id="email" placeholder="! 필수 항목 입니다."/></td>
-				</tr>
-				<tr>
-					<th>이름:</th>
-					<td><input type="text" name="name" id="name" placeholder="! 필수 항목 입니다."/></td>
-				</tr>
-				<tr>
-					<th>나이:</th>
-					<td><input type="text" name="age" id="age" placeholder="! 필수 항목 입니다."/></td>
-				</tr>
-				<tr>
-					<th>입사일:</th>
-					<td><input type="date" name="hiredate" id="hiredate"
-						placeholder="! 필수 항목 입니다. (날짜를 선택)" /></td>
-				</tr>
-				 <tr>
-					<th>퇴사일:</th>
-					<td><input type="date" name="retiredate" id="retiredate"/></td>
-				</tr>
-				<tr>
-					<th>핸드폰:</th>
-					<td><input type="text" name="phonenum" id="phonenum" 
-						placeholder="! 필수 항목 입니다. - 없이 입력하세요" maxlength="11" /></td>
-				</tr>
-				 <tr>
-					<th>퇴사사유:</th>
-					<td><input type="text" name="retiretype" id="retiretype"/></td>
-				</tr>
-				<tr>
-					<th>부서:</th>
-					<td><select name="dept_num" id="dept_num">
-							<option value="">팀선택</option>
-							<option value="1">인사팀</option>
-							<option value="2">개발팀</option>
-							<option value="3">영업팀</option>
-					</select></td>
-				</tr> 
-				<tr>
-					<th>직급/직책:</th>
-					<td><select name="position_num" id="position_num">
-							<option>직급선택</option>
-							<option value="1">CEO</option>
-							<option value="2">팀장</option>
-							<option value="3">차장</option>
-							<option value="4">과장</option>
-							<option value="5">대리</option>
-							<option value="6">사원</option>
-							<option value="7">인턴</option>
-					</select></td>
-				</tr>
-				<tr>
-					<th>상태:</th>
-					<td><select name="work_num" id="work_num">
-							<option value="1">재직</option>
-							<option value="2">휴직</option>
-							<option value="3">휴가</option>
-							<option value="4">퇴사</option>
-					</select></td>
-				</tr>
-				<tr>
-					<th>권한:</th>
-					<td><select name="authority" id="authority">
-							<option value="1">관리자</option>
-							<option value="2">일반사용자</option>
-					</select></td>
-				</tr>
-			</table>
-				<input type="hidden" name="randomcode" id="randomcode">
-				<input type="hidden" value="N" name="certify" id="certify">
+			<div class="form-group">
+				<label>※ 필수 항목 미 등록시 저장되지 않습니다.</label>
+			</div>
+			<div class="col-xs-6" id="signup">
+			<div class="form-group">
+				<label for="email">Email address</label>
+				<input type="email" class="form-control" name="email" id="email" placeholder="! 필수 항목 입니다."/>
+			</div>
+				
+			<div class="form-group">
+				<label for="name">이름</label>
+				<input type="text" class="form-control" name="name" id="name" placeholder="! 필수 항목 입니다."/>
+			</div>
+			
+			<div class="form-group">
+				<label for="age">나이</label>
+				<input type="text" class="form-control" name="age" id="age" placeholder="! 필수 항목 입니다."/>
+			</div>
+			
+			<div class="form-group">
+				<label for="hiredate">입사일</label>
+				<input type="date" class="form-control" name="hiredate" id="hiredate"/>
+			</div>
+			
+			<div class="form-group">
+				<label for="retiredate">퇴사일</label>
+				<input type="date" class="form-control" name="retiredate" id="retiredate"/>
+			</div>
+			
+			<div class="form-group">
+				<label for="phonenum">핸드폰</label>
+				<input type="text" class="form-control" name="phonenum" id="phonenum" placeholder="! 필수 항목 입니다. - 없이 입력하세요" maxlength="11"/>
+			</div>
+			
+			<div class="form-group">
+				<label for="retiretype">퇴사사유</label>
+				<input type="text" class="form-control" name="retiretype" id="retiretype"/>
+			</div>
+			
+			<div class="form-group">
+				<label for="dept_num">부서</label>
+				<select class="form-control" id="dept_num">
+					<option value="">팀선택</option>
+					<option value="1">인사팀</option>
+					<option value="2">개발팀</option>
+					<option value="3">영업팀</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="position_num">직급/직책</label>
+				<select class="form-control" id="position_num">
+					<option>직급선택</option>
+					<option value="1">CEO</option>
+					<option value="2">팀장</option>
+					<option value="3">차장</option>
+					<option value="4">과장</option>
+					<option value="5">대리</option>
+					<option value="6">사원</option>
+					<option value="7">인턴</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="work_num">상태</label>
+				<select class="form-control" name="work_num" id="work_num">
+					<option value="1">재직</option>
+					<option value="2">휴직</option>
+					<option value="3">휴가</option>
+					<option value="4">퇴사</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="authority">권한</label>
+				<select class="form-control" name="authority" id="authority">
+					<option value="1">관리자</option>
+					<option value="2">일반사용자</option>
+				</select>
+			</div>
+
+
+				
 			<br> 
-			<div align="center">
-					<input class="CheckButton" type="submit" value="저장"/>
-					<input type="button" value="취소"/>
+			<div class="form-group">
+			
+			<input type="hidden" name="randomcode" id="randomcode">
+			<input type="hidden" value="N" name="certify" id="certify">
+				
+			<div class="form-group" id="push">
+			<input type="submit" class="btn btn-primary" value="저장">
+			<input type="button" class="btn btn-primary" value="취소" onclick="location.href='/Puzzle/department/departmentList.puzzle'">
+			</div>
+			</div>
 			</div>
 		</form:form>
-	</div>
 </body>
 </html>

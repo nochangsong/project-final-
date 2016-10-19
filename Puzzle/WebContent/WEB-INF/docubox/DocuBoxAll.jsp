@@ -67,19 +67,20 @@
 </script>
 </head>
 <body>
-	<div align="center">
+
 		<h2>전체문서함</h2>
-		<div class="dropdown" style="float: center;">
-			<button class="dropbt">전체문서</button>
+		<div class="dropdown" style="float: right;">
+			<button class="btn btn-default dropdown-toggle" type="button">전체문서<span class="caret"></span></button>
 			<div class="dropdown-content">
-				<a href="DocuBoxAll.puzzle">전체문서</a> <a href="DocuBoxPG.puzzle">진행중인
-					문서</a> <a href="DocuBoxFN.puzzle">최종승인 문서</a> <a
-					href="DocuBoxRB.puzzle">반려문서</a>
+				<a href="DocuBoxAll.puzzle">전체문서</a> 
+				<a href="DocuBoxPG.puzzle">진행중인 문서</a> 
+				<a href="DocuBoxFN.puzzle">최종승인 문서</a> 
+				<a href="DocuBoxRB.puzzle">반려문서</a>
 			</div>
 		</div>
 		<br> <br>
 		<form:form>
-			<table border="1">
+			<table class="table">
 				<thead>
 					<tr>
 						<th><input type="checkbox" name="checkAll" id="checkAll"
@@ -110,13 +111,10 @@
 					</tr>
 				</tfoot>
 			</table>
-			<div>
-				<input class="check" type="submit" name="delete" id="delete"
-					value="선택삭제">
-			</div>
+
 		</form:form>
 
-	</div>
+
 	<div align="center">
 		<div class="pageing">
 			<C:if test="${startPage>4}">

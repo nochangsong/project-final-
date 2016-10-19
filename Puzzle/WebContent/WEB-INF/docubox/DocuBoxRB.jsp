@@ -68,10 +68,9 @@ $(function(){
 </script>
 </head>
 <body>
-	<div align="center">
-	<h2>반려</h2>
-		<div class="dropdown" style="float:center;">
-			<button class="dropbt">전체문서</button>
+	<h2>반려문서함</h2>
+		<div class="dropdown" style="float: right;">
+			<button class="btn btn-default dropdown-toggle" type="button">전체문서<span class="caret"></span></button>
 			<div class="dropdown-content">
 				<a href="DocuBoxAll.puzzle">전체문서</a> 
 				<a href="DocuBoxPG.puzzle">진행중인 문서</a> 
@@ -82,7 +81,7 @@ $(function(){
 		<br>
 		<br>
 		<form:form>
-			<table id="doc" border="1">
+			<table class="table" id="doc">
 				<thead>
 					<tr>
 						<th><input type="checkbox" name="checkAll" id="checkAll" value="전체선택"></th>
@@ -113,8 +112,7 @@ $(function(){
 				</tfoot>
 			</table>
 		</form:form>
-		<div><input class="check" type="button" name="delete" value="선택삭제"></div>
-	</div>
+
 	<div align="center">
 	<div class="pageing">
 		<C:if test="${startPage>4}">
