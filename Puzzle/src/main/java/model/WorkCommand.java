@@ -6,7 +6,7 @@ public class WorkCommand {
 	 private int work_Num;
 	 private String startTime;
 	 private String endTime;
-	 private String work_type;
+	 private String work_Type;
 	 private String email;
 	 private String dept_Type;
 	 private String positionType;
@@ -30,11 +30,11 @@ public class WorkCommand {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public String getWork_type() {
-		return work_type;
+	public String getWork_Type() {
+		return work_Type;
 	}
-	public void setWork_type(String work_type) {
-		this.work_type = work_type;
+	public void setWork_Type(String work_Type) {
+		this.work_Type = work_Type;
 	}
 	public String getEmail() {
 		return email;

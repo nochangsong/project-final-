@@ -3,13 +3,55 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="work">
-   
-   <select id="dataSearch" parameterType="String" resultType="model.WorkCommand">
-      select d.Dept_Type, p.PositionType, c.Name, w.Work_type 
-      from DepartMent d, Position p, PersonnelCard c, Work w 
-      where c.email=w.email and c.position_num=p.position_num and c.dept_num=d.dept_num
-      and c.Name = #{Name}
-   </select>
 
+
+<mapper namespace="work">
+
+	<select id="dataSearch" parameterType="String" resultType="model.WorkCommand">
+		select d.Dept_Type, p.PositionType, c.Name, w.Work_type , w.startTime, w.endTime
+		from DepartMent d, Position p, PersonnelCard c, Work w
+		where c.email=w.email and c.position_num=p.position_num and c.dept_num=d.dept_num and c.Name = #{Name}
+	</select>
+
+	<!-- <select id="getworkcheck" parameterType="model.WorkCommand" resultType="model.WorkCommand">
+		select work_type,startTime,endTime from work where email=#{email}
+	</select> -->
+	
+	<!-- 휴가 등록하는 부분 -->
+	<insert id="insertWork" parameterType="java.util.HashMap" >
+		insert into Work (work_Type,startTime,endTime,Email) values(#{work_Type},#{startTime},#{endTime},#{Email}) 
+	</insert>
+	
+	<select id="dataList" parameterType="String" resultType="model.WorkCommand">
+		select d.Dept_Type, p.PositionType, c.Name, w.Work_type, to_char(w.startTime) startTime ,to_char(w.endTime) endTime
+		from DepartMent d, Position p, PersonnelCard c, Work w 
+		where c.email=w.email and c.position_num=p.position_num and c.dept_num=d.dept_num and c.email=#{Email}
+	</select>
+	
+	<!-- 출근시간 등록전 기존 칼럼값에 오늘 날짜로 이미 출근등록이 되었는지 확인하는 부분 -->
+	<select id="selectStartTime" parameterType="String" resultType="String">
+		select to_date(sysdate,'YYYY/MM/DD') from Work where email=#{email}
+	</select>
+	
+	<!-- 출근시간 등록 부분 -->
+	<insert id="insertStartTime" parameterType="model.WorkCommand">
+		insert into Work(startTime,work_type,email) values(#{startTime},#{work_type},#{email})
+	</insert>
+	
+	<!-- 퇴근시간 등록 부분 -->
+	<update id="updateEndTime" parameterType="String">
+		update work set endTime = #{endTime}
+	</update>
+	
+	<select id="selectVacation" parameterType="String" resultType="model.WorkCommand">
+		select d.dept_Type, p.positionType, c.name, w.work_Type, to_char(w.startTime) startTime ,to_char(w.endTime) endTime
+		from DepartMent d, Position p, PersonnelCard c, Work w 
+		where c.email=w.email and c.position_num=p.position_num and c.dept_num=d.dept_num and c.email=#{email} and (w.work_Type='정기휴가' or w.work_Type='월차휴가' or w.work_Type='연차휴가' or w.work_Type='병가')
+	</select>
+	
+	<delete id="deleteVacation">
+		delete work_Type, to_char(w.startTime) startTime, to_char(w.endTime) endTime, email
+		from Work
+		where 
+	</delete>
 </mapper>
