@@ -74,6 +74,7 @@
 						var authority = decodeURIComponent(args.list[idx].authority);
 						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
 						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+						
 						$("#d_type").html(dept_Type);
 						
 						
@@ -82,8 +83,8 @@
 								"<div class='col-sm-6'>"+
 								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
 								"<div class='panel-img'>"+
-								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);'>"+
-								"<span>"+name+"</span>"+
+								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);' onclick='chk("+idx+");'>"+
+								"<label for='"+idx+"'><span id='"+idx+"'>"+name+"</span><input type='radio' value='"+idx+"' name='check_email'/></label>"+
 								"</div>"+
 								"</div>"+
 								"<div class='panel-content'>"+
@@ -91,7 +92,7 @@
 								"<span class='label label-orange'>"+authority+"</span>"+
 								"</div>"+
 								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
-								"<div class='infinite_name panel-workflow'>"+email+"</div>"+
+								"<div class='"+idx+"'>"+email+"</div>"+
 								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
 								"</div>"+
 								"</div>"+
@@ -163,7 +164,10 @@
 			alert("부서를 선택해주세요.");			
 			return false;
 		}
+		
 		getList("delete", selected_deptType);
+		
+		
 	}
 
 	function edit(){
@@ -216,6 +220,11 @@
 					}		
 				}
 				
+				if(args.msg!=null){
+					var msg = args.msg;
+					alert(msg);
+				}
+				
 			}
 		    ,error:function(e) {	
 		    	Console.log(e.responseText);
@@ -243,14 +252,15 @@
 						var authority = decodeURIComponent(args.list[idx].authority);
 						var dept_Type = decodeURIComponent(args.list[idx].dept_Type);
 						var positiontype = decodeURIComponent(args.list[idx].positiontype);
+	
 						
 						$("#info2").append(
 								"<div class='memAll'>"+
 								"<div class='col-sm-6'>"+
 								"<div class='panel-body detailMemberBtn' style='cursor:pointer; margin-top:0px;'>"+
 								"<div class='panel-img'>"+
-								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);'>"+
-								"<span>"+name+"</span>"+
+								"<div class='default-img' style='background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);' onclick='chk("+idx+");'>"+
+								"<label for='"+idx+"'><span id='"+idx+"'>"+name+"</span><input type='radio' value='"+idx+"' id='check_email' name='check_email'/></label>"+
 								"</div>"+
 								"</div>"+
 								"<div class='panel-content'>"+
@@ -258,7 +268,7 @@
 								"<span class='label label-orange'>"+authority+"</span>"+
 								"</div>"+
 								"<div class='infinite_name panel-workflow'>"+name+"</div>"+
-								"<div class='infinite_name panel-workflow'>"+email+"</div>"+
+								"<div class='"+idx+"'>"+email+"</div>"+
 								"<div class='infinite_name panel-workflow'>"+dept_Type+"</div>"+
 								"</div>"+
 								"</div>"+
@@ -278,23 +288,23 @@
 		var a = abc; 
 		$(":radio[value='"+a+"']").prop( "checked", true );
 	
-		var email = $("."+a).html();
-		alert(email);
-		sessionStorage.setItem('email',email);
-		var a = sessionStorage.getItem('email');
+		var chkemail = $("."+a).html();
+		alert(chkemail);
+		sessionStorage.setItem('chkemail',chkemail);
+		var a = sessionStorage.getItem('chkemail');
 		alert(a);
 		
 		//$.session.set("email", email);
 	}
 	
 	function memedit(){
-		var email = sessionStorage.getItem('email');
+		var email = sessionStorage.getItem('chkemail');
 		alert(email);
 		if(email==''){
 			alert("편집할 조직원을 선택하세요.");
 		}
 		
-		var link = "/Puzzle/PersonnelView/P_Modify.puzzle";
+		var link = "/Puzzle/PersonnelView/P_Modify.puzzle?chkemail"+email;
 		location.replace(link);
 		
 	}
@@ -302,7 +312,8 @@
 	
 	$(function(){	
 
-		$(".paging .pagination li#"+${pageNum1}).addClass("active");
+		(".paging .pagination li#"+${pageNum1}).addClass("active");
+
 
 	});
 	
@@ -320,16 +331,20 @@
 				<div class="panel panel-default">
 				<div class="panel-heading">
 					조직도
+					<c:if test="${sessionScope.authority=='1'}">
 					<input type="button" id="insert" class="btn btn-default" value="+" title="추가하기" onclick="return add();">
 					<input type="button" class="btn btn-default" onclick="return editCheck();" value="수정">
 					<input type="button" class="btn btn-default" onclick="return del();" value="삭제">
+					</c:if>
 				</div>
 				<div class="panel">
 					<input type="button" class="btn btn-default" id="searchButton" value="puzzle">
 				</div>
+				<c:if test="${sessionScope.authority=='1'}">
 				<div class="panel-body">
 					<input type="text" id="newdeptType" class="form-control" placeholder="부서추가">
 				</div>
+				</c:if>
 				<div class="deptlist">
 				</div>
 				</div>
@@ -343,16 +358,19 @@
 						<input id="search" name="search" size="25" placeholder="사원명을 입력해주세요."/>
 						<input type="button" value="검색" onclick="search()"/>
 					</div>
+					<c:if test="${sessionScope.authority=='1'}">
 					<div class="panel-body">
 						<div class="bodyOne">
 						<a href="#">*혹시 동료가 Gmail 이용자가 아니신가요?</a><button id="memedit" onclick="return memedit();">조직원 편집</button>
-						<button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</a></button>
+						<button id="memadd" onclick="location.href='/Puzzle/PersonnelView/P_Card_in.puzzle'">조직원 추가</button>
 						</div>
 					</div>
+					</c:if>
 
 					<div class="panel-body" id="tabmenu">
 						<ul id="memberStatusTab" class="nav nav-pills padding-left-15">
-							<li><a href="#" id="d_type" data-toggle="tab" data-id="1">전체</a></li>
+							<li><a href="/Puzzle/department/departmentList.puzzle" id="all" >전체</a></li>
+							<li><a href="#" id="d_type"></a></li>
 						</ul>
 						
 						<!-- 시작하자마자 전체조직원 정보 표시 -->						
@@ -362,24 +380,41 @@
 						<c:if test="${mem != null}">
 							<c:forEach var="list" items="${mem}" varStatus="abc">
 							<div class="col-sm-6">
-							<div class="panel-body detailMemberBtn" style="cursor:pointer; margin-top:0px;">
-							<div class="panel-img">
+							<table class="table table-bordered">
+							<thead>
 							<div class="default-img" style="background-color: rgb(170, 235, 170); color: rgb(255, 255, 255);"  onclick="chk(${abc.count});">
-							<label for="${list }"><span id="${abc.count }">${list.name }</span><input type="radio"
-							 value="${abc.count }" name="check_email"/></label>
+							<label for="${list }"><input type="radio" value="${abc.count }" name="check_email"/></label>
 							</div>
-							</div>
-							<div class="panel-content">
-							<div class="member_isAdmin">
-							<span class="label label-orange">${list.authority}</span>
-							</div>
+							</thead>
+							<tbody>
+							<tr>
+							<td>
+							<span class="authority">${list.authority}</span>
+							</td>
+							</tr>
+							<tr>
+							<td>
 							<div class="name">${list.name}</div>
+							</td>
+							</tr>
+							<tr>
+							<td>
 							<div class="${abc.count }">${list.email}</div>
+							</td>
+							</tr>
+							<tr>
+							<td>
 							<div class="positiontype">${list.positiontype}</div>
+							</td>
+							</tr>
+							<tr>
+							<td>
 							<div class="dept_type">${list.dept_Type}</div>								
+							</td>
+							</tr>
+							</tbody>
+							</table>
 							</div>
-							</div>	
-							</div>							
 							</c:forEach>
 						</c:if>
 					</div>
