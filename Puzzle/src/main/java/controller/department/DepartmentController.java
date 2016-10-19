@@ -100,7 +100,7 @@ public class DepartmentController {
 			}else if(type.equals("delete")){
 				List<PersonnelCommand> pc=service.memAll();
 				for(PersonnelCommand li:pc){
-					if(!dept_Num.equals(li.getDept_Num())){
+					if(!dept_Num.equals(li.getDept_num())){
 						service.deleteDeptType(Integer.parseInt(dept_Num));
 					}else{
 						msg = "조직원이 존재하는 부서입니다.";
