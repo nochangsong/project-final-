@@ -67,6 +67,7 @@
 	<br>
 	<form:form commandName="messageCommand">
 		<form:errors element="div" /> <!-- 글로벌 에러 -->
+		
 		<div class="form-group">
     		<label for="receiver">받는 사람:</label>
     		<form:input path="receiver" value="${sender}" class="form-control" id="receiver"/><form:errors path="receiver" element="div"/>

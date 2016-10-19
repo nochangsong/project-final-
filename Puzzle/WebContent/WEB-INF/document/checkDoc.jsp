@@ -67,8 +67,7 @@
 				var type = resp.items[i].mimeType;
 				var date = new Date(fechaUpd);
 				var month = date.getMonth() + 1;
-				var view = resp.items[i].id;
-				var fileId = view;
+				alert(type);
 
 				var bdate = date.getFullYear() + '-' + month + '-'
 						+ date.getDate() + ' ' + date.getHours() + ':'
@@ -87,16 +86,6 @@
 						document.getElementById('filetime').value = bdate; */
 					var checkin = confirm('기안을 하시겠습니까?');
 					if (checkin) {
-						var body = {
-							    'value': 'starkcb926@gmail.com',
-							    'type': 'user',
-							    'role': 'reader'
-							  };
-							  var request = gapi.client.drive.permissions.insert({
-							    'fileId': fileId,
-							    'resource': body
-							  });
-							  request.execute(function(resp) { });
 						var link = "/Puzzle/document/sendDraft.puzzle" + "?filename=" + titulo
 								+ "&filelink=" + userAltLink + "&reg_date="
 								+ bdate;
