@@ -53,21 +53,27 @@
     .hide li a span {
     	font-size: x-small;
     }
+    .img {
+    	height: auto;
+    	width: 250px;
+/*     	margin: auto; */
+     	margin-left: 25px; 
+    }
 </style>
     
-  
+ <div class="img"><img alt="조직로고" src="/Puzzle/admin/company/getLogo.puzzle" width="100%"/></div>
  <div class="container">
 	<ul class="nav nav-stacked">
 		<c:if test="${sessionScope.authority=='1'}">
 		<li class="col-sm-2" id="menu"><a href="#"><img src="/Puzzle/img/docuwrite.png" width="25px;">&nbsp;관리자</a>
 			<ul class="hide">
-				<li><a href="#"><span class="glyphicon glyphicon-user"> 조직관리</span></a></li>
-				<li><a href="/Puzzle/admin/position/positionList.puzzle">직급관리</a></li> 
-				<li><a href="/Puzzle/department/departmentList.puzzle"><span class="glyphicon glyphicon-credit-card">조직도/조직원관리</a></li>
-				<li><a href="/Puzzle/docubox/DocuBoxAll.puzzle"><span class="glyphicon glyphicon-inbox">전체문서함</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-pencil">문서양식</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-list-alt">게시판관리</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-calendar">근태관리</a></li>   
+				<li><a href="/Puzzle/admin/company/company.puzzle"><span class="glyphicon glyphicon-user">&nbsp;조직관리</span></a></li>
+           		<li><a href="/Puzzle/admin/position/positionList.puzzle"><span class="glyphicon glyphicon-tasks">&nbsp;직급관리</span></a></li> 
+            	<li><a href="/Puzzle/department/departmentList.puzzle"><span class="glyphicon glyphicon-credit-card">&nbsp;조직도/조직원관리</span></a></li>
+            	<li><a href="/Puzzle/docubox/DocuBoxAll.puzzle"><span class="glyphicon glyphicon-inbox">&nbsp;전체문서함</span></a></li>
+            	<li><a href="#"><span class="glyphicon glyphicon-pencil">&nbsp;문서양식</a></span></li>
+            	<li><a href="#"><span class="glyphicon glyphicon-list-alt">&nbsp;게시판관리</a></span></li>
+            	<li><a href="#"><span class="glyphicon glyphicon-calendar">&nbsp;근태관리</a></span></li>  
 			</ul>
 		</li>
 		</c:if>
