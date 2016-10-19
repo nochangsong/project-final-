@@ -16,7 +16,7 @@ public class DepartmentService{
 
    @Autowired
    private DepartmentDAO dao;
-
+  
    public void setDao(DepartmentDAO dao) {
       this.dao = dao;
    }
