@@ -72,8 +72,8 @@ public class PersonnelController {
 	
 	@RequestMapping(value="/P_Modify.puzzle", method=RequestMethod.GET)
 	public ModelAndView Modichange(HttpServletRequest reqeust,String eamil)throws Exception{
-		String email = (String)reqeust.getSession().getAttribute("email");
-		System.out.println("email:::"+email);
+		String email = (String)reqeust.getParameter("chkemail");
+		System.out.println("chkemail:::"+email);
 		
 		ModelAndView mv = new ModelAndView("P_Modify");
 		List<PersonnelCommand> list = service.getlist(email);
