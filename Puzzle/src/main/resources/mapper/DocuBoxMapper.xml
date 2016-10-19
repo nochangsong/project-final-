@@ -21,4 +21,8 @@
 <!-- 	<delete id="delete" parameterType="">
 		delete 
 	</delete> -->
+	
+	<insert id="draftin" parameterType="model.DocuBoxCommand">
+		insert into docubox values(#{FileName},#{Reg_Date},#{Path},#{writer},'기안대기',#{Email})
+	</insert>
 	</mapper>

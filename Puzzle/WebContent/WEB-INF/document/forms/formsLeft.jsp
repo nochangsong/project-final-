@@ -1,31 +1,34 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-<title></title>
 <%
-	System.out.println(request.getRequestURI());
 	System.out.println(request.getRequestURL());
 %>
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style>
 #formleft {
 	border: 1px solid;
-	border-color: #8EA7EB;
-	width: 18%;
+	border-color: #8EA7EB; width : 18%;
 	height: 18%;
 	color: #3163C9;
 	font-size: medium;
 	text-align: left;
 	padding-left: 2%;
-	float: left;
+	width: 18%;
+	float : left;
+}
+
+#formright{
+
+	height : 70%;
 }
 
 #contentg {
 	border: 1px solid;
 	border-color: gray;
 	width: 80%;
-	height: 70%;
-	overflow-y : scroll;
+	height: 5%;
+	overflow: hidden;
 	height: 70%;
 	float: right;
 }
@@ -91,11 +94,11 @@ div#modify {
 		});
 		request
 				.execute(function(resp) {
-					for (i = 0; i < resp.items.length; i++) {
+					for (i = 0; i < 3; i++) {
 						var titulo = resp.items[i].title;
 						var fechaUpd = resp.items[i].modifiedDate;
 						var userUpd = resp.items[i].lastModifyingUserName;/* 
-																												var userEmbed = resp.items[i].embedLink; */
+																																		var userEmbed = resp.items[i].embedLink; */
 						var userAltLink = resp.items[i].alternateLink;
 						var date = new Date(fechaUpd);
 						var month = date.getMonth() + 1;
@@ -138,7 +141,7 @@ div#modify {
 							}
 
 							fileInfo.appendChild(img);
-							fileInfo.setAttribute("href", userAltLink);
+							fileInfo.setAttribute("href", "/Puzzle/document/mydocument.puzzle?url="+userAltLink);
 							fileInfo.appendChild(document
 									.createTextNode(titulo));
 							fileInfo.appendChild(hr);
@@ -162,6 +165,7 @@ div#modify {
 		});
 	});
 </script>
+<title></title>
 </head>
 <body>
 	<br>
@@ -176,10 +180,11 @@ div#modify {
 
 		</ul>
 	</div>
+
 	<div id="formright">
 
 		<div id="contentg">
-			<h2>&nbsp;나의 양식 리스트</h2><hr>
+			<h2>&nbsp;최근 사용 문서</h2><hr>
 			<div id="inner">
 				&nbsp;&nbsp;&nbsp;제목
 				<hr>
