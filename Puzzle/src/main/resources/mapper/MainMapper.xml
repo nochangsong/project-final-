@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainDAO">
+<!-- 세션정보 -->
+<select id="session" parameterType="model.BoardCommand" resultType="model.BoardCommand">
+SELECT 
+	EMAIL
+	,DEPT_NUM
+	,NAME
+	,POSITION_NUM
+FROM PERSONNELCARD
+WHERE EMAIL = #{email}
+</select>
+
+<!--게시판 글목록(부서1) -->
+<select id="selectList" parameterType="Map" resultType="model.BoardCommand">
+SELECT 
+	BNO
+	,DEPT_NUM
+	,SUBJECT
+	,B_CONTENT
+	,REG_DATE
+	,BOARD_TYPE
+	,WRITE_TYPE
+	,WRITER 
+	,NAME
+FROM (
+	SELECT 
+		ROWNUM RNUM
+		,BNO
+		,DEPT_NUM
+		,SUBJECT
+		,B_CONTENT
+		,REG_DATE
+		,BOARD_TYPE
+		,WRITE_TYPE
+		,WRITER		 
+		,NAME
+	FROM (
+		SELECT 
+			A.BNO
+			,A.DEPT_NUM
+			,A.SUBJECT
+			,A.B_CONTENT
+			,A.REG_DATE
+			,A.BOARD_TYPE
+			,A.WRITE_TYPE
+			,A.WRITER 
+			,B.NAME
+	FROM BOARD A 
+		INNER JOIN PERSONNELCARD B ON A.WRITER = B.EMAIL
+		order by A.BNO desc)) 
+	<![CDATA[
+        WHERE rnum >= 1 AND rnum <= 3 AND DEPT_NUM = 1
+        ]]><!-- AND Dept_Num = 부서번호 -->
+</select>
+
+<!--게시판 글갯수(검색시 포함) -->
+<select id="selectCount" parameterType="Map" resultType="Integer">
+	select count(*) from BOARD 
+        WHERE DEPT_NUM = 1
+</select>
+
+<!--게시판 글목록(부서2) -->
+<select id="selectList2" parameterType="Map" resultType="model.BoardCommand">
+SELECT 
+	BNO
+	,DEPT_NUM
+	,SUBJECT
+	,B_CONTENT
+	,REG_DATE
+	,BOARD_TYPE
+	,WRITE_TYPE
+	,WRITER 
+	,NAME
+FROM (
+	SELECT 
+		ROWNUM RNUM
+		,BNO
+		,DEPT_NUM
+		,SUBJECT
+		,B_CONTENT
+		,REG_DATE
+		,BOARD_TYPE
+		,WRITE_TYPE
+		,WRITER		 
+		,NAME
+	FROM (
+		SELECT 
+			A.BNO
+			,A.DEPT_NUM
+			,A.SUBJECT
+			,A.B_CONTENT
+			,A.REG_DATE
+			,A.BOARD_TYPE
+			,A.WRITE_TYPE
+			,A.WRITER 
+			,B.NAME
+	FROM BOARD A 
+		INNER JOIN PERSONNELCARD B ON A.WRITER = B.EMAIL
+		order by A.BNO desc)) 
+	<![CDATA[
+        WHERE rnum >= 1 AND rnum <= 3 AND DEPT_NUM = 2
+        ]]><!-- AND Dept_Num = 부서번호 -->
+</select>
+
+<!--게시판 글갯수(검색시 포함) -->
+<select id="selectCount2" parameterType="Map" resultType="Integer">
+	select count(*) from BOARD 
+        WHERE DEPT_NUM = 2
+</select>
+
+<!--게시판 글목록(부서3) -->
+<select id="selectList3" parameterType="Map" resultType="model.BoardCommand">
+SELECT 
+	BNO
+	,DEPT_NUM
+	,SUBJECT
+	,B_CONTENT
+	,REG_DATE
+	,BOARD_TYPE
+	,WRITE_TYPE
+	,WRITER 
+	,NAME
+FROM (
+	SELECT 
+		ROWNUM RNUM
+		,BNO
+		,DEPT_NUM
+		,SUBJECT
+		,B_CONTENT
+		,REG_DATE
+		,BOARD_TYPE
+		,WRITE_TYPE
+		,WRITER		 
+		,NAME
+	FROM (
+		SELECT 
+			A.BNO
+			,A.DEPT_NUM
+			,A.SUBJECT
+			,A.B_CONTENT
+			,A.REG_DATE
+			,A.BOARD_TYPE
+			,A.WRITE_TYPE
+			,A.WRITER 
+			,B.NAME
+	FROM BOARD A 
+		INNER JOIN PERSONNELCARD B ON A.WRITER = B.EMAIL
+		order by A.BNO desc)) 
+	<![CDATA[
+        WHERE rnum >= 1 AND rnum <= 3 AND DEPT_NUM = 3
+        ]]><!-- AND Dept_Num = 부서번호 -->
+</select>
+
+<!--게시판 글갯수(검색시 포함) -->
+<select id="selectCount3" parameterType="Map" resultType="Integer">
+	select count(*) from BOARD 
+        WHERE DEPT_NUM = 3
+</select>
+
+<!--공지사항 글목록 -->
+<select id="selectNotifyList" parameterType="Map" resultType="model.BoardCommand">
+SELECT 
+	BNO
+	,SUBJECT
+	,N_CONTENT
+	,REG_DATE
+	,BOARD_TYPE
+	,WRITER 
+	,NAME
+FROM (
+	SELECT 
+		ROWNUM RNUM
+		,BNO
+		,SUBJECT
+		,N_CONTENT
+		,REG_DATE
+		,BOARD_TYPE
+		,WRITER		 
+		,NAME
+	FROM (
+		SELECT 
+			A.BNO
+			,A.SUBJECT
+			,A.N_CONTENT
+			,A.REG_DATE
+			,A.BOARD_TYPE
+			,A.WRITER 
+			,B.NAME
+	FROM NOTIFY A 
+		INNER JOIN PERSONNELCARD B ON A.WRITER = B.EMAIL
+		order by A.BNO desc)) 
+	<![CDATA[
+        WHERE rnum >= 1 AND rnum <= 3
+        ]]><!-- AND Dept_Num = 부서번호 -->
+</select>
+
+<!--게시판 글갯수(검색시 포함) -->
+<select id="selectNotifyCount" parameterType="Map" resultType="Integer">
+	select count(*) from NOTIFY
+</select>
+
+</mapper>
