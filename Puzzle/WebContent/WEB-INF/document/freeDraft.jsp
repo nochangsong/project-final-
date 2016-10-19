@@ -150,6 +150,20 @@
 	}
 </script>
 <style>
+
+#formleft{
+	border : 1px solid;
+	border-color : #8EA7EB;
+	width : 18%;
+	height : 18%;
+	color: #3163C9;
+	font-size: medium;
+	text-align: left;
+	padding-left: 2%;
+	float : left;
+}
+
+
 div#check {
 	border: 1px solid;
 	border-color: #8EA7EB;
@@ -157,7 +171,7 @@ div#check {
 	height: 38%;
 	text-align: center;
 	float: left;
-	margin-left: 8%;
+	margin-left: 2%;
 }
 
 .choise {
@@ -171,7 +185,7 @@ div#loadGoogleDrive {
 	height: 38%;
 	text-align: center;
 	float: right;
-	margin-right: 26%;
+	margin-right: 14%;
 }
 
 div#workimage {
@@ -193,6 +207,20 @@ div#selectType {
 <title>Free Draft</title>
 </head>
 <body>
+<br>
+
+<div id="formleft">
+	<br>
+		<ul>
+			<li><a href="/Puzzle/document/lately.puzzle">최근 사용 문서</a></li>
+			<li><a href="/Puzzle/document/shareForm.puzzle">공동 양식</a></li>
+			<li><a href="/Puzzle/document/freeDraft.puzzle">자유 기안</a></li>
+			<li><a href="/Puzzle/document/myWriteForm.puzzle">나의 양식</a></li>
+
+		</ul>
+	</div>
+	
+	
 	<div id="check">
 		직접 작성하기
 		<hr>
