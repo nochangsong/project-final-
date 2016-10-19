@@ -50,20 +50,10 @@
 			,url: url	// url 주소	
 			,dataType:"json"
 			,success:function(args){	
-				var name = decodeURIComponent(args.name);
-				var email = args.email;
-				var dept_type = decodeURIComponent(args.dept_type);
-				var content = decodeURIComponent(args.content);
-				var sender = name + " (" + email + ", " + dept_type + ")";
+				var sender = args.name + " (" + args.email + ", " + args.dept_type + ")";
 				$("#sender").html(sender);
-				$("#content").html(content);
-				
+				$("#content").html(args.content);
 				$("#email").val(email);
-// 				$("#messagebox").append(
-// 						"<div class='form-group'><label>보낸 사람: </label>"+args.sender+"</div>" +
-// 						"<div class='form-group'><label>내용: </label><br>"+args.content+"</div>" +
-// 						"<div><input type='button' value='답장하기' class='btn btn-default' " +
-// 						"onclick='reply('')'</div>");
 			}
 		    ,error:function(e) {	
 		    	Console.log(e.responseText);
