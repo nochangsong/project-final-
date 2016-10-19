@@ -83,6 +83,7 @@ public class DepartmentController {
 	@ResponseBody
 	public String getList(HttpServletResponse resp, String type, String dept_Num, String dept_Type) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
+		String msg = null;
 		if(type!=null){
 			DepartMentCommand command = new DepartMentCommand();
 			if(type.equals("insert")){
@@ -97,7 +98,16 @@ public class DepartmentController {
 				service.updateDeptType(command);
 				
 			}else if(type.equals("delete")){
-				service.deleteDeptType(Integer.parseInt(dept_Num));
+				List<PersonnelCommand> pc=service.memAll();
+				for(PersonnelCommand li:pc){
+					if(!dept_Num.equals(li.getDept_Num())){
+						service.deleteDeptType(Integer.parseInt(dept_Num));
+					}else{
+						msg = "조직원이 존재하는 부서입니다.";
+						System.out.println(msg);
+					}
+				}
+				
 			}
 		}
 		
@@ -108,6 +118,7 @@ public class DepartmentController {
 		
 		JSONObject json = new JSONObject();
 		json.put("list", list);
+		json.put("msg", msg);
 		return json.toString();
 	}
 
@@ -116,7 +127,7 @@ public class DepartmentController {
 	public String getselect(HttpServletResponse resp, String dept_Type, String search) throws Exception{
 		resp.setContentType("text/html; charset=UTF-8");
 		JSONObject json = new JSONObject();
-		
+		  
 		//검색어가 있으면
 		if(search!=null){
 //			System.out.println("search :: " + search);
