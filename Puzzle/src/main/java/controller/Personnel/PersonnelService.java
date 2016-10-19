@@ -45,6 +45,10 @@ public class PersonnelService {
 		return SeEm;
 	}
 	
+	public String selectName(String email){
+		return dao.selectName(email);
+	}
+	
 	public List<PersonnelCommand> getlist(String email){
 		List<PersonnelCommand> list = null;
 		try{

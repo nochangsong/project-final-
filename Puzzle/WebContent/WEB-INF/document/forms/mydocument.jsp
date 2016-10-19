@@ -2,8 +2,7 @@
 <html>
 <head>
 <%
-	System.out.println(request.getParameter("checking"));
-	String check = request.getParameter("checking");
+	String url = request.getParameter("url");
 %>
 <title></title>
 </head>
@@ -61,14 +60,18 @@
 			for (i = 0; i < 1; i++) {
 				var titulo = resp.items[i].title;
 				var fechaUpd = resp.items[i].modifiedDate;
-				var userUpd = resp.items[i].lastModifyingUserName;/* 
+				var userUpd = resp.items[i].lastModifyingUserName;
+				
+				resp.items[i].shared = true;
+				var view = resp.items[i].id;
+				/* 
+				
 																								var userEmbed = resp.items[i].embedLink; */
 				var userAltLink = resp.items[i].alternateLink;
 				var type = resp.items[i].mimeType;
 				var date = new Date(fechaUpd);
 				var month = date.getMonth() + 1;
-				var view = resp.items[i].id;
-				var fileId = view;
+				
 
 				var bdate = date.getFullYear() + '-' + month + '-'
 						+ date.getDate() + ' ' + date.getHours() + ':'
@@ -86,6 +89,7 @@
 						document.getElementById('mylink').value = userAltLink;
 						document.getElementById('filetime').value = bdate; */
 					var checkin = confirm('기안을 하시겠습니까?');
+					var fileId = view;
 					if (checkin) {
 						var body = {
 							    'value': 'starkcb926@gmail.com',
@@ -97,6 +101,7 @@
 							    'resource': body
 							  });
 							  request.execute(function(resp) { });
+							  
 						var link = "/Puzzle/document/sendDraft.puzzle" + "?filename=" + titulo
 								+ "&filelink=" + userAltLink + "&reg_date="
 								+ bdate;
@@ -134,24 +139,10 @@
 	<br>
 	<br>
 
-	<%
-		if (check.equals("1")) {
-	%>
+
 	<iframe width="100%" height="100%"
-		src="https://docs.google.com/spreadsheets/create?usp=drive_web&folder=0AMGaJxLiuXrrUk9PVA&authuser=0"></iframe>
-	<%
-		} else if (check.equals("2")) {
-	%>
-	<iframe width="100%" height="100%"
-		src="https://docs.google.com/document/create?usp=drive_web&folder=0AMGaJxLiuXrrUk9PVA&authuser=0"></iframe>
-	<%
-		} else if (check.equals("3")) {
-	%>
-	<iframe width="100%" height="100%"
-		src="https://docs.google.com/presentation/create?usp=drive_web&folder=0AMGaJxLiuXrrUk9PVA&authuser=0"></iframe>
-	<%
-		}
-	%>
+		src="<%=url%>"></iframe>
+	
 
 
 </body>
