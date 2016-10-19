@@ -137,6 +137,7 @@ public class DepartmentController {
 				list.get(i).setName(URLEncoder.encode(list.get(i).getName(),"UTF-8"));
 				list.get(i).setDept_Type(URLEncoder.encode(list.get(i).getDept_Type(),"UTF-8"));
 				list.get(i).setEmail(URLEncoder.encode(list.get(i).getEmail(),"UTF-8"));
+				list.get(i).setPositiontype(URLEncoder.encode(list.get(i).getPositiontype(),"UTF-8"));
 			}
 			json.put("list", list);
 			return json.toString();
