@@ -2,5 +2,5 @@
 <%@ page isELIgnored="false" %>
 
 <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p><span class="copyright">Copyright &copy; Puzzle</span></p>
 </footer> 

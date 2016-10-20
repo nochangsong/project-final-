@@ -87,15 +87,34 @@
 	#content{
 		height: 50px;
 	}
+	.border{
+		padding: 20px 0px;
+		width: 1100px;
+		height: auto;
+		margin: 15px 25px;
+	}
+	.paging{
+ 		margin-top: 50px;
+ 		text-align: center;
+ 		height:30px;
+ 	}
+ 	.btndiv{
+ 		text-align: right;
+ 		margin-bottom: 10px;
+ 	}
 </style>
 </head>
 <body>
-<h2>쪽지함 (${newMsgNumber}/${totalMsgCount})</h2>
-<br>
-<div class="container">
+<div class="title">
+	<h3>쪽지함 (${newMsgNumber}/${totalMsgCount})</h3>
+	<h5>조직원끼리 쪽지를 주고 받을 수 있습니다.</h5>
+</div>
+<div class="border">
 <form:form>
-<button type="button" class="btn btn-default" onclick="location.href='messageForm.puzzle'">쪽지보내기</button>
-<input type="submit" class="btn btn-default" onclick="return deleteMessage()" value="삭제"/>
+<div class="btndiv">
+	<button type="button" class="btn btn-default" onclick="location.href='messageForm.puzzle'">쪽지보내기</button>
+	<input type="submit" class="btn btn-default" onclick="return deleteMessage()" value="삭제"/>
+</div>
 <table class="table">
 	<tr>
 		<th>선택</th>
@@ -128,25 +147,26 @@
 	</c:if>
 </table>
 </form:form>
-</div>
-<div class="paging">
-	<c:if test="${startPage>5}">
-		<ul class="pager">
-			<li><a href="messageList.puzzle?pageNum=${startPage-1}">Previous</a></li>
+
+	<div class="paging">
+		<c:if test="${startPage>5}">
+			<ul class="pager">
+				<li><a href="messageList.puzzle?pageNum=${startPage-1}">Previous</a></li>
+			</ul>
+		</c:if>
+		<ul class="pagination">
+			<c:forEach var="i" begin="${startPage}" end="${endPage}">
+				<li id="${i}"><a href="messageList.puzzle?pageNum=${i}">${i}</a></li>
+			</c:forEach>
+	<!-- 		<li class="active"><a href="#">2</a></li> -->
 		</ul>
-	</c:if>
-	<ul class="pagination">
-		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-			<li id="${i}"><a href="messageList.puzzle?pageNum=${i}">${i}</a></li>
-		</c:forEach>
-<!-- 		<li class="active"><a href="#">2</a></li> -->
-	</ul>
-	
-	<c:if test="${pageCount>endPage}">
-	<ul class="pager">
-		<li><a href="messageList.puzzle?pageNum=${startPage+5}">Next</a></li>
-	</ul>
-	</c:if>
+		
+		<c:if test="${pageCount>endPage}">
+		<ul class="pager">
+			<li><a href="messageList.puzzle?pageNum=${startPage+5}">Next</a></li>
+		</ul>
+		</c:if>
+	</div>
 </div>
 <div>
 	<div id="messageBox" class="white-popup mfp-hide">

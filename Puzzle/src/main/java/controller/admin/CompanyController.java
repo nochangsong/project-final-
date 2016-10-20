@@ -54,12 +54,14 @@ public class CompanyController {
 	}
 	
 	
-	@RequestMapping(value="/company/setLogo.puzzle", method=RequestMethod.POST)
-	public ModelAndView setLogo(CompanyCommand companyCommand) throws Exception{
+	@RequestMapping(value="/company/company.puzzle", method=RequestMethod.POST)
+	public ModelAndView setLogo(CompanyCommand companyCommand, String check) throws Exception{
 		ModelAndView mav = new ModelAndView("company");
-		companyCommand.setCom_logo_subject(companyCommand.getCom_logo().getOriginalFilename());
-		companyCommand.setCom_logo_bytes(companyCommand.getCom_logo().getBytes());
-		service.setLogo(companyCommand);
+		if(check.equals("change")){
+			companyCommand.setCom_logo_subject(companyCommand.getCom_logo().getOriginalFilename());
+			companyCommand.setCom_logo_bytes(companyCommand.getCom_logo().getBytes());
+			service.setLogo(companyCommand);
+		}
 		mav.addObject("company", companyCommand);
 		return mav;
 	}

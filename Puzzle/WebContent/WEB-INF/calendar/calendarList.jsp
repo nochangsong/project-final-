@@ -105,6 +105,7 @@
 	}
 </script>
 <style>
+	
 	div {
 		width:auto;
 	}
@@ -180,10 +181,21 @@
 	    cursor: pointer;
 	}
 	
+	.border{
+		width: 1000px;
+		height: auto;
+		margin: 15px;
+	}
+	
 </style>
 </head>
 <body style="background-color:white;">
-	<div id='calendar' style='width: 60%; margin: 3em 0; font-size: 13px'></div>
+<div class="title">
+	<h3>일정관리</h3>
+	<h5>개인 또는 부서별 일정을 관리할 수 있습니다.</h5>
+</div>
+<div class="border">
+	<div id='calendar' style='width: 100%; margin: 3em 1em; font-size: 13px'></div>
 	
 	<div id="myModal" class="modal">
 		<!-- Modal content -->
@@ -241,6 +253,6 @@
 			</form:form>
 		</div>
 	</div>
-
+</div>
 </body>
 </html>

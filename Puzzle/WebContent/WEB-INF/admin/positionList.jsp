@@ -100,10 +100,11 @@
 
 </script>
 <body onload="getList()">
-<h3>직급/직책관리</h3>
-<h5>조직의 직급/직책을 관리 할 수 있습니다.</h5>
-<br>
-<div class="panel-group">
+<div class="title">
+	<h3>직급/직책관리</h3>
+	<h5>조직의 직급/직책을 관리 할 수 있습니다.</h5>
+</div>
+<div class="panel-group" style="width: 1100px;height: auto;margin: 15px 25px;">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<input type="button" class="btn btn-default" onclick="return del();" value="삭제"/>
