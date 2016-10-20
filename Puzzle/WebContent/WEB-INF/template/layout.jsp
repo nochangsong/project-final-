@@ -113,7 +113,7 @@ footer {
 #message span {
 	position: absolute;
 	margin-left: -15px;
-	
+
 }
 
 

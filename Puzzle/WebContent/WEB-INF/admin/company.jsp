@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE>
+<!DOCTYPE>  
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">

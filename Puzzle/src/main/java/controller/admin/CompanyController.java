@@ -49,7 +49,7 @@ public class CompanyController {
         resp.setContentType("image/gif");
         resp.setContentLength(logo.length);
         OutputStream os = resp.getOutputStream();
-        os.write(logo);
+        os.write(logo);  
         os.flush();    
 	}
 	
